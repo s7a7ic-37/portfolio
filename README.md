@@ -1,27 +1,13 @@
-# React + TypeScript + Vite
+# Welcome to my portfolio!
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This portfolio is a work in progress and is continually evolving. It's designed to showcase my work, skills, and experience in a variety of domains. I appreciate your interest in exploring it, and I'm excited to share my projects and achievements with you.
 
-Currently, two official plugins are available:
+## Content
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Here you will find a collection of my projects, both personal and professional. As I continue to work on new projects and expand my skills, I will be updating this personal website to provide a more comprehensive view of my work.
 
-## Expanding the ESLint configuration
+## Hosted Version
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+You can access the hosted version [here](https://ideanexus.uk/). Please note that as it's a work in progress, some sections may still be under construction, and I appreciate your understanding.
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Thank you for visiting my portfolio, and I look forward to sharing more of my work with you in the future!
