@@ -31,7 +31,7 @@ export default function Header() {
         <div className={styles.navbar_inner}>
           <div className={styles.logo}>
             <a href="#">
-              <img src="logo.png" alt="logo" />
+              <img src="../assets/logo.png" alt="logo" />
             </a>
           </div>
           <div className={overlayClassNames} onClick={toggleMenu}></div>
