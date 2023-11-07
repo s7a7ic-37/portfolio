@@ -1,4 +1,5 @@
 import styles from "./Header.module.css";
+import logo from "../assets/logo.png";
 import { scrollTo } from "../utils/utils";
 import { useState } from "react";
 
@@ -31,7 +32,7 @@ export default function Header() {
         <div className={styles.navbar_inner}>
           <div className={styles.logo}>
             <a href="#">
-              <img src="../assets/logo.png" alt="logo" />
+              <img src={logo} alt="logo" />
             </a>
           </div>
           <div className={overlayClassNames} onClick={toggleMenu}></div>
