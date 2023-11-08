@@ -4,6 +4,14 @@
     format("truetype");
 }
 
+input,
+textarea,
+button,
+select,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
 :root {
   --accent: #3399ff;
   --foreground: #003366;
