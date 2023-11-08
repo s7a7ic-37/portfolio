@@ -1,6 +1,7 @@
 @font-face {
   font-family: "Cascadia Code";
-  src: url("/assets/fonts/CascadiaCode.woff2") format("truetype");
+  src: local("Cascadia Code") url("/assets/fonts/CascadiaCode.tff")
+    format("truetype");
 }
 
 :root {
