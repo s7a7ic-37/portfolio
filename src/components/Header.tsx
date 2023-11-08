@@ -1,5 +1,5 @@
 import styles from "./Header.module.css";
-import logo from "../assets/logo.png";
+import logo from "../assets/photos/logo.png";
 import { scrollTo } from "../utils/utils";
 import { useState } from "react";
 
