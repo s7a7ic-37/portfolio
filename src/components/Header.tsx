@@ -38,7 +38,7 @@ export default function Header({
       <div className={styles.container}>
         <div className={styles.navbar_inner}>
           <div className={styles.logo}>
-            <a href="#">
+            <a onClick={() => handleButtonClick("about")}>
               <img src={logo} alt="logo" />
             </a>
           </div>
