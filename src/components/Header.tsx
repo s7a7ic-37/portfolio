@@ -3,8 +3,15 @@ import logo from "../assets/photos/logo.png";
 import { scrollTo } from "../utils/utils";
 import { useState } from "react";
 
-export default function Header() {
-  const [activeSection, setActiveSection] = useState("about");
+interface HeaderProps {
+  activeSection: string;
+  setActiveSection: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export default function Header({
+  activeSection,
+  setActiveSection,
+}: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleButtonClick = (section: string) => {

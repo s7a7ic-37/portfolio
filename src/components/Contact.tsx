@@ -1,8 +1,27 @@
 import styles from "./Contact.module.css";
+import { useEffect } from "react";
+import { useInView } from "react-intersection-observer";
 
-export default function Contact() {
+interface ContactProps {
+  setActiveSection: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export default function Contact({ setActiveSection }: ContactProps) {
+  const { ref, inView } = useInView({
+    threshold: 0.5,
+  });
+
+  useEffect(
+    function handleInViewChange() {
+      if (inView) {
+        setActiveSection("contact");
+      }
+    },
+    [inView, setActiveSection]
+  );
+
   return (
-    <div id="contact" className={styles["contact-section"]}>
+    <div ref={ref} id="contact" className={styles["contact-section"]}>
       Contact Section
     </div>
   );
