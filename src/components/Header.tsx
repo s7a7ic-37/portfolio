@@ -5,18 +5,13 @@ import { useState } from "react";
 
 interface HeaderProps {
   activeSection: string;
-  setActiveSection: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export default function Header({
-  activeSection,
-  setActiveSection,
-}: HeaderProps) {
+export default function Header({ activeSection }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleButtonClick = (section: string) => {
     scrollTo(section);
-    setActiveSection(section);
     toggleMenu();
   };
 

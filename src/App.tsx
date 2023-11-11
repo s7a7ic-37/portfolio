@@ -13,7 +13,6 @@ function App() {
     <>
       <Header
         activeSection={activeSection}
-        setActiveSection={setActiveSection}
       />
       <About setActiveSection={setActiveSection} />
       <Projects setActiveSection={setActiveSection} />
