@@ -40,7 +40,7 @@ li {
 
 button {
   color: var(--light);
-  font-family: "Cascadia Code";
+  font-family: "Cascadia Code", monospace;
   font-size: 24px;
   font-weight: 600;
   background: transparent;
