@@ -77,7 +77,7 @@ button::before {
 }
 
 @media (min-width: 750px) {
-  button:hover {
+  .navbar button:hover {
     transform: translateY(-8px);
     color: #10ab77;
   }
