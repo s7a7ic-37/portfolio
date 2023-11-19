@@ -76,14 +76,14 @@ button::before {
   display: none;
 }
 
-@media (min-width: 750px) {
+@media screen and (min-width: 750px) {
   .navbar button:hover {
     transform: translateY(-8px);
     color: #10ab77;
   }
 }
 
-@media (max-width: 750px) {
+@media screen and (max-width: 750px) {
   .logo {
     padding-bottom: 0;
   }
