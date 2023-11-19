@@ -12,11 +12,10 @@ export default function Header({ activeSection }: HeaderProps) {
 
   const handleButtonClick = (section: string) => {
     scrollTo(section);
-    toggleMenu();
-  };
 
-  const handleLogoClick = (section: string) => {
-    scrollTo(section);
+    if (section !== "hero") {
+      toggleMenu();
+    }
   };
 
   const toggleMenu = () => {
@@ -37,7 +36,7 @@ export default function Header({ activeSection }: HeaderProps) {
       <div className={styles.container}>
         <div className={styles.navbar_inner}>
           <div className={styles.logo}>
-            <a onClick={() => handleLogoClick("about")}>
+            <a onClick={() => handleButtonClick("hero")}>
               <img src={logo} alt="logo" />
             </a>
           </div>
