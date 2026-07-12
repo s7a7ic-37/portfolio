@@ -1,13 +1,30 @@
-# Welcome to my portfolio!
+# Maksymilian Pasiecki — portfolio
 
-This portfolio is a work in progress and is continually evolving. It's designed to showcase my work, skills, and experience in a variety of domains. I appreciate your interest in exploring it, and I'm excited to share my projects and achievements with you.
+A small React and Vite portfolio with two browser-only tools. It is deployed as a static site; the tools do not need a server or account.
 
-## Content
+## Run locally
 
-Here you will find a collection of my projects, both personal and professional. As I continue to work on new projects and expand my skills, I will be updating this personal website to provide a more comprehensive view of my work.
+Requirements: Node.js 20 or later.
 
-## Hosted Version
+    npm ci
+    npm run dev
 
-You can access the hosted version [here](https://ideanexus.uk/). Please note that as it's a work in progress, some sections may still be under construction, and I appreciate your understanding.
+Build the site with npm run build. Run the data checks with npm test.
 
-Thank you for visiting my portfolio, and I look forward to sharing more of my work with you in the future!
+## Projects
+
+- **Pure News** — existing React frontend and Express/PostgreSQL API. The frontend has article filters, detail pages, votes and comments. The API repository keeps its existing history and Jest/SuperTest suite. The deployed API index returned HTTP 200 on 30 October 2026, while its database-backed article and topic routes returned HTTP 500; the exact production cause is not confirmed. Local API setup and the required PostgreSQL environment variables are documented in that repository.
+- **Contract Check** — public/tools/api-contract-checker. A small contract format checks required fields and JSON types, including nested objects and arrays. The checker is deliberately smaller than JSON Schema.
+- **Stockroom Reconcile** — public/tools/stockroom-reconciliation. Reads stock-count CSV in the browser, validates rows, flags quantity or condition exceptions, and exports only the exception list. The bundled data is synthetic.
+
+The contract checker and CSV reconciler keep their core logic in separate JavaScript modules so it can be read and tested without the page UI. Run npm test to check matching and mismatching payloads, malformed or duplicate stock rows, and CSV export escaping.
+
+## Privacy and limits
+
+Both tools process pasted or selected data only in the current browser page. They do not send it to a service or save it. Stock quantities must be whole, non-negative numbers; duplicate SKUs are held for review. Contract Check supports a small, documented shape format and is not a full schema validator.
+
+The original travel planner is a group project. Its live landing page is available, but the source checkout found so far is empty; no team source is included here.
+
+## Contact
+
+Use the public GitHub or LinkedIn links on the site.

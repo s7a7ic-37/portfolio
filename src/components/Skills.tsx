@@ -1,28 +1,22 @@
-import styles from "./Skills.module.css";
-import { useEffect } from "react";
-import { useInView } from "react-intersection-observer";
+const skills = ["JavaScript", "TypeScript", "React", "Node.js", "Express", "PostgreSQL", "HTML & CSS", "Vite", "Jest", "Git"];
 
-interface SkillsProps {
-  setActiveSection: React.Dispatch<React.SetStateAction<string>>;
-}
-
-export default function Skills({ setActiveSection }: SkillsProps) {
-  const { ref, inView } = useInView({
-    threshold: 0.5,
-  });
-
-  useEffect(
-    function handleInViewChange() {
-      if (inView) {
-        setActiveSection("skills");
-      }
-    },
-    [inView, setActiveSection]
-  );
-
+export default function Skills() {
   return (
-    <div ref={ref} id="skills" className={styles["skills-section"]}>
-      Skills Section
-    </div>
+    <section id="skills" className="skills-section">
+      <div className="section-wrap">
+        <p className="eyebrow">Tools & approach</p>
+        <h2 className="section-title">A practical full-stack toolkit.</h2>
+        <p className="section-intro">I use the simplest parts of the stack that solve the job, and keep the code easy to understand and change.</p>
+        <div className="skill-layout">
+          <div className="skill-list" aria-label="Technologies used in selected projects">
+            {skills.map((skill) => <span key={skill}>{skill}</span>)}
+          </div>
+          <aside className="work-note">
+            <h3>How I approach a build</h3>
+            <p>Start with the user’s task. Check the data shape and edge cases. Make failure states useful. Leave a short explanation so the next person can run and extend the project.</p>
+          </aside>
+        </div>
+      </div>
+    </section>
   );
 }

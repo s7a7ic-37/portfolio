@@ -1,28 +1,24 @@
-import styles from "./About.module.css";
-import { useEffect } from "react";
-import { useInView } from "react-intersection-observer";
+import avatar from "../assets/photos/avatar.png";
 
-interface AboutProps {
-  setActiveSection: React.Dispatch<React.SetStateAction<string>>;
-}
-
-export default function About({ setActiveSection }: AboutProps) {
-  const { ref, inView } = useInView({
-    threshold: 0.5,
-  });
-
-  useEffect(
-    function handleInViewChange() {
-      if (inView) {
-        setActiveSection("about");
-      }
-    },
-    [inView, setActiveSection]
-  );
-
+export default function About() {
   return (
-    <div ref={ref} id="about" className={styles["about-section"]}>
-      About Section
-    </div>
+    <section id="about" className="about-section">
+      <div className="section-wrap">
+        <p className="eyebrow">About</p>
+        <h2 className="section-title">Good software starts with the problem in front of you.</h2>
+        <div className="about-copy">
+          <div className="about-aside">
+            <img src={avatar} alt="" />
+            <span>Based in Warrington, UK<br />Learning by building</span>
+          </div>
+          <p>
+            I’m Maksymilian. I bring an <strong>operations background</strong> to
+            my work in software: understand the task, make the information clear,
+            and build a tool that helps someone take the next step. My current
+            projects span React interfaces, Node APIs and practical data handling.
+          </p>
+        </div>
+      </div>
+    </section>
   );
 }

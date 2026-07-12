@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f4ed">
+  <meta name="description" content="Check a JSON response against a lightweight API contract.">
+  <title>Contract Check · Maksymilian Pasiecki</title>
+  <link rel="stylesheet" href="../tool-ui.css">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <main class="tool-shell">
+    <nav class="tool-nav" aria-label="Page navigation">
+      <a class="tool-brand" href="/">MP · Maksymilian Pasiecki</a>
+      <a class="tool-back" href="/#projects">← All projects</a>
+    </nav>
+    <header class="tool-hero">
+      <p class="tool-eyebrow">Project 02 · API debugging</p>
+      <h1>Contract Check</h1>
+      <p>Compare a JSON response with a small shape contract. Catch missing fields and type changes before they reach the next part of an app.</p>
+      <div class="tool-meta"><span>Runs in your browser</span><span>No upload</span><span>JSON</span></div>
+    </header>
+    <section class="tool-panel" aria-labelledby="check-heading">
+      <h2 id="check-heading">Check a response</h2>
+      <p>Use type names such as <code>"string"</code> and <code>"number"</code>, nested objects, or a one-item array template. Extra response fields are allowed.</p>
+      <form id="check-form">
+        <div class="tool-grid">
+          <div class="tool-field">
+            <label for="contract">Expected contract</label>
+            <textarea id="contract" spellcheck="false" aria-describedby="contract-help"></textarea>
+            <p class="field-help" id="contract-help">All listed fields are required. An empty object means “must be an object”.</p>
+          </div>
+          <div class="tool-field">
+            <label for="response">JSON response</label>
+            <textarea id="response" spellcheck="false"></textarea>
+          </div>
+        </div>
+        <div class="tool-actions">
+          <button class="tool-button" type="submit">Check response</button>
+          <button class="tool-button tool-button--light" id="load-example" type="button">Load example</button>
+          <button class="tool-button tool-button--light" id="download-report" type="button" disabled>Download report</button>
+        </div>
+      </form>
+      <p id="status" class="tool-status" role="status" aria-live="polite"></p>
+      <ul id="results" class="tool-results" aria-label="Contract check findings"></ul>
+      <p class="tool-footnote">The contract format is intentionally small for learning and quick checks; it is not a full JSON Schema implementation.</p>
+    </section>
+  </main>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

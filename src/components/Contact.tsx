@@ -1,28 +1,20 @@
-import styles from "./Contact.module.css";
-import { useEffect } from "react";
-import { useInView } from "react-intersection-observer";
-
-interface ContactProps {
-  setActiveSection: React.Dispatch<React.SetStateAction<string>>;
-}
-
-export default function Contact({ setActiveSection }: ContactProps) {
-  const { ref, inView } = useInView({
-    threshold: 0.5,
-  });
-
-  useEffect(
-    function handleInViewChange() {
-      if (inView) {
-        setActiveSection("contact");
-      }
-    },
-    [inView, setActiveSection]
-  );
-
+export default function Contact() {
   return (
-    <div ref={ref} id="contact" className={styles["contact-section"]}>
-      Contact Section
-    </div>
+    <section id="contact" className="contact-section">
+      <div className="section-wrap">
+        <p className="eyebrow">Contact</p>
+        <div className="contact-grid">
+          <div>
+            <h2 className="section-title">Let’s talk about useful software.</h2>
+            <p className="section-intro">I’m open to connecting with people building thoughtful products and practical tools.</p>
+            <div className="contact-links">
+              <a href="https://github.com/s7a7ic-37">GitHub ↗</a>
+              <a href="https://www.linkedin.com/in/maksymilian-pasiecki/">LinkedIn ↗</a>
+            </div>
+          </div>
+        </div>
+        <p className="footer-note">© {new Date().getFullYear()} Maksymilian Pasiecki · Built with React and Vite</p>
+      </div>
+    </section>
   );
 }
