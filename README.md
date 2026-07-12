@@ -11,6 +11,18 @@ Requirements: Node.js 20 or later.
 
 Build the site with npm run build. Run the data checks with npm test.
 
+## Deployment
+
+This portfolio is hosted directly in the owner's Cloudflare account as a static-assets Worker named `maksymilian-portfolio`. The production hostname is `portfolio.artemislab.co.uk`. Deployment does not use ChatGPT Sites.
+
+Verify the Cloudflare login before deploying:
+
+    npx wrangler@4.92.0 whoami
+    npm run build
+    npx wrangler@4.92.0 deploy
+
+The account ID and asset directory are recorded in `wrangler.jsonc`. Wrangler uses the local Cloudflare login; credentials do not belong in this repository.
+
 ## Projects
 
 - **Pure News** — existing React frontend and Express/PostgreSQL API. The frontend has article filters, detail pages, votes and comments. The API repository keeps its existing history and Jest/SuperTest suite. The deployed API index returned HTTP 200 on 30 October 2026, while its database-backed article and topic routes returned HTTP 500; the exact production cause is not confirmed. Local API setup and the required PostgreSQL environment variables are documented in that repository.
