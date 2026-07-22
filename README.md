@@ -1,42 +1,25 @@
 # Maksymilian Pasiecki — portfolio
 
-A small React and Vite portfolio with two browser-only tools. It is deployed as a static site; the tools do not need a server or account.
+React/TypeScript portfolio for practical software, API troubleshooting and operations data work.
 
-## Run locally
+Live: https://portfolio.artemislab.co.uk
 
-Requirements: Node.js 20 or later.
+## Run and verify
 
-    npm ci
-    npm run dev
+Use Node.js 22. Run npm ci, npm test and npm run build. For local development, run npm run dev. GitHub Actions repeats the tool tests and production build.
 
-Build the site with npm run build. Run the data checks with npm test.
+## Selected work
+
+- **Pure News**: React frontend and Express/PostgreSQL API. Restored on 30 October 2026 after the original Supabase project was paused beyond dashboard recovery. The replacement uses the original public sample data. The backend has 74 passing tests, safe transactional initialization and verified TLS. The free Render API can take about a minute to wake. Demo usernames are not authentication.
+- **Contract Check**: public/tools/api-contract-checker. A browser-local mini-contract validator for JSON fields and types. It deliberately does not implement full JSON Schema. No uploads or persistence.
+- **OpsLens**: https://github.com/s7a7ic-37/ops-lens. Python, DuckDB SQL and scikit-learn study of openly licensed retail invoices, with a data audit and honest validation/holdout comparison. The historical data and substantial forecast errors are disclosed in its model card.
+- **Stockroom Reconcile**: public/tools/stockroom-reconciliation. Small browser-local CSV tool with synthetic sample data, whole-number checks, duplicate SKU holds and exception export.
+- **Ready, Jet Set, Go!**: four-person Northcoders project, preserved at https://github.com/lai1372/travel-planner. Personal maintenance belongs only in https://github.com/s7a7ic-37/travel-planner. Original team history and credit remain intact; no changes are pushed to the team repository.
 
 ## Deployment
 
-This portfolio is hosted directly in the owner's Cloudflare account as a static-assets Worker named `maksymilian-portfolio`. The production hostname is `portfolio.artemislab.co.uk`. Deployment does not use ChatGPT Sites.
+Static-assets Worker maksymilian-portfolio in the owner's Cloudflare account. wrangler.jsonc pins the exact account and portfolio.artemislab.co.uk hostname. Verify the login with npx wrangler@4.92.0 whoami, build, then run npx wrangler@4.92.0 deploy. Credentials stay in the local Cloudflare session, never in Git. This repository does not use ChatGPT Sites.
 
-Verify the Cloudflare login before deploying:
+## Privacy
 
-    npx wrangler@4.92.0 whoami
-    npm run build
-    npx wrangler@4.92.0 deploy
-
-The account ID and asset directory are recorded in `wrangler.jsonc`. Wrangler uses the local Cloudflare login; credentials do not belong in this repository.
-
-## Projects
-
-- **Pure News** — existing React frontend and Express/PostgreSQL API. The frontend has article filters, detail pages, votes and comments. The API repository keeps its existing history and Jest/SuperTest suite. The deployed API index returned HTTP 200 on 30 October 2026, while its database-backed article and topic routes returned HTTP 500; the exact production cause is not confirmed. Local API setup and the required PostgreSQL environment variables are documented in that repository.
-- **Contract Check** — public/tools/api-contract-checker. A small contract format checks required fields and JSON types, including nested objects and arrays. The checker is deliberately smaller than JSON Schema.
-- **Stockroom Reconcile** — public/tools/stockroom-reconciliation. Reads stock-count CSV in the browser, validates rows, flags quantity or condition exceptions, and exports only the exception list. The bundled data is synthetic.
-
-The contract checker and CSV reconciler keep their core logic in separate JavaScript modules so it can be read and tested without the page UI. Run npm test to check matching and mismatching payloads, malformed or duplicate stock rows, and CSV export escaping.
-
-## Privacy and limits
-
-Both tools process pasted or selected data only in the current browser page. They do not send it to a service or save it. Stock quantities must be whole, non-negative numbers; duplicate SKUs are held for review. Contract Check supports a small, documented shape format and is not a full schema validator.
-
-The original travel planner is a group project. Its live landing page is available, but the source checkout found so far is empty; no team source is included here.
-
-## Contact
-
-Use the public GitHub or LinkedIn links on the site.
+No private career documents, employer records or credentials belong here. Browser tools process data locally. OpsLens serves precomputed public aggregates; it does not accept uploads. Public contact links use GitHub and LinkedIn only.

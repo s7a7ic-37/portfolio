@@ -7,7 +7,7 @@ export default function Projects() {
             <p className="eyebrow">Selected work</p>
             <h2 className="section-title">Tools built around real tasks.</h2>
           </div>
-          <p className="section-intro">A full-stack news app, an API debugging workbench, and an inventory reconciliation tool.</p>
+          <p className="section-intro">A full-stack news app, an API debugging tool, and an operations data study that makes machine learning earn its place.</p>
         </div>
 
         <div className="project-grid">
@@ -22,7 +22,7 @@ export default function Projects() {
                 <a href="https://github.com/s7a7ic-37/pure-news">Frontend source ↗</a>
                 <a href="https://github.com/s7a7ic-37/pure-news-api">API source ↗</a>
               </div>
-              <p className="project-note">The legacy demo depends on a hosted API whose data routes currently return HTTP 500. The frontend source now handles that failure with a retry state.</p>
+              <p className="project-note">Restored after a database outage: safe initialization, verified TLS, useful retry states and 74 API tests in CI. Public sample data and demo identities; the free API may take about a minute to wake.</p>
             </div>
             <div className="project-preview" aria-label="Pure News interface illustration">
               <div className="preview-top"><span>PURE NEWS</span><span>coding · cooking · sport</span></div>
@@ -48,22 +48,24 @@ export default function Projects() {
           </article>
 
           <article className="project-card">
-            <span className="project-number">03 / OPERATIONS</span>
-            <h3>Stockroom Reconcile</h3>
-            <p>Load a stock-count CSV, compare expected and counted quantities, and export a focused exception list for follow-up.</p>
-            <div className="project-tags"><span>CSV</span><span>Data quality</span><span>Operations</span></div>
-            <div className="project-preview" aria-label="Stockroom Reconcile example results">
-              <div className="preview-top"><span>COUNT SUMMARY</span><span>sample data</span></div>
-              <div className="preview-row"><span>4 rows checked<br /><small>1 match · 3 exceptions</small></span><span className="preview-status preview-status--warn">review</span></div>
-              <div className="preview-row"><span>SKU-104<br /><small>Expected 8 · counted 6</small></span><span className="preview-status preview-status--error">short 2</span></div>
+            <span className="project-number">03 / DATA & ML</span>
+            <h3>OpsLens</h3>
+            <p>Investigate retail cancellations, account for every source row, and compare a seven-day ML forecast against simple weekly patterns. See when the model loses.</p>
+            <div className="project-tags"><span>Python</span><span>DuckDB SQL</span><span>scikit-learn</span></div>
+            <div className="project-preview" aria-label="OpsLens evaluation summary">
+              <div className="preview-top"><span>EVIDENCE BEFORE AUTOMATION</span><span>historical study</span></div>
+              <div className="preview-row"><span>541,909 invoice lines<br /><small>Explicit exclusions · auditable totals</small></span><span className="preview-status">SQL</span></div>
+              <div className="preview-row"><span>5 products select ML · 3 select a baseline<br /><small>Validation chooses · untouched holdout measures</small></span><span className="preview-status preview-status--warn">compare</span></div>
             </div>
             <div className="project-links">
-              <a href="/tools/stockroom-reconciliation/index.html">Try the tool ↗</a>
-              <a href="https://github.com/s7a7ic-37/portfolio/tree/main/public/tools/stockroom-reconciliation">Source ↗</a>
+              <a href="https://opslens.artemislab.co.uk/">Open workbench ↗</a>
+              <a href="https://github.com/s7a7ic-37/ops-lens">Source & model card ↗</a>
             </div>
-            <p className="project-note">Both tool demos use sample data in your browser; no files are uploaded.</p>
+            <p className="project-note">Openly licensed 2010–2011 data. Large forecast errors are shown openly; this study is an investigation aid, not a live ordering system.</p>
           </article>
         </div>
+        <p className="project-note">Another small operations tool: <a href="/tools/stockroom-reconciliation/index.html">Stockroom Reconcile</a> validates a stock-count CSV and exports exceptions entirely in your browser.</p>
+        <p className="project-note">Team work: <a href="https://github.com/s7a7ic-37/travel-planner">Ready, Jet Set, Go!</a> was a four-person Northcoders project. My contributions included Firebase authentication, itinerary storage and deletion, places API and maps integration. The personal maintenance fork preserves the original team history.</p>
       </div>
     </section>
   );

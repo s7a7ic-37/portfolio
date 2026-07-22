@@ -7,6 +7,7 @@ export default function Skills() {
         <p className="eyebrow">Tools & approach</p>
         <h2 className="section-title">A practical full-stack toolkit.</h2>
         <p className="section-intro">I use the simplest parts of the stack that solve the job, and keep the code easy to understand and change.</p>
+        <p className="section-intro">Currently extending that toolkit through OpsLens: Python, DuckDB SQL and scikit-learn, with explicit baselines and time-based evaluation.</p>
         <div className="skill-layout">
           <div className="skill-list" aria-label="Technologies used in selected projects">
             {skills.map((skill) => <span key={skill}>{skill}</span>)}

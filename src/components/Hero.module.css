@@ -13,7 +13,7 @@
 .portrait img { display: block; width: 100%; border-radius: 50%; background: #fff; }
 .portrait p { position: absolute; right: -8px; bottom: 18px; margin: 0; padding: 13px 16px; border: 1px solid #d9dcd0; border-radius: 12px; background: var(--surface); color: var(--ink); font-size: 12px; font-weight: 700; box-shadow: 0 8px 24px rgba(32,38,30,.08); }
 .portrait p span { display: block; margin-bottom: 4px; color: var(--moss); font: 700 10px/1.2 "Cascadia Code", monospace; text-transform: uppercase; }
-.orbit { position: absolute; top: 27px; right: -45px; z-index: 1; padding: 9px 12px; border: 1px solid #d0d6c5; border-radius: 99px; background: var(--lime); color: #455834; font: 700 9px/1 "Cascadia Code", monospace; letter-spacing: .1em; transform: rotate(7deg); }
+.orbit { position: absolute; top: 27px; right: 0; z-index: 1; padding: 9px 12px; border: 1px solid #d0d6c5; border-radius: 99px; background: var(--lime); color: #455834; font: 700 9px/1 "Cascadia Code", monospace; letter-spacing: .1em; transform: rotate(7deg); }
 .scroll { position: absolute; bottom: 6px; left: 0; display: flex; align-items: center; gap: 12px; color: var(--moss); font-size: 20px; text-decoration: none; }
 .scroll span { font: 700 10px/1.2 "Cascadia Code", monospace; letter-spacing: .1em; }
 @media (max-width: 760px) {
