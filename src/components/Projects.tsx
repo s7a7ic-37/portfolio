@@ -65,7 +65,7 @@ export default function Projects() {
           </article>
         </div>
         <p className="project-note">Another small operations tool: <a href="/tools/stockroom-reconciliation/index.html">Stockroom Reconcile</a> validates a stock-count CSV and exports exceptions entirely in your browser.</p>
-        <p className="project-note">Team work: <a href="https://github.com/s7a7ic-37/travel-planner">Ready, Jet Set, Go!</a> was a four-person Northcoders project. My contributions included Firebase authentication, itinerary storage and deletion, places API and maps integration. The personal maintenance fork preserves the original team history.</p>
+        <p className="project-note">Team work: <a href="https://github.com/s7a7ic-37/travel-planner">Ready, Jet Set, Go!</a> was a four-person Northcoders project. My contributions included Firebase authentication, itinerary storage and deletion, places API and maps integration. The personal maintenance fork preserves the original team history. <a href="https://travel-planner-demo.mpasiecki.workers.dev/demo/">Try the fork’s guest demo ↗</a></p>
       </div>
     </section>
   );
