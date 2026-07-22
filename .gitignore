@@ -12,6 +12,12 @@ dist
 dist-ssr
 .wrangler
 *.local
+.env
+.env.*
+!.env.example
+*.key
+*.p12
+*.pfx
 
 # Editor directories and files
 .vscode/*
