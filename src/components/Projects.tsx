@@ -58,7 +58,7 @@ export default function Projects() {
               <div className="preview-row"><span>5 products select ML · 3 select a baseline<br /><small>Validation chooses · untouched holdout measures</small></span><span className="preview-status preview-status--warn">compare</span></div>
             </div>
             <div className="project-links">
-              <a href="https://opslens.artemislab.co.uk/">Open workbench ↗</a>
+              <a href="https://opslens.mpasiecki.workers.dev/">Open workbench ↗</a>
               <a href="https://github.com/s7a7ic-37/ops-lens">Source & model card ↗</a>
             </div>
             <p className="project-note">Openly licensed 2010–2011 data. Large forecast errors are shown openly; this study is an investigation aid, not a live ordering system.</p>
