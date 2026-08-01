@@ -16,6 +16,8 @@ export default function About() {
             my work in software: understand the task, make the information clear,
             and build a tool that helps someone take the next step. My current
             projects span React interfaces, Node APIs and practical data handling.
+            I trained in full-stack JavaScript with Northcoders and keep extending
+            that foundation through the projects below.
           </p>
         </div>
       </div>
