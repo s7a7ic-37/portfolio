@@ -10,7 +10,7 @@ Use Node.js 22. Run npm ci, npm test and npm run build. For local development, r
 
 ## Selected work
 
-- **Pure News**: React frontend and Express/PostgreSQL API. Restored on 30 October 2026 after the original Supabase project was paused beyond dashboard recovery. The replacement uses the original public sample data. The backend has 74 passing tests, safe transactional initialization and verified TLS. The free Render API can take about a minute to wake. Demo usernames are not authentication.
+- **Pure News**: React frontend and Express/PostgreSQL API. Restored after the original Supabase project was paused beyond dashboard recovery. The replacement uses the original public sample data. The backend has 74 passing tests, safe transactional initialization and verified TLS. The free Render API can take about a minute to wake. Demo usernames are not authentication.
 - **Contract Check**: public/tools/api-contract-checker. A browser-local mini-contract validator for JSON fields and types. It deliberately does not implement full JSON Schema. No uploads or persistence.
 - **OpsLens**: https://github.com/s7a7ic-37/ops-lens. Python, DuckDB SQL and scikit-learn study of openly licensed retail invoices, with a data audit and honest validation/holdout comparison. The historical data and substantial forecast errors are disclosed in its model card.
 - **Stockroom Reconcile**: public/tools/stockroom-reconciliation. Small browser-local CSV tool with synthetic sample data, whole-number checks, duplicate SKU holds and exception export.
