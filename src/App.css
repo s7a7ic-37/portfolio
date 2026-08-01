@@ -36,6 +36,10 @@
 .preview-status--warn { background: #fff0d9; color: #8d5414; }
 .preview-status--error { background: #f9e3dc; color: #904531; }
 .project-note { margin: 18px 0 0; color: var(--muted); font-size: 12px !important; }
+.project-details { margin-top: 20px; border-top: 1px solid var(--line); padding-top: 14px; }
+.project-details summary { cursor: pointer; color: var(--moss); font-size: 13px; font-weight: 700; }
+.project-details p { font-size: 13px; margin: 12px 0 0; }
+.project-details strong { color: var(--ink); }
 
 .skills-section { background: var(--ink); color: #f1f2eb; }
 .skills-section .section-title { color: #f1f2eb; }
