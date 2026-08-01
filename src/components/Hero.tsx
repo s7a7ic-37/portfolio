@@ -1,4 +1,4 @@
-import avatar from "../assets/photos/avatar.png";
+import avatar from "../assets/photos/avatar.webp";
 import styles from "./Hero.module.css";
 
 export default function Hero() {
@@ -19,7 +19,7 @@ export default function Hero() {
         </div>
         <div className={styles.portrait}>
           <div className={styles.orbit} aria-hidden="true">BUILD · TEST · IMPROVE</div>
-          <img src={avatar} alt="Illustrated portrait of Maksymilian" />
+          <img src={avatar} width="660" height="660" decoding="async" alt="Illustrated portrait of Maksymilian" />
           <p><span>Currently</span> building practical tools</p>
         </div>
         <a className={styles.scroll} href="#about" aria-label="Scroll to About">↓ <span>SCROLL TO EXPLORE</span></a>

@@ -23,8 +23,8 @@
 }
 
 * { box-sizing: border-box; }
-html { min-width: 320px; scroll-behavior: smooth; }
-body { min-width: 320px; margin: 0; font-size: 16px; }
+html { scroll-behavior: smooth; }
+body { margin: 0; font-size: 16px; }
 button, a { -webkit-tap-highlight-color: transparent; }
 button, input, textarea, select { font: inherit; }
 button:focus-visible, a:focus-visible { outline: 3px solid #c96e4c; outline-offset: 3px; }

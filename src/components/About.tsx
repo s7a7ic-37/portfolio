@@ -1,4 +1,4 @@
-import avatar from "../assets/photos/avatar.png";
+import avatar from "../assets/photos/avatar.webp";
 
 export default function About() {
   return (
@@ -8,7 +8,7 @@ export default function About() {
         <h2 className="section-title">Good software starts with the problem in front of you.</h2>
         <div className="about-copy">
           <div className="about-aside">
-            <img src={avatar} alt="" />
+            <img src={avatar} width="660" height="660" loading="lazy" decoding="async" alt="" />
             <span>Based in Warrington, UK<br />Learning by building</span>
           </div>
           <p>

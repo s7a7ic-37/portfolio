@@ -39,7 +39,8 @@
       <p id="status" class="tool-status" role="status" aria-live="polite"></p>
       <div id="summary" class="summary" aria-live="polite"></div>
       <ul id="issues" class="tool-results" aria-label="Import issues"></ul>
-      <div class="table-wrap">
+      <p class="field-help">On a narrow screen, swipe the table sideways to see every column.</p>
+      <div class="table-wrap" tabindex="0" role="region" aria-label="Stock count exceptions, scroll to see all columns">
         <table id="exceptions-table">
           <caption>Rows requiring follow-up</caption>
           <thead><tr><th scope="col">Finding</th><th scope="col">SKU</th><th scope="col">Item</th><th scope="col">Expected</th><th scope="col">Counted</th><th scope="col">Difference</th></tr></thead>
