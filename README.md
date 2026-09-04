@@ -27,3 +27,7 @@ The existing React/Vite section structure is retained. Four capability cards con
 ## Privacy
 
 No private career documents, employer records or credentials belong here. Browser tools process data locally. OpsLens serves precomputed public aggregates; it does not accept uploads. Public contact links use GitHub and LinkedIn only.
+
+## Visual identity
+
+The portfolio keeps its olive identity. Contract Check uses a purple developer-tool palette; Stockroom Reconcile uses an amber operations palette. Each has its own SVG tab icon, 32px PNG fallback, multi-size ICO and Apple touch icon. Icon links are absolute and versioned so nested tool paths resolve correctly.

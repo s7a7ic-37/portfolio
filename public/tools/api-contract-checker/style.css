@@ -1,1 +1,9 @@
 .field-help{margin:7px 0 0;color:#697164;font-size:12px;line-height:1.5}code{padding:2px 5px;border-radius:4px;background:#f0f2e8;font:12px "Cascadia Code",monospace}
+
+body { background: #f2eff8; color: #30243f; }
+.tool-eyebrow,.tool-nav a,.tool-meta span { color: #65458d; }
+.tool-hero h1 { font-family: "Segoe UI",Arial,sans-serif; font-weight: 700; }
+.tool-panel { border-top: 3px solid #75539b; }
+.tool-button { background: #65458d; border-color: #65458d; }
+.tool-button--light { background: transparent; color: #65458d; }
+.tool-field textarea { background: #faf8ff; border-color: #d8d0e6; }
