@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "test": "node --test public/tools/api-contract-checker/checker.test.js public/tools/stockroom-reconciliation/reconcile.test.js",
+    "test": "node --test tests/theme.test.mjs public/tools/api-contract-checker/checker.test.js public/tools/stockroom-reconciliation/reconcile.test.js",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },

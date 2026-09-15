@@ -17,3 +17,24 @@ body { background: #f4f4f0; color: #30332f; font-family: Arial,Helvetica,sans-se
 th { background: #ecece5; }
 th,td { padding: 14px 12px; }
 .tool-footnote { font-size: 12px; }
+
+html[data-theme="dark"] body { background: #1c1f1b; color: #ecebdd; }
+html[data-theme="dark"] .tool-nav { border-color: #535443; }
+html[data-theme="dark"] .tool-nav a { color: #e4c179; }
+html[data-theme="dark"] .tool-panel { background: #282c24; }
+html[data-theme="dark"] .tool-panel > p, html[data-theme="dark"] .field-help, html[data-theme="dark"] .tool-footnote, html[data-theme="dark"] .file-input { color: #c4c7b5; }
+html[data-theme="dark"] .tool-field label, html[data-theme="dark"] caption { color: #ecebdd; }
+html[data-theme="dark"] .tool-field textarea { background: #1d211b; color: #ecebdd; border-color: #77765a; }
+html[data-theme="dark"] .tool-button { background: #e4c179; color: #29210f; border-color: #e4c179; }
+html[data-theme="dark"] .tool-button--light { background: transparent; color: #e4c179; }
+html[data-theme="dark"] .file-input::file-selector-button { background: #282c24; color: #ecebdd; border-color: #77765a; }
+html[data-theme="dark"] .summary { border-color: #535443; }
+html[data-theme="dark"] .summary span { background: #393525; border-color: #535443; color: #ecebdd; }
+html[data-theme="dark"] .summary strong, html[data-theme="dark"] td:first-child { color: #e4c179; }
+html[data-theme="dark"] th { background: #393525; color: #c4c7b5; }
+html[data-theme="dark"] th, html[data-theme="dark"] td { border-color: #535443; }
+html[data-theme="dark"] .tool-status { color: #c1dba3; }
+html[data-theme="dark"] .tool-status[data-tone=error] { color: #ffb99f; }
+html[data-theme="dark"] .tool-results li { background: #4b3228; color: #ffcfb9; }
+html[data-theme="dark"] .tool-results li[data-kind=missing] { background: #443c24; color: #f1dca9; }
+html[data-theme="dark"] .tool-results li[data-kind=success] { background: #2c432a; color: #c1dba3; }

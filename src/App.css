@@ -28,7 +28,7 @@
 .project-links a, .text-link { display: inline-flex; align-items: center; min-height: 44px; color: var(--ink); font-size: 14px; font-weight: 700; text-underline-offset: 4px; }
 .project-links a:hover, .text-link:hover { color: var(--moss); }
 
-.skills-section { background: var(--ink); color: #f1f2eb; }
+.skills-section { background: var(--skills-bg,var(--ink)); color: #f1f2eb; }
 .skills-section .section-title { color: #f1f2eb; }
 .skills-section .eyebrow { color: var(--lime); }
 .skills-section .section-intro { color: #c4c9c1; }
@@ -49,15 +49,15 @@
 .team-toolkit p { color: #c4c9c1; font-size: 13px; line-height: 1.7; margin: 0; }
 .team-toolkit a { grid-column: 2; color: #e5eadf; font-size: 12px; display: inline-flex; align-items: center; min-height: 44px; }
 
-.contact-section { padding-bottom: 78px; background: var(--lime); }
-.contact-section .eyebrow { color: #42562d; }
+.contact-section { padding-bottom: 78px; background: var(--contact-bg,var(--lime)); }
+.contact-section .eyebrow { color: var(--contact-text,#42562d); }
 .contact-grid { display: flex; justify-content: space-between; gap: 32px; align-items: end; }
 .contact-section .section-title { max-width: 700px; }
-.contact-section .section-intro { color: #42493a; }
+.contact-section .section-intro { color: var(--contact-text,#42493a); }
 .contact-links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
 .contact-links a { display: inline-flex; align-items: center; min-height: 46px; padding: 0 17px; border: 1px solid rgba(28,38,23,.25); border-radius: 999px; color: var(--ink); font-size: 14px; font-weight: 700; text-decoration: none; transition: background .2s, color .2s; }
-.contact-links a:hover { background: var(--ink); color: white; }
-.footer-note { margin: 82px 0 0; padding-top: 18px; border-top: 1px solid rgba(28,38,23,.22); color: #48513c; font: 12px/1.5 "Cascadia Code", monospace; }
+.contact-links a:hover { background: var(--ink); color: var(--paper); }
+.footer-note { margin: 82px 0 0; padding-top: 18px; border-top: 1px solid rgba(28,38,23,.22); color: var(--contact-text,#48513c); font: 12px/1.5 "Cascadia Code", monospace; }
 
 @media (max-width: 760px) {
   .section-wrap { width: min(100% - 36px, 560px); }
@@ -79,3 +79,5 @@
   .team-toolkit { grid-template-columns: 1fr; }
   .team-toolkit a { grid-column: auto; }
 }
+
+html[data-theme="dark"] .contact-links a { border-color: #718565; }

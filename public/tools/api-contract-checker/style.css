@@ -21,3 +21,19 @@ a, .tool-nav a { color: #c4b5fd; }
 .field-help { margin: 8px 0; font-size: 12px; line-height: 1.5; }
 code { background: #363347; color: #e0d4ff; padding: 2px 5px; }
 @media(max-width:760px) { .tool-field textarea { min-height: 240px; } }
+
+html[data-theme="light"] body { background: #f3f1f8; color: #292438; }
+html[data-theme="light"] a, html[data-theme="light"] .tool-nav a, html[data-theme="light"] .tool-field label { color: #65458d; }
+html[data-theme="light"] .tool-nav { border-color: #cfc8dc; }
+html[data-theme="light"] .tool-hero h1, html[data-theme="light"] .tool-panel h2 { color: #292438; }
+html[data-theme="light"] .tool-panel { background: #fff; border-color: #cfc8dc; }
+html[data-theme="light"] .tool-panel > p, html[data-theme="light"] .field-help, html[data-theme="light"] .tool-footnote { color: #61576e; }
+html[data-theme="light"] .tool-field textarea { background: #faf8ff; color: #292438; border-color: #9c91ae; }
+html[data-theme="light"] .tool-button { background: #65458d; color: #fff; border-color: #65458d; }
+html[data-theme="light"] .tool-button--light { background: transparent; color: #65458d; }
+html[data-theme="light"] .tool-status { color: #25613e; }
+html[data-theme="light"] .tool-status[data-tone=error] { color: #9b3f2f; }
+html[data-theme="light"] .tool-results li { background: #fbeae5; color: #773d30; }
+html[data-theme="light"] .tool-results li[data-kind=missing] { background: #fff2cd; color: #70501c; }
+html[data-theme="light"] .tool-results li[data-kind=success] { background: #e7f5e9; color: #25613e; }
+html[data-theme="light"] code { background: #e7e1f4; color: #503776; }
