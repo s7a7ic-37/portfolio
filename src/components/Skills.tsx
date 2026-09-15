@@ -3,7 +3,7 @@ const capabilities = [
     number: "01", title: "Interfaces & interaction",
     description: "Responsive interfaces, keyboard-friendly controls, shareable browsing state and clear loading, empty and recovery states.",
     tools: ["JavaScript", "TypeScript", "React", "HTML & CSS", "React Router"],
-    evidence: "Explore the news interface", href: "https://pure-news.netlify.app/?topic=coding&sort_by=title&order=asc",
+    evidence: "Explore the news interface", href: "https://news.artemislab.co.uk/?topic=coding&sort_by=title&order=asc",
   },
   {
     number: "02", title: "APIs & relational data",

@@ -6,9 +6,9 @@ A React and TypeScript portfolio for web applications, API tools and operations 
 
 ## Projects
 
-- **[Pure News](https://pure-news.netlify.app/)** — article browsing, filters, votes and comments, backed by an Express/PostgreSQL API.
+- **[Pure News](https://news.artemislab.co.uk/)** — article browsing, filters, votes and comments, backed by an Express/PostgreSQL API.
 - **[OpsLens](https://opslens.artemislab.co.uk/)** — retail invoice investigation and time-based forecast comparisons using Python, DuckDB and scikit-learn.
-- **[Travel Planner](https://travel-planner-demo.mpasiecki.workers.dev/demo/)** — editable Manchester itineraries with local saving and plan-file import/export. A personal fork of a four-person Northcoders project.
+- **[Travel Planner](https://travel.artemislab.co.uk/demo/)** — editable Manchester itineraries with local saving and plan-file import/export. A personal fork of a four-person Northcoders project.
 - **[Contract Check](https://portfolio.artemislab.co.uk/tools/api-contract-checker/)** — check JSON payloads against a small field-and-type contract.
 - **[Stockroom Reconcile](https://portfolio.artemislab.co.uk/tools/stockroom-reconciliation/)** — compare CSV stock counts and export exceptions.
 
