@@ -1,20 +1,20 @@
 # Contract Check
 
-A browser-only JSON response checker. Define a small contract using primitive type names, nested objects, and one-item array templates, then check a payload for missing fields and type changes.
+Check JSON payloads for missing fields and type changes using a small contract.
 
-## Try it
+**[Open the tool](https://portfolio.artemislab.co.uk/tools/api-contract-checker/)**
 
-Open index.html directly or visit /tools/api-contract-checker/ on the portfolio. Select Load example to see the sample API mismatch, then edit either JSON field and check again. The report downloads as JSON.
+Load the example, edit the contract or payload, then check the result. Reports download as JSON. Inputs stay in the browser without uploads or persistence.
 
 ## Contract format
 
-- Primitive fields use string, number, boolean, object, array, null, or any.
+- Primitive types: `string`, `number`, `boolean`, `object`, `array`, `null` or `any`.
 - Nested objects list required child fields.
-- Arrays may contain one template, for example [{ "id": "number" }].
+- Arrays accept one template, such as `[{ "id": "number" }]`.
 - Extra payload fields are allowed.
 
-This is a small learning tool rather than a full JSON Schema validator. It runs locally in the browser and sends no data to a server.
+This is a small field-and-type checker, not a full JSON Schema validator.
 
-## Check
+## Run and test
 
-Run node --test checker.test.js to verify matching payloads, missing fields, nested type changes, and invalid contract definitions.
+Open `index.html` directly. From this directory, run `node --test checker.test.js`.
