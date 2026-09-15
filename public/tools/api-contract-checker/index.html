@@ -20,10 +20,7 @@
       <a class="tool-back" href="/#projects">← All projects</a>
     </nav>
     <header class="tool-hero">
-      <p class="tool-eyebrow">API debugging · Browser tool</p>
       <h1>Contract Check</h1>
-      <p>Compare a JSON response with a small shape contract. Catch missing fields and type changes before they reach the next part of an app.</p>
-      <div class="tool-meta"><span>Runs in your browser</span><span>No upload</span><span>JSON</span></div>
     </header>
     <section class="tool-panel" aria-labelledby="check-heading">
       <h2 id="check-heading">Check a response</h2>
@@ -48,7 +45,7 @@
       </form>
       <p id="status" class="tool-status" role="status" aria-live="polite"></p>
       <ul id="results" class="tool-results" aria-label="Contract check findings"></ul>
-      <p class="tool-footnote">The contract format is intentionally small for learning and quick checks; it is not a full JSON Schema implementation.</p>
+      <details class="tool-footnote"><summary>Contract format</summary><p>Listed fields are required; extra response fields are allowed. This format is not full JSON Schema.</p></details>
     </section>
   </main>
   <script type="module" src="./app.js"></script>

@@ -1,9 +1,23 @@
-.field-help{margin:7px 0 0;color:#697164;font-size:12px;line-height:1.5}code{padding:2px 5px;border-radius:4px;background:#f0f2e8;font:12px "Cascadia Code",monospace}
-
-body { background: #f2eff8; color: #30243f; }
-.tool-eyebrow,.tool-nav a,.tool-meta span { color: #65458d; }
-.tool-hero h1 { font-family: "Segoe UI",Arial,sans-serif; font-weight: 700; }
-.tool-panel { border-top: 3px solid #75539b; }
-.tool-button { background: #65458d; border-color: #65458d; }
-.tool-button--light { background: transparent; color: #65458d; }
-.tool-field textarea { background: #faf8ff; border-color: #d8d0e6; }
+body { background: #181922; color: #e4e6f0; font-family: Consolas,"Courier New",monospace; }
+a, .tool-nav a { color: #c4b5fd; }
+.tool-nav { border-color: #3d3e51; }
+.tool-shell { width: min(1240px,calc(100% - 40px)); }
+.tool-hero { padding: 32px 0 12px; }
+.tool-hero h1 { font: 700 clamp(30px,5vw,48px)/1.2 Consolas,monospace; letter-spacing: -.05em; color: #e4e6f0; }
+.tool-panel { margin-top: 12px; border: 1px solid #3d3e51; border-radius: 4px; background: #21232e; }
+.tool-panel h2 { font: 700 19px/1.3 Consolas,monospace; color: #e4e6f0; }
+.tool-panel > p, .field-help, .tool-footnote { color: #b4b8cb; }
+.tool-field label { color: #c4b5fd; font-family: Consolas,monospace; }
+.tool-field textarea { border: 1px solid #55586e; border-radius: 0; background: #15161e; color: #e4e6f0; min-height: 340px; font-family: Consolas,monospace; }
+.tool-button { background: #c4b5fd; border-color: #c4b5fd; color: #211a33; border-radius: 4px; }
+.tool-button--light { background: transparent; color: #c4b5fd; }
+.tool-status { color: #b3efc7; }
+.tool-status[data-tone=error] { color: #ffb8a8; }
+.tool-results li { color: #f3cdc5; border-radius: 0; background: #482e2c; border-color: #ef9b85; }
+.tool-results li[data-kind=missing] { color: #f2dfab; background: #423c25; }
+.tool-results li[data-kind=success] { color: #c4efd0; background: #243e30; }
+.tool-footnote { margin-top: 24px; font-size: 13px; }
+.tool-footnote summary { min-height: 44px; cursor: pointer; padding: 12px 0; }
+.field-help { margin: 8px 0; font-size: 12px; line-height: 1.5; }
+code { background: #363347; color: #e0d4ff; padding: 2px 5px; }
+@media(max-width:760px) { .tool-field textarea { min-height: 240px; } }
