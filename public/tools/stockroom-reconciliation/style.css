@@ -38,3 +38,4 @@ html[data-theme="dark"] .tool-status[data-tone=error] { color: #ffb99f; }
 html[data-theme="dark"] .tool-results li { background: #4b3228; color: #ffcfb9; }
 html[data-theme="dark"] .tool-results li[data-kind=missing] { background: #443c24; color: #f1dca9; }
 html[data-theme="dark"] .tool-results li[data-kind=success] { background: #2c432a; color: #c1dba3; }
+@media(max-width:600px){.tool-shell{width:calc(100% - 24px)}.tool-panel{padding:14px}.tool-actions{align-items:stretch}.tool-actions>*{max-width:100%}.tool-actions .tool-button{flex:1 1 100%}.file-input{width:100%}.summary span{flex:1 1 120px;padding:12px}.table-wrap{max-width:calc(100vw - 12px);overscroll-behavior-x:contain}}

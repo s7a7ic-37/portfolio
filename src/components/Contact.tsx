@@ -13,7 +13,7 @@ export default function Contact() {
             </div>
           </div>
         </div>
-        <p className="footer-note">© {new Date().getFullYear()} Maksymilian Pasiecki · Built with React and Vite</p>
+        <p className="footer-note">© {new Date().getFullYear()} Maksymilian Pasiecki · Built with React and Vite · <a href="https://github.com/s7a7ic-37/portfolio">Portfolio source ↗</a></p>
       </div>
     </section>
   );
