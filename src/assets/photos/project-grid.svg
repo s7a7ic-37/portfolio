@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="633" viewBox="0 0 900 633" fill="none">
+  <rect width="900" height="633" fill="#091112"/>
+  <path d="M0 0h900v8H0z" fill="#50D7B3"/>
+  <text x="58" y="61" fill="#74E5C5" font-family="monospace" font-size="12" letter-spacing="2">LIVE GRID / GB</text>
+  <text x="58" y="115" fill="#F2F5F1" font-family="Arial,sans-serif" font-size="42" font-weight="700">Grid Demand Lab</text>
+  <text x="58" y="148" fill="#A9B8B3" font-family="Arial,sans-serif" font-size="15">Tomorrow’s electricity demand, forecast in half-hour steps</text>
+  <rect x="58" y="185" width="784" height="96" rx="10" fill="#111E1F" stroke="#233737"/>
+  <text x="82" y="218" fill="#97AAA4" font-family="monospace" font-size="12">GB AVERAGE FORECAST</text>
+  <text x="82" y="260" fill="#F2F5F1" font-family="Arial,sans-serif" font-size="34" font-weight="600">24,860</text>
+  <text x="225" y="260" fill="#74E5C5" font-family="Arial,sans-serif" font-size="15">MW</text>
+  <path d="M475 231h78m-39-39v78" stroke="#29413E"/>
+  <text x="594" y="218" fill="#97AAA4" font-family="monospace" font-size="12">FORECAST PERIOD</text>
+  <text x="594" y="258" fill="#F2F5F1" font-family="Arial,sans-serif" font-size="23" font-weight="600">00:00 — 23:30</text>
+  <rect x="58" y="306" width="784" height="271" rx="10" fill="#0D1819" stroke="#233737"/>
+  <text x="82" y="340" fill="#E5EFEB" font-family="Arial,sans-serif" font-size="15" font-weight="600">Demand through the day</text>
+  <text x="820" y="340" fill="#79DCC0" font-family="monospace" font-size="11" text-anchor="end">MODEL FORECAST</text>
+  <g stroke="#263737" stroke-width="1">
+    <path d="M106 379h700M106 425h700M106 471h700M106 517h700"/>
+    <path d="M106 361v175" stroke-dasharray="2 5"/>
+  </g>
+  <g fill="#82958F" font-family="monospace" font-size="10">
+    <text x="82" y="383" text-anchor="end">35k</text><text x="82" y="429" text-anchor="end">30k</text>
+    <text x="82" y="475" text-anchor="end">25k</text><text x="82" y="521" text-anchor="end">20k</text>
+    <text x="106" y="554">00:00</text><text x="275" y="554">06:00</text>
+    <text x="449" y="554">12:00</text><text x="622" y="554">18:00</text>
+    <text x="806" y="554" text-anchor="end">23:30</text>
+  </g>
+  <path d="M106 482 136 484 166 491 196 503 226 515 256 520 286 514 316 505 346 512 376 508 406 500 436 494 466 487 496 468 526 443 556 428 586 411 616 397 646 390 676 398 706 415 736 436 766 459 806 477" stroke="#63DFC0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <g fill="#091112" stroke="#8CF0D4" stroke-width="2">
+    <circle cx="106" cy="482" r="4"/><circle cx="166" cy="491" r="4"/><circle cx="226" cy="515" r="4"/>
+    <circle cx="286" cy="514" r="4"/><circle cx="346" cy="512" r="4"/><circle cx="406" cy="500" r="4"/>
+    <circle cx="466" cy="487" r="4"/><circle cx="526" cy="443" r="4"/><circle cx="586" cy="411" r="4"/>
+    <circle cx="646" cy="390" r="4"/><circle cx="706" cy="415" r="4"/><circle cx="766" cy="459" r="4"/><circle cx="806" cy="477" r="4"/>
+  </g>
+  <text x="58" y="611" fill="#758A84" font-family="monospace" font-size="11" letter-spacing="1">LIGHTGBM · NESO DATA · UK CLOCK TIME</text>
+</svg>
