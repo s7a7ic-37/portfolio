@@ -43,11 +43,8 @@
 .capability-card p { color: #c4c9c1; font-size: 14px; line-height: 1.75; margin: 0; }
 .capability-tools { display: flex; flex-wrap: wrap; gap: 7px; list-style: none; padding: 0; margin: 24px 0; }
 .capability-tools li { border: 1px solid #56614f; padding: 7px 10px; border-radius: 6px; color: #e5eadf; font-size: 11px; }
-.capability-card a { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; margin-top: auto; color: var(--lime); font-size: 12px; font-weight: 650; text-underline-offset: 5px; }
-.team-toolkit { display: grid; grid-template-columns: 145px 1fr; gap: 12px 30px; align-items: start; padding-top: 28px; margin-top: 30px; border-top: 1px solid #495343; }
-.team-toolkit > span { color: var(--lime); font-size: 10px; letter-spacing: .1em; padding-top: 5px; }
-.team-toolkit p { color: #c4c9c1; font-size: 13px; line-height: 1.7; margin: 0; }
-.team-toolkit a { grid-column: 2; color: #e5eadf; font-size: 12px; display: inline-flex; align-items: center; min-height: 44px; }
+.capability-evidence { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: auto; }
+.capability-card a { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; color: var(--lime); font-size: 12px; font-weight: 650; text-underline-offset: 5px; }
 
 .contact-section { padding-bottom: 78px; background: var(--contact-bg,var(--lime)); }
 .contact-section .eyebrow { color: var(--contact-text,#42562d); }
@@ -76,8 +73,6 @@
   .skills-heading .section-intro { margin-top: 24px; }
   .capability-grid { grid-template-columns: 1fr; }
   .capability-card { padding: 24px; }
-  .team-toolkit { grid-template-columns: 1fr; }
-  .team-toolkit a { grid-column: auto; }
 }
 
 html[data-theme="dark"] .contact-links a { border-color: #718565; }
