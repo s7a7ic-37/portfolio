@@ -1,4 +1,4 @@
-import { exceptionsToCsv, reconcileCsv } from "./reconcile.js";
+import { exceptionsToCsv, reconcileCsv, readCsvFile } from "./reconcile.js";
 
 const csvInput = document.querySelector("#csv-input");
 const fileInput = document.querySelector("#csv-file");
@@ -16,6 +16,20 @@ const sampleCsv = [
   "SKU-315,Carton tape,10,10,damaged",
 ].join("\n");
 let lastExceptions = [];
+
+function clearResult() {
+  summary.replaceChildren();
+  issues.replaceChildren();
+  tableBody.replaceChildren();
+  lastExceptions = [];
+  downloadButton.disabled = true;
+}
+
+csvInput.addEventListener("input", () => {
+  clearResult();
+  status.dataset.tone = "";
+  status.textContent = "Stock data changed. Reconcile again to update the results.";
+});
 
 function showResult(result) {
   summary.replaceChildren();
@@ -62,11 +76,7 @@ function run() {
   try {
     showResult(reconcileCsv(csvInput.value));
   } catch (error) {
-    summary.replaceChildren();
-    issues.replaceChildren();
-    tableBody.replaceChildren();
-    lastExceptions = [];
-    downloadButton.disabled = true;
+    clearResult();
     status.dataset.tone = "error";
     status.textContent = error.message;
   }
@@ -80,12 +90,13 @@ document.querySelector("#load-sample").addEventListener("click", () => {
 fileInput.addEventListener("change", async () => {
   const file = fileInput.files?.[0];
   if (!file) return;
+  clearResult();
   try {
-    csvInput.value = await file.text();
+    csvInput.value = await readCsvFile(file);
     run();
-  } catch {
+  } catch (error) {
     status.dataset.tone = "error";
-    status.textContent = "This file could not be read. Try another CSV file.";
+    status.textContent = file.size > 1_000_000 ? error.message : "This file could not be read. Choose a UTF-8 CSV file.";
   }
   fileInput.value = "";
 });

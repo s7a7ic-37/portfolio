@@ -25,6 +25,16 @@ const sampleResponse = {
 
 let lastReport = null;
 
+for (const input of [contractInput, responseInput]) {
+  input.addEventListener("input", () => {
+    lastReport = null;
+    results.replaceChildren();
+    downloadButton.disabled = true;
+    status.dataset.tone = "";
+    status.textContent = "Inputs changed. Check the response again to update the findings.";
+  });
+}
+
 function showFindings(findings) {
   results.replaceChildren();
   if (!findings.length) {

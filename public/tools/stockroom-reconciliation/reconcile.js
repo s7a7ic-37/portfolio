@@ -1,5 +1,6 @@
 function readRows(source) {
   if (typeof source !== "string") throw new Error("CSV input must be text.");
+  if (source.length > 1_000_000) throw new Error("Keep pasted CSV below 1,000,000 characters.");
   const text = source.replace(/^\uFEFF/, "");
   const rows = [];
   let line = 1;
@@ -12,7 +13,10 @@ function readRows(source) {
   function finishRow() {
     cells.push(field);
     field = "";
-    if (cells.some((cell) => cell.trim() !== "")) rows.push({ line: rowLine, cells });
+    if (cells.some((cell) => cell.trim() !== "")) {
+      rows.push({ line: rowLine, cells });
+      if (rows.length > 5001) throw new Error("Use at most 5,000 stock rows.");
+    }
     cells = [];
     rowLine = line;
     quoteClosed = false;
@@ -73,7 +77,7 @@ function readRows(source) {
     if (values.length !== headers.length) {
       throw new Error("Line " + sourceLine + " has " + values.length + " fields; expected " + headers.length + ".");
     }
-    return { line: sourceLine, ...Object.fromEntries(headers.map((header, index) => [header, values[index]])) };
+    return { ...Object.fromEntries(headers.map((header, index) => [header, values[index]])), line: sourceLine };
   });
 
   if (!dataRows.length) throw new Error("Add at least one stock row.");
@@ -100,7 +104,9 @@ export function reconcileCsv(source) {
       issues.push({ line: row.line, message: "SKU is blank." });
       continue;
     }
-    groups.set(sku, [...(groups.get(sku) ?? []), row]);
+    const matches = groups.get(sku);
+    if (matches) matches.push(row);
+    else groups.set(sku, [row]);
   }
 
   const validRows = [];
@@ -148,11 +154,18 @@ export function reconcileCsv(source) {
   };
 }
 
+export async function readCsvFile(file) {
+  if (file.size > 1_000_000) throw new Error("Choose a CSV file no larger than 1 MB.");
+  return new TextDecoder("utf-8", { fatal: true }).decode(await file.arrayBuffer());
+}
+
 export function exceptionsToCsv(exceptions) {
   const headers = ["sku", "name", "expected", "counted", "difference", "condition", "finding"];
   const quote = (value) => {
-    const text = String(value ?? "");
-    return /[",\r\n]/.test(text) ? '"' + text.replaceAll('"', '""') + '"' : text;
+    let text = String(value ?? "");
+    // shortcut: CSV escaping targets Excel; use typed exports when another importer must be supported.
+    if (typeof value === "string" && (/^\s*[=+\-@＝＋－＠]/u.test(text) || /^[\t\r\n]/.test(text))) text = "\t" + text;
+    return /[",\r\n\t]/.test(text) ? '"' + text.replaceAll('"', '""') + '"' : text;
   };
   return [headers, ...exceptions.map((row) => headers.map((header) => row[header]))]
     .map((row) => row.map(quote).join(","))
