@@ -9,8 +9,9 @@
 .primary:hover { transform: translateY(-2px); background: var(--moss); }
 .primary span { color: var(--button-mark,var(--lime)); font-size: 18px; }
 .secondary { color: var(--ink); text-decoration: underline; text-decoration-color: #a3ac9c; text-underline-offset: 5px; }
-.portrait { position: relative; width: min(100%, 390px); justify-self: end; padding: 24px; border: 1px solid #d9dcd0; border-radius: 48% 48% 22px 22px; background: var(--portrait-surface,#ebece2); }
-.portrait img { display: block; width: 100%; height: auto; border-radius: 50%; background: #fff; }
+.portrait { position: relative; width: min(100%, 350px); justify-self: end; padding: 32px; border: 1px solid var(--line); border-radius: 3px; background: var(--portrait-surface,#ebece2); }
+.initials { display: flex; flex-direction: column; min-height: 290px; justify-content: center; padding: 16px 0 30px; border-top: 1px solid var(--line); color: var(--ink); font: 500 164px/.7 Georgia,serif; letter-spacing: -.09em; }
+.initials span { align-self: end; color: var(--moss); }
 .portrait p { position: absolute; right: -8px; bottom: 18px; margin: 0; padding: 13px 16px; border: 1px solid #d9dcd0; border-radius: 12px; background: var(--surface); color: var(--ink); font-size: 12px; font-weight: 700; box-shadow: 0 8px 24px rgba(32,38,30,.08); }
 .portrait p span { display: block; margin-bottom: 4px; color: var(--moss); font: 700 10px/1.2 "Cascadia Code", monospace; text-transform: uppercase; }
 .orbit { position: absolute; top: 27px; right: 0; z-index: 1; padding: 9px 12px; border: 1px solid #d0d6c5; border-radius: 99px; background: var(--lime); color: #455834; font: 700 9px/1 "Cascadia Code", monospace; letter-spacing: .1em; transform: rotate(7deg); }

@@ -12,7 +12,7 @@
 .about-copy p { max-width: 690px; margin: 0; color: var(--muted); font-size: 18px; line-height: 1.8; }
 .about-copy strong { color: var(--ink); font-weight: 650; }
 .about-aside { display: flex; gap: 14px; align-items: center; padding-top: 8px; color: var(--muted); font-size: 14px; }
-.about-aside img { width: 56px; height: 56px; border: 1px solid var(--line); border-radius: 50%; background: white; }
+.about-monogram { display: grid; flex: 0 0 56px; height: 56px; place-items: center; border: 1px solid var(--line); border-radius: 50%; color: var(--moss); font: 500 21px Georgia,serif; }
 
 .projects-section { background: var(--paper); }
 .projects-heading { margin-bottom: 42px; }

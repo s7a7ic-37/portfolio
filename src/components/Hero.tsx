@@ -1,4 +1,3 @@
-import avatar from "../assets/photos/avatar.webp";
 import styles from "./Hero.module.css";
 
 export default function Hero() {
@@ -21,7 +20,7 @@ export default function Hero() {
         </div>
         <div className={styles.portrait}>
           <div className={styles.orbit} aria-hidden="true">BUILD · TEST · IMPROVE</div>
-          <img src={avatar} width="660" height="660" decoding="async" alt="Illustrated portrait of Maksymilian" />
+          <div className={styles.initials} aria-hidden="true">M<span>P.</span></div>
           <p><span>Currently</span> building practical tools</p>
         </div>
       </div>

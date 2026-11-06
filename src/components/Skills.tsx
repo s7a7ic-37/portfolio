@@ -13,7 +13,7 @@ const capabilities = [
   },
   {
     number: "03", title: "Data & model evaluation",
-    description: "OpsLens evaluates product decisions against a time-based holdout; Grid Demand compares a LightGBM forecast with live NESO readings.",
+    description: "Time-based holdouts and baseline comparisons in OpsLens; live NESO inputs and a separate historical evaluation in Grid Demand.",
     tools: ["Python", "pandas", "NumPy", "DuckDB", "scikit-learn", "LightGBM", "Altair", "NESO API"],
     evidence: [
       { label: "OpsLens · holdout evaluation", href: "https://opslens.artemislab.co.uk/#cohort" },
