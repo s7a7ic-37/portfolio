@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./Header.module.css";
 
 const links = [
@@ -10,15 +10,32 @@ const links = [
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuButton = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!isMenuOpen) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setIsMenuOpen(false);
+        menuButton.current?.focus();
+      }
+    };
+    document.addEventListener("keydown", closeOnEscape);
+    return () => document.removeEventListener("keydown", closeOnEscape);
+  }, [isMenuOpen]);
 
   return (
-    <header className={styles.header}>
+    <header className={styles.header} onBlur={(event) => {
+      if (!event.currentTarget.contains(event.relatedTarget)) setIsMenuOpen(false);
+    }}>
       <div className={styles.inner + " section-wrap"}>
         <a className={styles.brand} href="#hero" onClick={() => setIsMenuOpen(false)} aria-label="Maksymilian Pasiecki, home">
           <span className={styles.brandMark}>MP</span>
           <span>Maksymilian Pasiecki</span>
         </a>
         <button
+          ref={menuButton}
           className={styles.menuToggle}
           type="button"
           aria-label={isMenuOpen ? "Close navigation" : "Open navigation"}
