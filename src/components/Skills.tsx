@@ -7,9 +7,9 @@ const capabilities = [
   },
   {
     number: "02", title: "APIs & relational data",
-    description: "Express endpoints, parameterized SQL, stable pagination and safe database initialization with transactions and verified TLS.",
-    tools: ["Node.js", "Express", "PostgreSQL", "SQL", "Supabase"],
-    evidence: [{ label: "Pure News API · setup", href: "https://github.com/s7a7ic-37/pure-news-api#production-configuration" }],
+    description: "REST endpoints, validated requests, source-backed draft review and transactional SQL.",
+    tools: ["Node.js", "Express", "FastAPI", "Pydantic", "PostgreSQL", "SQL", "OpenAI Responses API", "Supabase"],
+    evidence: [{ label: "Runbook Desk", href: "https://runbook.artemislab.co.uk/" }, { label: "Pure News API", href: "https://github.com/s7a7ic-37/pure-news-api" }],
   },
   {
     number: "03", title: "Data & model evaluation",
@@ -22,9 +22,9 @@ const capabilities = [
   },
   {
     number: "04", title: "Testing & delivery",
-    description: "Database-backed regression tests, automated build and credential checks, and static deployments with documented setup and limits.",
-    tools: ["Git", "GitHub Actions", "Jest", "Supertest", "Cloudflare Workers", "Render"],
-    evidence: [{ label: "Pure News API · CI checks", href: "https://github.com/s7a7ic-37/pure-news-api/actions/workflows/checks.yml" }],
+    description: "Database-backed regression tests, container builds, CI checks and repeatable deployments.",
+    tools: ["Git", "GitHub Actions", "Jest", "Supertest", "pytest", "Docker", "Cloudflare Workers", "Render"],
+    evidence: [{ label: "Runbook Desk tests", href: "https://github.com/s7a7ic-37/runbook-desk/actions" }, { label: "Pure News API tests", href: "https://github.com/s7a7ic-37/pure-news-api/actions/workflows/checks.yml" }],
   },
 ];
 
@@ -34,7 +34,7 @@ export default function Skills() {
       <div className="section-wrap">
         <div className="skills-heading">
           <div><p className="eyebrow">Tools, with a purpose</p><h2 className="section-title">Built across<br />the stack.</h2></div>
-          <p className="section-intro">A practical toolkit, backed by work you can inspect. My core is full-stack JavaScript; Python and machine learning are newer skills I’m building through OpsLens and Grid Demand Lab.</p>
+          <p className="section-intro">JavaScript and TypeScript for interfaces and APIs; Python and SQL for data processing, model evaluation and support workflows.</p>
         </div>
         <div className="capability-grid">
           {capabilities.map((capability) => (
