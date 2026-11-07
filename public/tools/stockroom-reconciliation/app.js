@@ -12,6 +12,9 @@ const pagination = document.querySelector("#exception-pages");
 const previousButton = document.querySelector("#previous-page");
 const nextButton = document.querySelector("#next-page");
 const pageLabel = document.querySelector("#page-label");
+const filterControls = document.querySelector("#exception-filter");
+const findingFilter = document.querySelector("#finding-filter");
+const emptyFilter = document.querySelector("#filter-empty");
 const PAGE_SIZE = 25;
 
 const sampleCsv = [
@@ -32,6 +35,9 @@ function clearResult() {
   lastExceptions = [];
   page = 0;
   pagination.hidden = true;
+  findingFilter.value = "all";
+  filterControls.hidden = true;
+  emptyFilter.hidden = true;
   downloadButton.disabled = true;
 }
 
@@ -66,6 +72,7 @@ function showResult(result) {
     issues.append(item);
   }
   lastExceptions = result.exceptions;
+  findingFilter.value = "all";
   page = 0;
   showPage();
   downloadButton.disabled = !lastExceptions.length;
@@ -75,10 +82,18 @@ function showResult(result) {
     : "Reconciliation complete. Exceptions are ready for follow-up.";
 }
 
+function filteredExceptions() {
+  const choice = findingFilter.value;
+  return lastExceptions.filter(row => choice === "all" ||
+    (choice === "shortage" && row.difference < 0) ||
+    (choice === "overage" && row.difference > 0) || row.condition === choice);
+}
+
 function showPage() {
   tableBody.replaceChildren();
+  const shown = filteredExceptions();
   const start = page * PAGE_SIZE;
-  for (const row of lastExceptions.slice(start, start + PAGE_SIZE)) {
+  for (const row of shown.slice(start, start + PAGE_SIZE)) {
     const tr = document.createElement("tr");
     for (const value of [row.finding, row.sku, row.name || "—", row.expected, row.counted, row.difference > 0 ? "+" + row.difference : row.difference]) {
       const td = document.createElement("td");
@@ -87,14 +102,22 @@ function showPage() {
     }
     tableBody.append(tr);
   }
-  pagination.hidden = !lastExceptions.length;
+  filterControls.hidden = !lastExceptions.length;
+  emptyFilter.hidden = !lastExceptions.length || shown.length > 0;
+  emptyFilter.textContent = `No exceptions match this filter. ${lastExceptions.length.toLocaleString("en-GB")} total exceptions remain in the report.`;
+  pagination.hidden = !shown.length;
   previousButton.disabled = page === 0;
-  nextButton.disabled = start + PAGE_SIZE >= lastExceptions.length;
-  pageLabel.textContent = `${start + 1}–${Math.min(start + PAGE_SIZE, lastExceptions.length)} of ${lastExceptions.length.toLocaleString("en-GB")} exceptions`;
+  nextButton.disabled = start + PAGE_SIZE >= shown.length;
+  pageLabel.textContent = shown.length
+    ? `${start + 1}–${Math.min(start + PAGE_SIZE, shown.length)} of ${shown.length.toLocaleString("en-GB")} exceptions` +
+      (findingFilter.value === "all" ? "" : ` · ${lastExceptions.length.toLocaleString("en-GB")} total`)
+    : "";
 }
 
 function changePage(delta) {
-  page += delta;
+  const next = page + delta;
+  if (next < 0 || next * PAGE_SIZE >= filteredExceptions().length) return;
+  page = next;
   showPage();
   tableRegion.focus();
   tableRegion.scrollIntoView({ block: "start" });
@@ -102,6 +125,10 @@ function changePage(delta) {
 
 previousButton.addEventListener("click", () => changePage(-1));
 nextButton.addEventListener("click", () => changePage(1));
+findingFilter.addEventListener("change", () => {
+  page = 0;
+  showPage();
+});
 
 function run() {
   inputRevision++;

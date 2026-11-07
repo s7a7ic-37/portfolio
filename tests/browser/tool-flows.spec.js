@@ -122,3 +122,58 @@ test("Contract Check explains nested-contract limits and clears stale results", 
   await expect(page.locator("#results li")).toHaveText("Response matches the contract.");
   await expect(page.getByRole("button", { name: "Download report", exact: true })).toBeEnabled();
 });
+
+test("Stockroom filters follow-up rows while preserving all-exception export and input warnings", async ({ page }) => {
+  await page.goto("/tools/stockroom-reconciliation/");
+  const input = page.getByLabel("Stock count CSV", { exact: true });
+  const source = ["sku,expected,counted,condition",
+    ...Array.from({length: 30}, (_, index) => `SHORT-${index},2,1,sellable`),
+    "DAMAGE,2,1,damaged", "OVER,2,4,sellable", "HELD,3,3,held",
+    "MATCH,2,2,sellable", "INVALID,-1,0,sellable"].join("\n");
+  await input.fill(source);
+  await page.getByRole("button", { name: "Reconcile rows", exact: true }).click();
+  const filter = page.getByLabel("Filter exceptions", { exact: true });
+  await expect(filter).toBeVisible();
+  const rows = page.locator("#exceptions-table tbody tr");
+  const pages = page.getByRole("navigation", { name: "Exception pages", exact: true });
+  await pages.getByRole("button", { name: "Next", exact: true }).click();
+  await expect(rows).toHaveCount(8);
+  await filter.selectOption("shortage");
+  await expect(rows).toHaveCount(25);
+  await expect(rows.first()).toContainText("SHORT-0");
+  await expect(pages.getByRole("button", { name: "Previous", exact: true })).toBeDisabled();
+  await pages.getByRole("button", { name: "Next", exact: true }).click();
+  await expect(rows).toHaveCount(6);
+  await expect(rows.last()).toContainText("DAMAGE");
+  await filter.selectOption("damaged");
+  await expect(rows).toHaveCount(1);
+  await expect(rows.first()).toContainText("DAMAGE");
+  await expect(page.locator("#status")).toContainText("Review the input issues");
+  const pending = page.waitForEvent("download");
+  await page.getByRole("button", { name: "Export all exceptions", exact: true }).click();
+  const csv = await readFile(await (await pending).path(), "utf8");
+  expect(csv.split("\r\n")).toHaveLength(34);
+  for (const sku of ["SHORT-0", "DAMAGE", "OVER", "HELD"]) expect(csv).toContain(sku + ",");
+  expect(csv).not.toContain("INVALID,");
+  expect(csv).not.toContain("MATCH,");
+  await filter.selectOption("overage");
+  await expect(rows).toHaveCount(1);
+  await expect(rows.first()).toContainText("OVER");
+  await filter.selectOption("held");
+  await expect(rows).toHaveCount(1);
+  await expect(rows.first()).toContainText("HELD");
+  await input.fill("sku,expected,counted\nNEW,2,1\nMATCH,1,1");
+  await expect(filter).toBeHidden();
+  await page.getByRole("button", { name: "Reconcile rows", exact: true }).click();
+  await expect(filter).toHaveValue("all");
+  await filter.selectOption("held");
+  await expect(rows).toHaveCount(0);
+  await expect(page.locator("#filter-empty")).toContainText("No exceptions match this filter");
+  await expect(pages).toBeHidden();
+  await expect(filter).toBeVisible();
+  await expect(page.getByRole("button", { name: "Export all exceptions", exact: true })).toBeEnabled();
+  await filter.selectOption("all");
+  await expect(rows).toHaveCount(1);
+  await expect(rows.first()).toContainText("NEW");
+  await expect(page.locator("#filter-empty")).toBeHidden();
+});
