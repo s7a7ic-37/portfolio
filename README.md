@@ -25,7 +25,7 @@ npm run dev
 
 `npm test` checks tool parsing, validation and themes. `npm run build` checks TypeScript and builds the site into `dist/`.
 
-Run `npx playwright install --only-shell chromium` once, then `npm run test:browser` for mobile and desktop checks against a fresh production build. These cover local file loading, newer-input preservation, worklist paging and complete CSV exports. CI runs them too.
+Run `npx playwright install --only-shell chromium webkit` once, then `npm run test:browser` for Chromium desktop/mobile and mobile WebKit checks against a fresh production build. These cover local file loading, newer-input preservation, worklist paging and complete CSV exports. CI runs them too. Browser emulation does not replace physical-device testing.
 
 ## Stack and hosting
 
