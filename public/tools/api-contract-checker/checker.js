@@ -17,6 +17,10 @@ function isRecord(value) {
   return value !== null && typeof value === "object" && !Array.isArray(value);
 }
 
+function propertyPath(path, key) {
+  return /^[A-Za-z_$][A-Za-z0-9_$]*$/.test(key) ? path + "." + key : path + "[" + JSON.stringify(key) + "]";
+}
+
 function validateSchema(schema, path = "$") {
   if (typeof schema === "string") {
     if (!primitiveTypes.has(schema)) throw new Error("Unsupported type at " + path + ": " + schema);
@@ -28,7 +32,7 @@ function validateSchema(schema, path = "$") {
     return;
   }
   if (isRecord(schema)) {
-    for (const [key, child] of Object.entries(schema)) validateSchema(child, path + "." + key);
+    for (const [key, child] of Object.entries(schema)) validateSchema(child, propertyPath(path, key));
     return;
   }
   throw new Error("Use type names, nested objects, or array templates at " + path);
@@ -53,8 +57,8 @@ function collectFindings(schema, value, path, findings) {
     return;
   }
   for (const [key, child] of Object.entries(schema)) {
-    if (!Object.prototype.hasOwnProperty.call(value, key)) findings.push({ kind: "missing", path: path + "." + key });
-    else collectFindings(child, value[key], path + "." + key, findings);
+    if (!Object.prototype.hasOwnProperty.call(value, key)) findings.push({ kind: "missing", path: propertyPath(path, key) });
+    else collectFindings(child, value[key], propertyPath(path, key), findings);
   }
 }
 

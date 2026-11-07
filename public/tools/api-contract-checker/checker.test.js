@@ -39,3 +39,14 @@ test("rejects unsupported and ambiguous contract definitions", () => {
   assert.throws(() => checkContract({ rows: ["string", "number"] }, { rows: [] }), /one array item/);
   assert.throws(() => checkContract([], []), /root must be/);
 });
+
+test("paths distinguish literal punctuation, empty keys and nested fields", () => {
+  const shape = {"customer.name": "string", customer: {name: "string"}, "": "boolean", 'a"b': [{"[id]": "number"}]};
+  assert.deepEqual(checkContract(shape, {"customer.name": 1, customer: {}, 'a"b': [{"[id]": "wrong"}]}), [
+    {kind: "type", path: '$["customer.name"]', expected: "string", actual: "number"},
+    {kind: "missing", path: "$.customer.name"},
+    {kind: "missing", path: '$[""]'},
+    {kind: "type", path: '$["a\\"b"][0]["[id]"]', expected: "number", actual: "string"},
+  ]);
+  assert.throws(() => checkContract({"customer.name": "integer"}, {}), error => error.message === 'Unsupported type at $["customer.name"]: integer');
+});

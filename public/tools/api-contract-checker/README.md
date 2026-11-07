@@ -16,6 +16,7 @@ Editing either input clears the previous findings and disables export until the 
 - Nested objects list required child fields.
 - Arrays accept one template, such as `[{ "id": "number" }]`.
 - Extra payload fields are allowed.
+- Finding paths use brackets for literal keys containing spaces or punctuation, such as `$["customer.name"]`.
 
 This is a small field-and-type checker, not a full JSON Schema validator.
 
