@@ -22,9 +22,9 @@ const capabilities = [
   },
   {
     number: "04", title: "Testing & delivery",
-    description: "Database-backed regression tests, container builds, CI checks and repeatable deployments.",
-    tools: ["Git", "GitHub Actions", "Jest", "Supertest", "pytest", "Docker", "Cloudflare Workers", "Render"],
-    evidence: [{ label: "Runbook Desk tests", href: "https://github.com/s7a7ic-37/runbook-desk/actions" }, { label: "Pure News API tests", href: "https://github.com/s7a7ic-37/pure-news-api/actions/workflows/checks.yml" }],
+    description: "Database-backed regression tests, mobile browser checks, container builds and repeatable deployments.",
+    tools: ["Git", "GitHub Actions", "Jest", "Supertest", "Playwright", "pytest", "Docker", "Cloudflare Workers", "Render"],
+    evidence: [{ label: "Runbook Desk tests", href: "https://github.com/s7a7ic-37/runbook-desk/actions" }, { label: "Pure News browser checks", href: "https://github.com/s7a7ic-37/pure-news/actions/workflows/checks.yml" }],
   },
 ];
 

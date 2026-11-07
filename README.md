@@ -23,7 +23,9 @@ npm ci
 npm run dev
 ```
 
-`npm test` runs the browser-tool tests. `npm run build` checks TypeScript and builds the site into `dist/`.
+`npm test` checks tool parsing, validation and themes. `npm run build` checks TypeScript and builds the site into `dist/`.
+
+Run `npx playwright install --only-shell chromium` once, then `npm run test:browser` for mobile and desktop checks against a fresh production build. These cover local file loading, newer-input preservation, worklist paging and complete CSV exports. CI runs them too.
 
 ## Stack and hosting
 

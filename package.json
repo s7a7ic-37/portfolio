@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "test": "node --test tests/theme.test.mjs public/tools/api-contract-checker/checker.test.js public/tools/stockroom-reconciliation/reconcile.test.js",
+    "test:browser": "playwright test",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
@@ -16,6 +17,7 @@
     "react-intersection-observer": "^9.5.2"
   },
   "devDependencies": {
+    "@playwright/test": "1.65.0",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
