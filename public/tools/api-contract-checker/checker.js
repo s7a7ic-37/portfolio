@@ -39,27 +39,27 @@ function validateSchema(schema, path = "$", depth = 1) {
   throw new Error("Use type names, nested objects, or array templates at " + path);
 }
 
-function collectFindings(schema, value, path, findings) {
+function collectFindings(schema, value, path, addFinding) {
   if (typeof schema === "string") {
     const actual = typeOf(value);
-    if (schema !== "any" && actual !== schema) findings.push({ kind: "type", path, expected: schema, actual });
+    if (schema !== "any" && actual !== schema) addFinding({ kind: "type", path, expected: schema, actual });
     return;
   }
   if (Array.isArray(schema)) {
     if (!Array.isArray(value)) {
-      findings.push({ kind: "type", path, expected: "array", actual: typeOf(value) });
+      addFinding({ kind: "type", path, expected: "array", actual: typeOf(value) });
       return;
     }
-    if (schema.length === 1) value.forEach((item, index) => collectFindings(schema[0], item, path + "[" + index + "]", findings));
+    if (schema.length === 1) value.forEach((item, index) => collectFindings(schema[0], item, path + "[" + index + "]", addFinding));
     return;
   }
   if (!isRecord(value)) {
-    findings.push({ kind: "type", path, expected: "object", actual: typeOf(value) });
+    addFinding({ kind: "type", path, expected: "object", actual: typeOf(value) });
     return;
   }
   for (const [key, child] of Object.entries(schema)) {
-    if (!Object.prototype.hasOwnProperty.call(value, key)) findings.push({ kind: "missing", path: propertyPath(path, key) });
-    else collectFindings(child, value[key], propertyPath(path, key), findings);
+    if (!Object.prototype.hasOwnProperty.call(value, key)) addFinding({ kind: "missing", path: propertyPath(path, key) });
+    else collectFindings(child, value[key], propertyPath(path, key), addFinding);
   }
 }
 
@@ -67,6 +67,13 @@ export function checkContract(contract, response) {
   validateSchema(contract);
   if (!isRecord(contract)) throw new Error("Contract root must be a JSON object");
   const findings = [];
-  collectFindings(contract, response, "$", findings);
+  let pathCharacters = 0;
+  const addFinding = (finding) => {
+    pathCharacters += finding.path.length;
+    if (findings.length >= 50_000 || pathCharacters > 1_000_000)
+      throw new Error("Report is too large. Check a smaller response or contract.");
+    findings.push(finding);
+  };
+  collectFindings(contract, response, "$", addFinding);
   return findings;
 }

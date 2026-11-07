@@ -59,3 +59,15 @@ test("deep contracts fail with a useful limit before overflowing the call stack"
   const arrays = JSON.parse('{"rows":' + "[".repeat(10000) + '"number"' + "]".repeat(10000) + "}");
   assert.throws(() => checkContract(arrays, {}), /at most 64 levels/);
 });
+
+test("large reports stop without returning a truncated finding list", () => {
+  const contract = {rows: ["number"]};
+  assert.equal(checkContract(contract, {rows: Array(50_000).fill("wrong")}).length, 50_000);
+  assert.throws(() => checkContract(contract, {rows: Array(50_001).fill("wrong")}), /Report is too large/);
+});
+
+test("large reports also bound repeated long paths", () => {
+  const contract = {rows: [{["k".repeat(20_000)]: "number"}]};
+  assert.equal(checkContract(contract, {rows: Array.from({length: 49}, () => ({}))}).length, 49);
+  assert.throws(() => checkContract(contract, {rows: Array.from({length: 50}, () => ({}))}), /Report is too large/);
+});

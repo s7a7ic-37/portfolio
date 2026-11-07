@@ -10,6 +10,8 @@ Response files can be loaded as UTF-8 JSON up to 1 MB. An invalid file leaves th
 
 Editing either input clears the previous findings and disables export until the next check.
 
+Contracts allow up to 64 nesting levels. Reports allow up to 50,000 findings and 1,000,000 characters across their paths; larger reports show an error without offering a partial export.
+
 ## Contract format
 
 - Primitive types: `string`, `number`, `boolean`, `object`, `array`, `null` or `any`.

@@ -123,6 +123,33 @@ test("Contract Check explains nested-contract limits and clears stale results", 
   await expect(page.getByRole("button", { name: "Download report", exact: true })).toBeEnabled();
 });
 
+test("Contract Check refuses oversized reports and recovers without partial exports", async ({ page }) => {
+  await page.goto("/tools/api-contract-checker/");
+  const contract = page.getByLabel("Expected contract", { exact: true });
+  const response = page.getByLabel("JSON response", { exact: true });
+  const download = page.getByRole("button", { name: "Download report", exact: true });
+  await expect(download).toBeEnabled();
+  const cases = [
+    {contract: {rows: [Object.fromEntries(Array.from({length: 10}, (_, i) => ["field" + i, "number"]))]}, response: {rows: Array.from({length: 6000}, () => ({}))}},
+    {contract: {rows: [{["k".repeat(20_000)]: "number"}]}, response: {rows: Array.from({length: 50}, () => ({}))}},
+  ];
+  for (const sample of cases) {
+    const text = JSON.stringify(sample.response);
+    await contract.fill(JSON.stringify(sample.contract));
+    await response.fill(text);
+    await page.getByRole("button", { name: "Check response", exact: true }).click();
+    await expect(page.locator("#status")).toHaveText("Report is too large. Check a smaller response or contract.");
+    await expect(page.locator("#results li")).toHaveCount(0);
+    await expect(page.getByRole("navigation", { name: "Finding pages", exact: true })).toBeHidden();
+    await expect(download).toBeDisabled();
+    await expect(response).toHaveValue(text);
+  }
+  await page.getByRole("button", { name: "Load example", exact: true }).click();
+  await expect(page.locator("#results li")).toHaveCount(2);
+  await expect(download).toBeEnabled();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+});
+
 test("Stockroom filters follow-up rows while preserving all-exception export and input warnings", async ({ page }) => {
   await page.goto("/tools/stockroom-reconciliation/");
   const input = page.getByLabel("Stock count CSV", { exact: true });
