@@ -8,6 +8,8 @@ Load the synthetic sample, paste CSV or choose a local file. Files are processed
 
 Use UTF-8 CSV with up to 5,000 stock rows. Files are capped at 1 MB; pasted text at 1,000,000 characters. Input changes clear previous results and disable export until the next reconciliation.
 
+Editing, loading the sample or reconciling while a file is being read keeps the newer input.
+
 ## CSV format
 
 Required columns: `sku`, `expected`, `counted`. Optional: `name`, `condition`.

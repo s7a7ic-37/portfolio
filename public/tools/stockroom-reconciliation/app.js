@@ -16,6 +16,7 @@ const sampleCsv = [
   "SKU-315,Carton tape,10,10,damaged",
 ].join("\n");
 let lastExceptions = [];
+let inputRevision = 0;
 
 function clearResult() {
   summary.replaceChildren();
@@ -26,6 +27,7 @@ function clearResult() {
 }
 
 csvInput.addEventListener("input", () => {
+  inputRevision++;
   clearResult();
   status.dataset.tone = "";
   status.textContent = "Stock data changed. Reconcile again to update the results.";
@@ -73,6 +75,7 @@ function showResult(result) {
 }
 
 function run() {
+  inputRevision++;
   try {
     showResult(reconcileCsv(csvInput.value));
   } catch (error) {
@@ -91,14 +94,23 @@ fileInput.addEventListener("change", async () => {
   const file = fileInput.files?.[0];
   if (!file) return;
   clearResult();
+  const revision = ++inputRevision;
+  fileInput.disabled = true;
+  status.dataset.tone = "";
+  status.textContent = "Reading CSV file…";
   try {
-    csvInput.value = await readCsvFile(file);
+    const text = await readCsvFile(file);
+    if (revision !== inputRevision) return;
+    csvInput.value = text;
     run();
   } catch (error) {
+    if (revision !== inputRevision) return;
     status.dataset.tone = "error";
     status.textContent = file.size > 1_000_000 ? error.message : "This file could not be read. Choose a UTF-8 CSV file.";
+  } finally {
+    fileInput.disabled = false;
+    fileInput.value = "";
   }
-  fileInput.value = "";
 });
 downloadButton.addEventListener("click", () => {
   if (!lastExceptions.length) return;
