@@ -6,7 +6,13 @@ const status = document.querySelector("#status");
 const summary = document.querySelector("#summary");
 const issues = document.querySelector("#issues");
 const tableBody = document.querySelector("#exceptions-table tbody");
+const tableRegion = document.querySelector(".table-wrap");
 const downloadButton = document.querySelector("#download-exceptions");
+const pagination = document.querySelector("#exception-pages");
+const previousButton = document.querySelector("#previous-page");
+const nextButton = document.querySelector("#next-page");
+const pageLabel = document.querySelector("#page-label");
+const PAGE_SIZE = 25;
 
 const sampleCsv = [
   "sku,name,expected,counted,condition",
@@ -17,12 +23,15 @@ const sampleCsv = [
 ].join("\n");
 let lastExceptions = [];
 let inputRevision = 0;
+let page = 0;
 
 function clearResult() {
   summary.replaceChildren();
   issues.replaceChildren();
   tableBody.replaceChildren();
   lastExceptions = [];
+  page = 0;
+  pagination.hidden = true;
   downloadButton.disabled = true;
 }
 
@@ -36,7 +45,6 @@ csvInput.addEventListener("input", () => {
 function showResult(result) {
   summary.replaceChildren();
   issues.replaceChildren();
-  tableBody.replaceChildren();
   const stats = [
     ["Rows", result.summary.rows],
     ["Checked", result.summary.checked],
@@ -57,7 +65,20 @@ function showResult(result) {
     item.textContent = "Line " + issue.line + " — " + issue.message;
     issues.append(item);
   }
-  for (const row of result.exceptions) {
+  lastExceptions = result.exceptions;
+  page = 0;
+  showPage();
+  downloadButton.disabled = !lastExceptions.length;
+  status.dataset.tone = result.summary.issues ? "error" : "";
+  status.textContent = result.summary.issues
+    ? "Review the input issues before relying on the totals."
+    : "Reconciliation complete. Exceptions are ready for follow-up.";
+}
+
+function showPage() {
+  tableBody.replaceChildren();
+  const start = page * PAGE_SIZE;
+  for (const row of lastExceptions.slice(start, start + PAGE_SIZE)) {
     const tr = document.createElement("tr");
     for (const value of [row.finding, row.sku, row.name || "—", row.expected, row.counted, row.difference > 0 ? "+" + row.difference : row.difference]) {
       const td = document.createElement("td");
@@ -66,13 +87,21 @@ function showResult(result) {
     }
     tableBody.append(tr);
   }
-  lastExceptions = result.exceptions;
-  downloadButton.disabled = !lastExceptions.length;
-  status.dataset.tone = result.summary.issues ? "error" : "";
-  status.textContent = result.summary.issues
-    ? "Review the input issues before relying on the totals."
-    : "Reconciliation complete. Exceptions are ready for follow-up.";
+  pagination.hidden = !lastExceptions.length;
+  previousButton.disabled = page === 0;
+  nextButton.disabled = start + PAGE_SIZE >= lastExceptions.length;
+  pageLabel.textContent = `${start + 1}–${Math.min(start + PAGE_SIZE, lastExceptions.length)} of ${lastExceptions.length.toLocaleString("en-GB")} exceptions`;
 }
+
+function changePage(delta) {
+  page += delta;
+  showPage();
+  tableRegion.focus();
+  tableRegion.scrollIntoView({ block: "start" });
+}
+
+previousButton.addEventListener("click", () => changePage(-1));
+nextButton.addEventListener("click", () => changePage(1));
 
 function run() {
   inputRevision++;

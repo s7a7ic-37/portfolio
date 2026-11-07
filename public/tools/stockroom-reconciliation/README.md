@@ -10,6 +10,8 @@ Use UTF-8 CSV with up to 5,000 stock rows. Files are capped at 1 MB; pasted text
 
 Editing, loading the sample or reconciling while a file is being read keeps the newer input.
 
+The worklist shows 25 exceptions per page. Export includes every exception, regardless of the open page; held input issues remain separate from checked stock.
+
 ## CSV format
 
 Required columns: `sku`, `expected`, `counted`. Optional: `name`, `condition`.
