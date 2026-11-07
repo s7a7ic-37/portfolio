@@ -6,6 +6,11 @@ const fileInput = document.querySelector("#response-file");
 const status = document.querySelector("#status");
 const results = document.querySelector("#results");
 const downloadButton = document.querySelector("#download-report");
+const pagination = document.querySelector("#finding-pages");
+const previousButton = document.querySelector("#previous-page");
+const nextButton = document.querySelector("#next-page");
+const pageLabel = document.querySelector("#page-label");
+const PAGE_SIZE = 25;
 
 const sampleContract = {
   article_id: "number",
@@ -26,13 +31,20 @@ const sampleResponse = {
 
 let lastReport = null;
 let inputRevision = 0;
+let page = 0;
+
+function clearResult() {
+  lastReport = null;
+  page = 0;
+  results.replaceChildren();
+  pagination.hidden = true;
+  downloadButton.disabled = true;
+}
 
 for (const input of [contractInput, responseInput]) {
   input.addEventListener("input", () => {
     inputRevision++;
-    lastReport = null;
-    results.replaceChildren();
-    downloadButton.disabled = true;
+    clearResult();
     status.dataset.tone = "";
     status.textContent = "Inputs changed. Check the response again to update the findings.";
   });
@@ -62,6 +74,13 @@ fileInput.addEventListener("change", async () => {
 
 function showFindings(findings) {
   results.replaceChildren();
+  const start = page * PAGE_SIZE;
+  pagination.hidden = findings.length <= PAGE_SIZE;
+  previousButton.disabled = page === 0;
+  nextButton.disabled = start + PAGE_SIZE >= findings.length;
+  pageLabel.textContent = findings.length
+    ? `${start + 1}–${Math.min(start + PAGE_SIZE, findings.length)} of ${findings.length.toLocaleString("en-GB")} findings`
+    : "";
   if (!findings.length) {
     const item = document.createElement("li");
     item.dataset.kind = "success";
@@ -69,7 +88,7 @@ function showFindings(findings) {
     results.append(item);
     return;
   }
-  for (const finding of findings) {
+  for (const finding of findings.slice(start, start + PAGE_SIZE)) {
     const item = document.createElement("li");
     item.dataset.kind = finding.kind === "missing" ? "missing" : "type";
     item.textContent = finding.kind === "missing"
@@ -79,6 +98,18 @@ function showFindings(findings) {
   }
 }
 
+function changePage(delta) {
+  const next = page + delta;
+  if (!lastReport || next < 0 || next * PAGE_SIZE >= lastReport.findings.length) return;
+  page = next;
+  showFindings(lastReport.findings);
+  results.focus();
+  results.scrollIntoView({ block: "start" });
+}
+
+previousButton.addEventListener("click", () => changePage(-1));
+nextButton.addEventListener("click", () => changePage(1));
+
 function check() {
   inputRevision++;
   status.dataset.tone = "";
@@ -87,17 +118,16 @@ function check() {
     const response = JSON.parse(responseInput.value);
     const findings = checkContract(contract, response);
     lastReport = { checked_at: new Date().toISOString(), findings };
+    page = 0;
     showFindings(findings);
     status.textContent = findings.length
       ? findings.length + " finding" + (findings.length === 1 ? "" : "s") + "."
       : "No missing fields or type changes found.";
     downloadButton.disabled = false;
   } catch (error) {
-    lastReport = null;
-    results.replaceChildren();
+    clearResult();
     status.dataset.tone = "error";
     status.textContent = error instanceof SyntaxError ? "Check the JSON syntax in both fields." : error.message;
-    downloadButton.disabled = true;
   }
 }
 

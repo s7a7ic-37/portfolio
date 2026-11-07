@@ -12,7 +12,7 @@ A React and TypeScript portfolio for web applications, API tools and operations 
 - **[OpsLens](https://opslens.artemislab.co.uk/)** — retail invoice investigation and time-based forecast comparisons using Python, DuckDB and scikit-learn.
 - **[Travel Planner](https://travel.artemislab.co.uk/demo/)** — five-city itineraries with reordering, local saving and JSON import/export. A personal fork of a four-person Northcoders project.
 - **[Stockroom Reconcile](https://portfolio.artemislab.co.uk/tools/stockroom-reconciliation/)** — compare CSV stock counts and export exceptions.
-- **[Contract Check](https://portfolio.artemislab.co.uk/tools/api-contract-checker/)** — check JSON payloads against a small field-and-type contract.
+- **[Contract Check](https://portfolio.artemislab.co.uk/tools/api-contract-checker/)** — check JSON payloads against a small field-and-type contract, review 25 findings at a time and download the complete report.
 
 ## Run locally
 

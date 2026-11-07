@@ -48,7 +48,13 @@
         </div>
       </form>
       <p id="status" class="tool-status" role="status" aria-live="polite"></p>
-      <ul id="results" class="tool-results" aria-label="Contract check findings"></ul>
+      <ul id="results" class="tool-results" aria-label="Contract check findings" tabindex="-1"></ul>
+      <nav id="finding-pages" class="finding-pages" aria-label="Finding pages" hidden>
+        <button class="tool-button tool-button--light" id="previous-page" type="button">Previous</button>
+        <span id="page-label" role="status" aria-live="polite"></span>
+        <button class="tool-button tool-button--light" id="next-page" type="button">Next</button>
+        <small>Download report includes every finding.</small>
+      </nav>
       <details class="tool-footnote"><summary>Contract format</summary><p>Listed fields are required; extra response fields are allowed. This format is not full JSON Schema.</p></details>
     </section>
     <p class="tool-source"><a href="https://github.com/s7a7ic-37/portfolio/tree/main/public/tools/api-contract-checker">Source ↗</a></p>

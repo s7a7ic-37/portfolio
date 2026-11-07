@@ -16,6 +16,9 @@ a, .tool-nav a { color: #c4b5fd; }
 .tool-results li { color: #f3cdc5; border-radius: 0; background: #482e2c; border-color: #ef9b85; }
 .tool-results li[data-kind=missing] { color: #f2dfab; background: #423c25; }
 .tool-results li[data-kind=success] { color: #c4efd0; background: #243e30; }
+.finding-pages:not([hidden]) { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; margin-top: 16px; font-size: 13px; }
+.finding-pages small { flex-basis: 100%; font-size: 12px; }
+#results:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
 .tool-footnote { margin-top: 24px; font-size: 13px; }
 .tool-footnote summary { min-height: 44px; cursor: pointer; padding: 12px 0; }
 .field-help { margin: 8px 0; font-size: 12px; line-height: 1.5; }
@@ -24,6 +27,7 @@ a, .tool-nav a { color: #c4b5fd; }
 #response-file::file-selector-button { min-height: 44px; margin-right: 8px; padding: 8px 12px; border: 1px solid currentColor; border-radius: 0; background: transparent; color: inherit; font: inherit; cursor: pointer; }
 code { background: #363347; color: #e0d4ff; padding: 2px 5px; }
 @media(max-width:760px) { .tool-field textarea { min-height: 240px; } }
+@media(max-width:600px) { .finding-pages span { flex-basis: 100%; order: -1; text-align: center; } }
 
 html[data-theme="light"] body { background: #f3f1f8; color: #292438; }
 html[data-theme="light"] a, html[data-theme="light"] .tool-nav a, html[data-theme="light"] .tool-field label { color: #65458d; }
