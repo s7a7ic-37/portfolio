@@ -1,8 +1,8 @@
 import newsPreview from "../assets/photos/project-news.png";
 import travelPreview from "../assets/photos/project-travel.png";
 import opsPreview from "../assets/photos/project-opslens.webp";
-import contractPreview from "../assets/photos/project-contract.webp";
-import stockPreview from "../assets/photos/project-stockroom.webp";
+import contractPreview from "../assets/photos/project-contract.jpg";
+import stockPreview from "../assets/photos/project-stockroom.jpg";
 import gridPreview from "../assets/photos/project-grid.png";
 import runbookPreview from "../assets/photos/project-runbook.png";
 
