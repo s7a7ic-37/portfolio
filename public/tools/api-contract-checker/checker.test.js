@@ -1,6 +1,17 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { checkContract } from "./checker.js";
+import { checkContract, readJsonFile } from "./checker.js";
+
+test("local JSON files preserve UTF-8 text and validate before replacing input", async () => {
+  const text = '{"title":"Łódź","rows":[1,2]}';
+  assert.equal(await readJsonFile(new Blob([text])), text);
+  await assert.rejects(readJsonFile(new Blob(['{"broken":}'])), SyntaxError);
+  await assert.rejects(readJsonFile(new Blob([new Uint8Array([0xc3, 0x28])])));
+  assert.equal(await readJsonFile(new Blob(['{}' + ' '.repeat(999998)])), '{}' + ' '.repeat(999998));
+  let read = false;
+  await assert.rejects(readJsonFile({size: 1_000_001, arrayBuffer: () => { read = true; }}), /1 MB/);
+  assert.equal(read, false);
+});
 
 const contract = {
   article_id: "number",

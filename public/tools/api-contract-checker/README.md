@@ -6,6 +6,8 @@ Check JSON payloads for missing fields and type changes using a small contract.
 
 Load the example, edit the contract or payload, then check the result. Reports download as JSON. Inputs stay in the browser without uploads or persistence.
 
+Response files can be loaded as UTF-8 JSON up to 1 MB. An invalid file leaves the response text unchanged. Editing inputs while a file is being read keeps the newer input.
+
 Editing either input clears the previous findings and disables export until the next check.
 
 ## Contract format

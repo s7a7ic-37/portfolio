@@ -1,5 +1,12 @@
 const primitiveTypes = new Set(["string", "number", "boolean", "object", "array", "null", "any"]);
 
+export async function readJsonFile(file) {
+  if (file.size > 1_000_000) throw new Error("Choose a JSON file no larger than 1 MB.");
+  const text = new TextDecoder("utf-8", { fatal: true }).decode(await file.arrayBuffer());
+  JSON.parse(text);
+  return text;
+}
+
 function typeOf(value) {
   if (value === null) return "null";
   if (Array.isArray(value)) return "array";

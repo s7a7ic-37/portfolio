@@ -1,7 +1,8 @@
-import { checkContract } from "./checker.js";
+import { checkContract, readJsonFile } from "./checker.js";
 
 const contractInput = document.querySelector("#contract");
 const responseInput = document.querySelector("#response");
+const fileInput = document.querySelector("#response-file");
 const status = document.querySelector("#status");
 const results = document.querySelector("#results");
 const downloadButton = document.querySelector("#download-report");
@@ -24,9 +25,11 @@ const sampleResponse = {
 };
 
 let lastReport = null;
+let inputRevision = 0;
 
 for (const input of [contractInput, responseInput]) {
   input.addEventListener("input", () => {
+    inputRevision++;
     lastReport = null;
     results.replaceChildren();
     downloadButton.disabled = true;
@@ -34,6 +37,28 @@ for (const input of [contractInput, responseInput]) {
     status.textContent = "Inputs changed. Check the response again to update the findings.";
   });
 }
+
+fileInput.addEventListener("change", async () => {
+  const file = fileInput.files?.[0];
+  if (!file) return;
+  responseInput.dispatchEvent(new Event("input"));
+  const revision = inputRevision;
+  fileInput.disabled = true;
+  status.textContent = "Reading response file…";
+  try {
+    const text = await readJsonFile(file);
+    if (revision !== inputRevision) return;
+    responseInput.value = text;
+    status.textContent = "Response file loaded locally. Check the response to see findings.";
+  } catch {
+    if (revision !== inputRevision) return;
+    status.dataset.tone = "error";
+    status.textContent = "Choose a valid UTF-8 JSON file no larger than 1 MB. Your response text is unchanged.";
+  } finally {
+    fileInput.disabled = false;
+    fileInput.value = "";
+  }
+});
 
 function showFindings(findings) {
   results.replaceChildren();
@@ -55,6 +80,7 @@ function showFindings(findings) {
 }
 
 function check() {
+  inputRevision++;
   status.dataset.tone = "";
   try {
     const contract = JSON.parse(contractInput.value);
@@ -81,6 +107,7 @@ document.querySelector("#check-form").addEventListener("submit", (event) => {
 });
 
 document.querySelector("#load-example").addEventListener("click", () => {
+  inputRevision++;
   contractInput.value = JSON.stringify(sampleContract, null, 2);
   responseInput.value = JSON.stringify(sampleResponse, null, 2);
   check();

@@ -36,6 +36,9 @@
           <div class="tool-field">
             <label for="response">JSON response</label>
             <textarea id="response" spellcheck="false"></textarea>
+            <label for="response-file" class="file-label">Or choose a response file</label>
+            <input id="response-file" type="file" accept=".json,application/json" aria-describedby="file-help">
+            <p class="field-help" id="file-help">UTF-8 JSON, up to 1 MB. Read in your browser without uploads. Loading a file replaces the response text.</p>
           </div>
         </div>
         <div class="tool-actions">
