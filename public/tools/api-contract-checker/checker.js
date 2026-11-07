@@ -21,18 +21,19 @@ function propertyPath(path, key) {
   return /^[A-Za-z_$][A-Za-z0-9_$]*$/.test(key) ? path + "." + key : path + "[" + JSON.stringify(key) + "]";
 }
 
-function validateSchema(schema, path = "$") {
+function validateSchema(schema, path = "$", depth = 1) {
+  if (depth > 64) throw new Error("Contract is nested too deeply. Use at most 64 levels.");
   if (typeof schema === "string") {
     if (!primitiveTypes.has(schema)) throw new Error("Unsupported type at " + path + ": " + schema);
     return;
   }
   if (Array.isArray(schema)) {
     if (schema.length > 1) throw new Error("Use one array item template at " + path);
-    if (schema.length === 1) validateSchema(schema[0], path + "[0]");
+    if (schema.length === 1) validateSchema(schema[0], path + "[0]", depth + 1);
     return;
   }
   if (isRecord(schema)) {
-    for (const [key, child] of Object.entries(schema)) validateSchema(child, propertyPath(path, key));
+    for (const [key, child] of Object.entries(schema)) validateSchema(child, propertyPath(path, key), depth + 1);
     return;
   }
   throw new Error("Use type names, nested objects, or array templates at " + path);

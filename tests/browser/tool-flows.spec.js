@@ -107,3 +107,18 @@ test("Contract Check pages findings without truncating the downloadable report",
   await expect(pages).toBeHidden();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });
+
+test("Contract Check explains nested-contract limits and clears stale results", async ({ page }) => {
+  await page.goto("/tools/api-contract-checker/");
+  const contract = page.getByLabel("Expected contract", { exact: true });
+  await contract.fill('{"a":'.repeat(64) + '"number"' + "}".repeat(64));
+  await page.getByRole("button", { name: "Check response", exact: true }).click();
+  await expect(page.locator("#status")).toHaveText("Contract is nested too deeply. Use at most 64 levels.");
+  await expect(page.locator("#results li")).toHaveCount(0);
+  await expect(page.getByRole("button", { name: "Download report", exact: true })).toBeDisabled();
+  await contract.fill('{"a":"number"}');
+  await page.getByLabel("JSON response", { exact: true }).fill('{"a":1}');
+  await page.getByRole("button", { name: "Check response", exact: true }).click();
+  await expect(page.locator("#results li")).toHaveText("Response matches the contract.");
+  await expect(page.getByRole("button", { name: "Download report", exact: true })).toBeEnabled();
+});

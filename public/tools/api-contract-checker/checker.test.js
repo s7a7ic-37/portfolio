@@ -50,3 +50,12 @@ test("paths distinguish literal punctuation, empty keys and nested fields", () =
   ]);
   assert.throws(() => checkContract({"customer.name": "integer"}, {}), error => error.message === 'Unsupported type at $["customer.name"]: integer');
 });
+
+test("deep contracts fail with a useful limit before overflowing the call stack", () => {
+  const nested = (depth, leaf) => JSON.parse('{"a":'.repeat(depth) + leaf + "}".repeat(depth));
+  assert.deepEqual(checkContract(nested(63, '"number"'), nested(63, "1")), []);
+  assert.throws(() => checkContract(nested(64, '"number"'), nested(64, "1")), /at most 64 levels/);
+  assert.throws(() => checkContract(nested(10000, '"number"'), {}), /at most 64 levels/);
+  const arrays = JSON.parse('{"rows":' + "[".repeat(10000) + '"number"' + "]".repeat(10000) + "}");
+  assert.throws(() => checkContract(arrays, {}), /at most 64 levels/);
+});
