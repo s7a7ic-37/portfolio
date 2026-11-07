@@ -2,8 +2,8 @@ const capabilities = [
   {
     number: "01", title: "Interfaces & interaction",
     description: "Responsive interfaces, keyboard-friendly controls, shareable browsing state and clear loading, empty and recovery states.",
-    tools: ["JavaScript", "TypeScript", "React", "HTML & CSS", "React Router"],
-    evidence: [{ label: "Pure News · live interface", href: "https://news.artemislab.co.uk/" }],
+    tools: ["JavaScript", "TypeScript", "React", "Next.js", "HTML & CSS", "React Router"],
+    evidence: [{ label: "Pure News · live interface", href: "https://news.artemislab.co.uk/" }, { label: "Travel · Next.js planner", href: "https://travel.artemislab.co.uk/demo/" }],
   },
   {
     number: "02", title: "APIs & relational data",
