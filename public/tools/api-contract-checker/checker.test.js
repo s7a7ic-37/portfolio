@@ -50,7 +50,23 @@ test("number contracts reject overflowed JSON numbers without exposing values", 
 test("rejects unsupported and ambiguous contract definitions", () => {
   assert.throws(() => checkContract({ count: "integer" }, { count: 2 }), /Unsupported type/);
   assert.throws(() => checkContract({ rows: ["string", "number"] }, { rows: [] }), /one array item/);
-  assert.throws(() => checkContract([], []), /root must be/);
+  assert.throws(() => checkContract(null, null), /Use type names/);
+});
+
+test("root arrays and primitive contracts use the same validation and paths", () => {
+  assert.deepEqual(checkContract([{id: "number"}], [{id: 1}, {id: "2"}, {}]), [
+    {kind: "type", path: "$[1].id", expected: "number", actual: "string"},
+    {kind: "missing", path: "$[2].id"},
+  ]);
+  assert.deepEqual(checkContract([{id: "number"}], []), []);
+  assert.deepEqual(checkContract([], [1, "anything", null]), []);
+  assert.deepEqual(checkContract(["number"], {}), [{kind: "type", path: "$", expected: "array", actual: "object"}]);
+  assert.deepEqual(checkContract("number", "1"), [{kind: "type", path: "$", expected: "number", actual: "string"}]);
+  assert.deepEqual(checkContract("boolean", false), []);
+  assert.deepEqual(checkContract("null", null), []);
+  assert.deepEqual(checkContract("any", {nested: []}), []);
+  assert.throws(() => checkContract("integer", 1), /Unsupported type at \$/);
+  assert.throws(() => checkContract(["string", "number"], []), /one array item/);
 });
 
 test("paths distinguish literal punctuation, empty keys and nested fields", () => {

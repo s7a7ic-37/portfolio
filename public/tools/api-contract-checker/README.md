@@ -14,10 +14,12 @@ Contracts allow up to 64 nesting levels. Reports allow up to 50,000 findings and
 
 ## Contract format
 
+- The root can be an object, an array template such as `[{"id":"number"}]`, or a quoted type such as `"boolean"`. A root mismatch is reported at `$`.
 - Primitive types: `string`, `number`, `boolean`, `object`, `array`, `null` or `any`.
 - `number` requires a finite JavaScript number; overflowed values such as `1e400` produce a finding. Integer ranges and decimal precision are not checked. `any` leaves the value unconstrained.
 - Nested objects list required child fields.
 - Arrays accept one template, such as `[{ "id": "number" }]`.
+- An empty array contract accepts any array items, including an empty response array.
 - Extra payload fields are allowed.
 - Finding paths use brackets for literal keys containing spaces or punctuation, such as `$["customer.name"]`.
 

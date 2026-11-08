@@ -1,6 +1,35 @@
 import { test, expect } from "@playwright/test";
 import { readFile } from "node:fs/promises";
 
+test("Contract Check validates root arrays and primitive responses", async ({ page }) => {
+  await page.goto("/tools/api-contract-checker/");
+  const contract = page.getByLabel("Expected contract", {exact: true});
+  const response = page.getByLabel("JSON response", {exact: true});
+  const check = page.getByRole("button", {name: "Check response", exact: true});
+  await contract.fill('[{"id":"number"}]');
+  await response.fill('[{"id":1},{"id":"2"},{}]');
+  await check.click();
+  await expect(page.locator("#results li")).toHaveText([
+    "$[1].id — expected number, received string",
+    "$[2].id — required field is missing",
+  ]);
+  const pending = page.waitForEvent("download");
+  await page.getByRole("button", {name: "Download report", exact: true}).click();
+  const report = JSON.parse(await readFile(await (await pending).path(), "utf8"));
+  expect(report.findings.map(finding => finding.path)).toEqual(["$[1].id", "$[2].id"]);
+  await response.fill("[]");
+  await check.click();
+  await expect(page.locator("#results li")).toHaveText("Response matches the contract.");
+  await contract.fill('"boolean"');
+  await response.fill("0");
+  await check.click();
+  await expect(page.locator("#results li")).toHaveText("$ — expected boolean, received number");
+  await response.fill("false");
+  await check.click();
+  await expect(page.locator("#results li")).toHaveText("Response matches the contract.");
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+});
+
 test("Contract Check reports overflowing numbers and recovers with finite values", async ({ page }) => {
   await page.goto("/tools/api-contract-checker/");
   await page.getByLabel("Expected contract", { exact: true }).fill('{"amount":"number"}');

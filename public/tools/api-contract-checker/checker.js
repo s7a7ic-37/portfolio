@@ -66,7 +66,6 @@ function collectFindings(schema, value, path, addFinding) {
 
 export function checkContract(contract, response) {
   validateSchema(contract);
-  if (!isRecord(contract)) throw new Error("Contract root must be a JSON object");
   const findings = [];
   let pathCharacters = 0;
   const addFinding = (finding) => {
