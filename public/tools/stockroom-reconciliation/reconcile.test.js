@@ -17,6 +17,21 @@ test("holds duplicate and invalid rows out of the checked totals", () => {
   assert.deepEqual(result.summary, { rows: 4, checked: 0, matches: 0, exceptions: 0, issues: 4 });
 });
 
+test("quantity boundaries preserve exact counts and hold ambiguous numeric formats", () => {
+  const invalid = ["9007199254740992", "1e3", "0x10", "1.0", "1,000", "", "-0", "+1", "Infinity", "NaN"];
+  const result = reconcileCsv([
+    "sku,expected,counted",
+    ...invalid.map((value, i) => `BAD-${i},"${value}",1`),
+    `MAX,${Number.MAX_SAFE_INTEGER},${Number.MAX_SAFE_INTEGER - 1}`,
+    "ZERO, 000 , 0 ",
+  ].join("\n"));
+  assert.deepEqual(result.summary, {rows: 12, checked: 2, matches: 1, exceptions: 1, issues: 10});
+  assert.deepEqual(result.issues.map(issue => issue.line), invalid.map((_, i) => i + 2));
+  assert.equal(result.exceptions[0].difference, -1);
+  assert.equal(result.exceptions[0].finding, "Short by 1");
+  assert.ok(exceptionsToCsv(result.exceptions).includes("MAX,,9007199254740991,9007199254740990,-1,sellable,Short by 1"));
+});
+
 test("validates headers, CSV quoting, and exports escaped exception rows", () => {
   assert.throws(() => reconcileCsv("sku,expected\nA1,1"), /Missing required columns/);
   assert.throws(() => reconcileCsv('sku,expected,counted\nA1,1,"2'), /Unclosed quote/);

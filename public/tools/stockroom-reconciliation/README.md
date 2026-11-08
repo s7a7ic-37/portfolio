@@ -20,6 +20,8 @@ Required columns: `sku`, `expected`, `counted`. Optional: `name`, `condition`.
 
 Quantities must be whole, non-negative numbers. Condition is `sellable`, `damaged` or `held`; the default is `sellable`. Duplicate SKUs and invalid rows are held for review.
 
+Use plain decimal digits within JavaScript's safe integer range. Decimal points, signs, scientific notation and thousands separators are held for review; surrounding spaces and leading zeros are accepted.
+
 Excel-oriented exports prefix formula-like text with a tab inside a quoted field. The tab remains part of the CSV value; numeric quantities and differences stay numeric. Other spreadsheet importers may handle CSV differently.
 
 ## Run and test
