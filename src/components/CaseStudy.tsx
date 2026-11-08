@@ -5,6 +5,7 @@ const studies = {
   "runbook-desk": {
     title: "Runbook Desk",
     subtitle: "Keeping a support decision connected to its evidence.",
+    revision: "c984692",
     stack: "React · TypeScript · FastAPI · PostgreSQL",
     live: "https://runbook.artemislab.co.uk/",
     source: "https://github.com/s7a7ic-37/runbook-desk",
@@ -27,6 +28,7 @@ const studies = {
   "pure-news": {
     title: "Pure News",
     subtitle: "Following a request from a reader’s click to a database write.",
+    revision: "15e81e8",
     stack: "React · Express · PostgreSQL · Jest · Playwright",
     live: "https://news.artemislab.co.uk/",
     source: "https://github.com/s7a7ic-37/pure-news",
@@ -47,6 +49,30 @@ const studies = {
     limits: "Sample identities are not authentication, and voting is anonymous count adjustment. A public publishing service would need identity, ownership and moderation. Saved links are local to a browser. The free API can sleep or temporarily reject requests.",
     contribution: "An existing Northcoders-era project extended with browser workflows, API validation and regression coverage. The API includes Northcoders starter contributions and supplied sample data; article images use the supplied Pexels links. Original history and attribution are retained. Recent development uses AI coding assistance with verification.",
   },
+  opslens: {
+    title: "OpsLens",
+    subtitle: "Checking a forecast against later data before relying on it.",
+    revision: "04feeda",
+    stack: "Python · DuckDB SQL · pandas · scikit-learn · JavaScript",
+    live: "https://opslens.artemislab.co.uk/",
+    source: "https://github.com/s7a7ic-37/ops-lens",
+    problem: "Historical order lines mix product sales with cancellations, adjustments and non-product rows. This workbench makes those classifications inspectable and compares seven-day product forecasts with later observations from an openly licensed retail dataset.",
+    flow: ["UCI invoice workbook", "DuckDB row classification", "Daily product series", "Validation-selected forecast", "Frozen holdout report"],
+    decisions: [
+      {title: "Choose before the holdout", text: "Simple baselines and gradient boosting are compared on an earlier validation window. The selected method is frozen before later holdout scoring, so the holdout does not choose its own winner.", path: "forecast.py"},
+      {title: "Keep cancellation claims narrow", text: "SQL separates cancellation proxies from adjustments and invalid rows. Because invoice lines are not matched to original orders, the dashboard reports proxies rather than claiming these are returns.", path: "sql/classify_transactions.sql"},
+      {title: "Find the largest observed errors", text: "The product picker can sort by holdout WAPE for each product's validation-selected method. This changes inspection order only; it never retunes a model using holdout results.", path: "web/helpers.mjs"},
+    ],
+    proof: "Python tests cover rolling-origin evaluation, holdout isolation and scoring edge cases. JavaScript tests cover forecast and holdout exports plus error-based product sorting. GitHub Actions runs both suites and the source scan.",
+    checks: [
+      {label: "Forecast validation tests", path: "tests/test_pipeline.py"},
+      {label: "Dashboard helper tests", path: "web/helpers.test.mjs"},
+      {label: "Green CI run", path: "https://github.com/s7a7ic-37/ops-lens/actions/runs/42465716125"},
+    ],
+    demo: "Compare the cohort table, order the product picker by highest selected-method WAPE, inspect one product’s holdout chart and historical forecast, then export the observed and predicted rows.",
+    limits: "The UCI data covers UK retail invoices from 2010–2011, not live stock or current demand. On this single holdout, the selected policy’s WAPE is 74.00%, versus 93.31% for validation-chosen simple baselines; gradient boosting alone scored 71.26%. These are large errors, not savings or accuracy claims.",
+    contribution: "A personal data-analysis project using public CC BY 4.0 data. No production operations or inventory impact are claimed. Recent code uses AI assistance with automated verification.",
+  },
 };
 
 export type CaseStudyKey = keyof typeof studies;
@@ -54,7 +80,7 @@ export type CaseStudyKey = keyof typeof studies;
 export default function CaseStudy({ project }: { project: CaseStudyKey }) {
   const study = studies[project];
   useEffect(() => { document.title = `${study.title} — project case study`; }, [study.title]);
-  const sourceLink = (path: string) => path.startsWith("https:") ? path : `${study.source}/blob/${project === "runbook-desk" ? "c984692" : "15e81e8"}/${path}`;
+  const sourceLink = (path: string) => path.startsWith("https:") ? path : `${study.source}/blob/${study.revision}/${path}`;
   return (
     <div className={styles.page}>
       <a className={styles.skip} href="#case-content">Skip to case study</a>

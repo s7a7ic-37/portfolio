@@ -10,9 +10,14 @@ const evidenceLinks = {
     ["API race regression test ↗", "https://github.com/s7a7ic-37/pure-news-api/blob/e3dc588/__tests__/comments.models.test.js"],
     ["API CI run ↗", "https://github.com/s7a7ic-37/pure-news-api/actions/runs/42435157894"],
   ],
+  opslens: [
+    ["Forecast validation tests ↗", "https://github.com/s7a7ic-37/ops-lens/blob/04feeda/tests/test_pipeline.py"],
+    ["Dashboard helper tests ↗", "https://github.com/s7a7ic-37/ops-lens/blob/04feeda/web/helpers.test.mjs"],
+    ["Green CI run ↗", "https://github.com/s7a7ic-37/ops-lens/actions/runs/42465716125"],
+  ],
 };
 
-for (const [slug, title] of [["runbook-desk", "Runbook Desk"], ["pure-news", "Pure News"]]) {
+for (const [slug, title] of [["runbook-desk", "Runbook Desk"], ["pure-news", "Pure News"], ["opslens", "OpsLens"]]) {
   test(`${title} case study opens directly and returns to the project list`, async ({page}) => {
     const response = await page.goto(`/case-studies/${slug}/`);
     expect(response.status()).toBe(200);

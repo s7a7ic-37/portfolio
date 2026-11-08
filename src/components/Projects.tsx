@@ -9,6 +9,7 @@ import runbookPreview from "../assets/photos/project-runbook.png";
 const caseStudies: Record<string, string> = {
   "Runbook Desk": "/case-studies/runbook-desk/",
   "Pure News": "/case-studies/pure-news/",
+  OpsLens: "/case-studies/opslens/",
 };
 
 const projects = [
