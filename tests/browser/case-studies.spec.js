@@ -6,9 +6,11 @@ const evidenceLinks = {
     ["CI run with Docker build ↗", "https://github.com/s7a7ic-37/runbook-desk/actions/runs/42433452124"],
   ],
   "pure-news": [
-    ["Browser regression tests ↗", "https://github.com/s7a7ic-37/pure-news/blob/15e81e8/tests/browser/reading-list.spec.js"],
+    ["Browser search and browsing tests ↗", "https://github.com/s7a7ic-37/pure-news/blob/236b0f1/tests/browser/browsing.spec.js"],
+    ["API search and validation tests ↗", "https://github.com/s7a7ic-37/pure-news-api/blob/2e3e12b/__tests__/app.test.js"],
     ["API race regression test ↗", "https://github.com/s7a7ic-37/pure-news-api/blob/e3dc588/__tests__/comments.models.test.js"],
-    ["API CI run ↗", "https://github.com/s7a7ic-37/pure-news-api/actions/runs/42435157894"],
+    ["Frontend CI run ↗", "https://github.com/s7a7ic-37/pure-news/actions/runs/42469313012"],
+    ["API CI run ↗", "https://github.com/s7a7ic-37/pure-news-api/actions/runs/42469060995"],
   ],
   opslens: [
     ["Forecast validation tests ↗", "https://github.com/s7a7ic-37/ops-lens/blob/04feeda/tests/test_pipeline.py"],
@@ -30,7 +32,7 @@ for (const [slug, title] of [["runbook-desk", "Runbook Desk"], ["pure-news", "Pu
     await expect(page).toHaveTitle(`${title} — project case study`);
     await expect(page.getByRole("heading", {name: "Boundaries and contribution", exact: true})).toBeVisible();
     const implementations = page.getByRole("link", {name: "Inspect the implementation", exact: false});
-    await expect(implementations).toHaveCount(3);
+    await expect(implementations).toHaveCount(slug === "pure-news" ? 4 : 3);
     for (const link of await implementations.all()) expect(await link.getAttribute("href")).toMatch(/^https:\/\/github\.com\/s7a7ic-37\//);
     for (const [name, href] of evidenceLinks[slug]) await expect(page.getByRole("link", {name, exact: true})).toHaveAttribute("href", href);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
