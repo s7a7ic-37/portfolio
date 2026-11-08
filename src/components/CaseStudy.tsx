@@ -15,8 +15,11 @@ const studies = {
       {title: "Validate the evidence boundary", text: "Structured drafts must reference the incident or selected runbook IDs. Pydantic validates the shape and allowed citations. That checks references, not whether a proposed explanation is true; human review remains necessary.", path: "server/models.py"},
       {title: "Recover a save after a lost response", text: "A new case carries a workspace-scoped retry key. If its response is lost, an explicit retry with unchanged details returns the saved case. PostgreSQL rejects reuse for different input. The pending key lasts while the page stays open; writes are never repeated automatically.", path: "frontend/src/App.tsx"},
     ],
-    proof: "Four hosted browser checks discarded a successful response after the database committed, then recovered exactly one case through an explicit retry. Database tests cover concurrent retries, case limits and schema upgrades. Separate hosted checks confirmed conflicting-input rejection and workspace isolation; a two-tab review check recorded one decision and rejected the stale second review.",
-    testPath: "tests/test_creation_retries.py",
+    proof: "Four hosted browser checks discarded a successful response after the database committed, then recovered exactly one case through an explicit retry. Database tests cover concurrent retries, case limits and schema upgrades; CI also builds the deployment Docker image. Separate hosted checks confirmed conflicting-input rejection and workspace isolation; a two-tab review check recorded one decision and rejected the stale second review.",
+    checks: [
+      {label: "Database retry tests", path: "tests/test_creation_retries.py"},
+      {label: "CI run with Docker build", path: "https://github.com/s7a7ic-37/runbook-desk/actions/runs/42433452124"},
+    ],
     demo: "Open a labelled worked example, inspect a cited procedure, edit the reply, record a review and download the handoff. The export separates the original draft from the recorded decision.",
     limits: "The hosted demo uses fictional authored examples. The OpenAI Responses API client is implemented and mock-tested; real provider calls remain disabled and unverified. Browser workspaces use anonymous cookies, not user accounts. Free hosting can delay startup.",
     contribution: "A personal portfolio project developed with AI coding assistance and checked through automated tests and published browser flows.",
@@ -35,7 +38,11 @@ const studies = {
       {title: "Keep pending work understandable", text: "A pending comment locks its editor; failure keeps the draft. Votes update optimistically, then use the server’s total or roll back. Filters, sort order and page stay in the URL when a reader opens an article and returns.", path: "tests/browser/votes.spec.js"},
     ],
     proof: "API tests include a deterministic regression for the validation/INSERT race. Published browser checks exercise browsing, saved links, voting and comment recovery with intercepted APIs. A separate real-feed check loaded 36 articles and images across three pages at phone width.",
-    testPath: "tests/browser/reading-list.spec.js",
+    checks: [
+      {label: "Browser regression tests", path: "tests/browser/reading-list.spec.js"},
+      {label: "API race regression test", path: "https://github.com/s7a7ic-37/pure-news-api/blob/e3dc588/__tests__/comments.models.test.js"},
+      {label: "API CI run", path: "https://github.com/s7a7ic-37/pure-news-api/actions/runs/42435157894"},
+    ],
     demo: "Filter or sort the feed, open an article and return to the same view. Save a link, reload and remove it from Saved. Use the source tests to inspect vote rollback and the missing-article regression without writing test content into the public feed.",
     limits: "Sample identities are not authentication, and voting is anonymous count adjustment. A public publishing service would need identity, ownership and moderation. Saved links are local to a browser. The free API can sleep or temporarily reject requests.",
     contribution: "An existing Northcoders-era project extended with browser workflows, API validation and regression coverage. The API includes Northcoders starter contributions and supplied sample data; article images use the supplied Pexels links. Original history and attribution are retained. Recent development uses AI coding assistance with verification.",
@@ -60,7 +67,7 @@ export default function CaseStudy({ project }: { project: CaseStudyKey }) {
         <section><h2>The problem</h2><p>{study.problem}</p></section>
         <section><h2>The request path</h2><ol className={styles.flow}>{study.flow.map(step => <li key={step}>{step}</li>)}</ol></section>
         <section><h2>Decisions in the code</h2>{study.decisions.map(item => <article className={styles.decision} key={item.title}><h3>{item.title}</h3><p>{item.text}</p><a href={sourceLink(item.path)}>Inspect the implementation ↗</a></article>)}</section>
-        <section><h2>What was checked</h2><p>{study.proof}</p><a href={sourceLink(study.testPath)}>Read the tests ↗</a></section>
+        <section><h2>What was checked</h2><p>{study.proof}</p><div className={styles.proofLinks}>{study.checks.map(check => <a key={check.label} href={sourceLink(check.path)}>{check.label} ↗</a>)}</div></section>
         <section><h2>A short demo</h2><p>{study.demo}</p></section>
         <section><h2>Boundaries and contribution</h2><p>{study.limits}</p><p>{study.contribution}</p></section>
       </main>
