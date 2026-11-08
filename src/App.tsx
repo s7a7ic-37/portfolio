@@ -19,6 +19,7 @@ function App() {
   if (path === "/case-studies/travel-planner") return <CaseStudy project="travel-planner" />;
   if (path === "/case-studies/opslens") return <CaseStudy project="opslens" />;
   if (path === "/case-studies/stockroom-reconcile") return <CaseStudy project="stockroom-reconcile" />;
+  if (path === "/case-studies/contract-check") return <CaseStudy project="contract-check" />;
   return (
     <div className="site-shell">
       <Header />

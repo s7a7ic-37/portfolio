@@ -148,6 +148,30 @@ const studies = {
     limits: "The example data is synthetic and this is not connected to a warehouse, inventory database or approval process. The CSV has whole-number counts and a 5,000-row limit; real stock decisions still need local business rules and review.",
     contribution: "A personal browser tool built with AI coding assistance and verified with unit and browser tests. No production warehouse outcome is claimed.",
   },
+  "contract-check": {
+    title: "Contract Check",
+    subtitle: "Finding response-shape changes before they reach a caller.",
+    revision: "3b7d47c",
+    stack: "JavaScript · JSON · Playwright",
+    live: "https://portfolio.artemislab.co.uk/tools/api-contract-checker/",
+    source: "https://github.com/s7a7ic-37/portfolio",
+    problem: "A payload can be valid JSON and still omit a required field or change a value's type. This small browser tool compares a response example with a contract of required fields, types and array templates, then reports the paths that need attention.",
+    flow: ["Load a local response and contract", "Validate the contract", "Compare required fields and value types", "Review bounded findings", "Download the complete report"],
+    decisions: [
+      {title: "Point to the exact JSON key", text: "Simple keys use dot paths; punctuation, empty keys and literal dots use quoted brackets. A literal `customer.name` key stays distinct from a nested `customer.name` path.", path: "public/tools/api-contract-checker/checker.js"},
+      {title: "Bound work and display", text: "Contracts stop at 64 levels and reports stop at 50,000 findings or one million path characters. The screen renders 25 findings per page; a refused oversized report is never offered as a partial download.", path: "public/tools/api-contract-checker/app.js"},
+      {title: "Keep file input local and safe", text: "Response files are capped at 1 MB, decoded as valid UTF-8 and parsed before replacing the editor. If the visitor edits while a read is pending, the older file result is discarded.", path: "public/tools/api-contract-checker/checker.js"},
+    ],
+    proof: "Unit tests cover nested arrays, missing fields, punctuation in keys, invalid UTF-8, file-size and depth limits, and oversized findings. Browser tests cover local file reads, concurrent edits, 25-row paging, complete exports and recovery after an error.",
+    checks: [
+      {label: "Contract parser and limit tests", path: "public/tools/api-contract-checker/checker.test.js"},
+      {label: "Browser workflow tests", path: "tests/browser/tool-flows.spec.js"},
+      {label: "CI workflow", path: ".github/workflows/checks.yml"},
+    ],
+    demo: "Load the example, check the response, then change a type or try the literal key `customer.name`. Inspect its path, page through findings and download the full JSON report. All input stays in the browser.",
+    limits: "This checks a small required-field and type contract; it is not a full JSON Schema validator and does not make network requests. Extra response fields are allowed, and a shape match cannot prove endpoint behavior or meaning.",
+    contribution: "A personal browser tool built with AI coding assistance and checked with parser and browser regression tests.",
+  },
 };
 
 export type CaseStudyKey = keyof typeof studies;

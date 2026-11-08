@@ -13,6 +13,7 @@ const caseStudies: Record<string, string> = {
   "Ready, Jet Set, Go!": "/case-studies/travel-planner/",
   OpsLens: "/case-studies/opslens/",
   "Stockroom Reconcile": "/case-studies/stockroom-reconcile/",
+  "Contract Check": "/case-studies/contract-check/",
 };
 
 const projects = [

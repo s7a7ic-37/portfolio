@@ -32,9 +32,14 @@ const evidenceLinks = {
     ["Browser workflow tests ↗", "https://github.com/s7a7ic-37/portfolio/blob/bf35c92/tests/browser/tool-flows.spec.js"],
     ["Green CI run ↗", "https://github.com/s7a7ic-37/portfolio/actions/runs/42466718145"],
   ],
+  "contract-check": [
+    ["Contract parser and limit tests ↗", "https://github.com/s7a7ic-37/portfolio/blob/3b7d47c/public/tools/api-contract-checker/checker.test.js"],
+    ["Browser workflow tests ↗", "https://github.com/s7a7ic-37/portfolio/blob/3b7d47c/tests/browser/tool-flows.spec.js"],
+    ["CI workflow ↗", "https://github.com/s7a7ic-37/portfolio/blob/3b7d47c/.github/workflows/checks.yml"],
+  ],
 };
 
-for (const [slug, title] of [["runbook-desk", "Runbook Desk"], ["pure-news", "Pure News"], ["grid-demand-lab", "Grid Demand Lab"], ["travel-planner", "Ready, Jet Set, Go!"], ["opslens", "OpsLens"], ["stockroom-reconcile", "Stockroom Reconcile"]]) {
+for (const [slug, title] of [["runbook-desk", "Runbook Desk"], ["pure-news", "Pure News"], ["grid-demand-lab", "Grid Demand Lab"], ["travel-planner", "Ready, Jet Set, Go!"], ["opslens", "OpsLens"], ["stockroom-reconcile", "Stockroom Reconcile"], ["contract-check", "Contract Check"]]) {
   test(`${title} case study opens directly and returns to the project list`, async ({page}) => {
     const response = await page.goto(`/case-studies/${slug}/`);
     expect(response.status()).toBe(200);
