@@ -16,6 +16,7 @@ function App() {
   if (path === "/case-studies/runbook-desk") return <CaseStudy project="runbook-desk" />;
   if (path === "/case-studies/pure-news") return <CaseStudy project="pure-news" />;
   if (path === "/case-studies/grid-demand-lab") return <CaseStudy project="grid-demand-lab" />;
+  if (path === "/case-studies/travel-planner") return <CaseStudy project="travel-planner" />;
   if (path === "/case-studies/opslens") return <CaseStudy project="opslens" />;
   if (path === "/case-studies/stockroom-reconcile") return <CaseStudy project="stockroom-reconcile" />;
   return (
