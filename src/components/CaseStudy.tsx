@@ -73,6 +73,30 @@ const studies = {
     limits: "The UCI data covers UK retail invoices from 2010–2011, not live stock or current demand. On this single holdout, the selected policy’s WAPE is 74.00%, versus 93.31% for validation-chosen simple baselines; gradient boosting alone scored 71.26%. These are large errors, not savings or accuracy claims.",
     contribution: "A personal data-analysis project using public CC BY 4.0 data. No production operations or inventory impact are claimed. Recent code uses AI assistance with automated verification.",
   },
+  "stockroom-reconcile": {
+    title: "Stockroom Reconcile",
+    subtitle: "Turning a local stock count into a reviewable exception list.",
+    revision: "bf35c92",
+    stack: "JavaScript · CSV · Playwright",
+    live: "https://portfolio.artemislab.co.uk/tools/stockroom-reconciliation/",
+    source: "https://github.com/s7a7ic-37/portfolio",
+    problem: "A count sheet can contain real shortages alongside duplicate identifiers, invalid quantities and stock held for review. This browser-only tool separates those cases, then gives a reviewer a focused list to follow up.",
+    flow: ["Paste or select a CSV", "Validate bounded input", "Separate count exceptions from data issues", "Filter and page the worklist", "Export all exceptions"],
+    decisions: [
+      {title: "Separate bad input from stock exceptions", text: "Duplicate SKUs and invalid quantities are held as input issues. Valid rows are classified as matches, shortages, overages, damaged or held stock; issues do not quietly affect the checked totals.", path: "public/tools/stockroom-reconciliation/reconcile.js"},
+      {title: "Keep the file on the device", text: "The input is read and reconciled in the browser. File size, pasted text and row count have explicit limits, and a late file read cannot replace newer edits.", path: "public/tools/stockroom-reconciliation/app.js"},
+      {title: "Keep paging separate from export", text: "The screen shows 25 exceptions at a time, while the CSV export includes every exception. Formula-like text is guarded in the spreadsheet-oriented export.", path: "public/tools/stockroom-reconciliation/reconcile.js"},
+    ],
+    proof: "Unit tests cover CSV quoting, malformed rows, row limits and formula-like export values. Browser checks cover filters, paging, delayed file reads and exports that include rows on every page. The portfolio CI run is green.",
+    checks: [
+      {label: "Parser and export tests", path: "public/tools/stockroom-reconciliation/reconcile.test.js"},
+      {label: "Browser workflow tests", path: "tests/browser/tool-flows.spec.js"},
+      {label: "Green CI run", path: "https://github.com/s7a7ic-37/portfolio/actions/runs/42466718145"},
+    ],
+    demo: "Use the loaded synthetic example, filter shortages or damaged stock, move between pages, then export the complete exception list. Paste or select a small CSV to try another count; the browser does not upload it.",
+    limits: "The example data is synthetic and this is not connected to a warehouse, inventory database or approval process. The CSV has whole-number counts and a 5,000-row limit; real stock decisions still need local business rules and review.",
+    contribution: "A personal browser tool built with AI coding assistance and verified with unit and browser tests. No production warehouse outcome is claimed.",
+  },
 };
 
 export type CaseStudyKey = keyof typeof studies;

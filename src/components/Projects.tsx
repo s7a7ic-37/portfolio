@@ -10,6 +10,7 @@ const caseStudies: Record<string, string> = {
   "Runbook Desk": "/case-studies/runbook-desk/",
   "Pure News": "/case-studies/pure-news/",
   OpsLens: "/case-studies/opslens/",
+  "Stockroom Reconcile": "/case-studies/stockroom-reconcile/",
 };
 
 const projects = [

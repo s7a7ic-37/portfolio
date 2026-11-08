@@ -15,9 +15,14 @@ const evidenceLinks = {
     ["Dashboard helper tests ↗", "https://github.com/s7a7ic-37/ops-lens/blob/04feeda/web/helpers.test.mjs"],
     ["Green CI run ↗", "https://github.com/s7a7ic-37/ops-lens/actions/runs/42465716125"],
   ],
+  "stockroom-reconcile": [
+    ["Parser and export tests ↗", "https://github.com/s7a7ic-37/portfolio/blob/bf35c92/public/tools/stockroom-reconciliation/reconcile.test.js"],
+    ["Browser workflow tests ↗", "https://github.com/s7a7ic-37/portfolio/blob/bf35c92/tests/browser/tool-flows.spec.js"],
+    ["Green CI run ↗", "https://github.com/s7a7ic-37/portfolio/actions/runs/42466718145"],
+  ],
 };
 
-for (const [slug, title] of [["runbook-desk", "Runbook Desk"], ["pure-news", "Pure News"], ["opslens", "OpsLens"]]) {
+for (const [slug, title] of [["runbook-desk", "Runbook Desk"], ["pure-news", "Pure News"], ["opslens", "OpsLens"], ["stockroom-reconcile", "Stockroom Reconcile"]]) {
   test(`${title} case study opens directly and returns to the project list`, async ({page}) => {
     const response = await page.goto(`/case-studies/${slug}/`);
     expect(response.status()).toBe(200);
