@@ -10,6 +10,7 @@ export async function readJsonFile(file) {
 function typeOf(value) {
   if (value === null) return "null";
   if (Array.isArray(value)) return "array";
+  if (typeof value === "number" && !Number.isFinite(value)) return "non-finite number";
   return typeof value;
 }
 

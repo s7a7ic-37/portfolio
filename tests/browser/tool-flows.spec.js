@@ -1,6 +1,23 @@
 import { test, expect } from "@playwright/test";
 import { readFile } from "node:fs/promises";
 
+test("Contract Check reports overflowing numbers and recovers with finite values", async ({ page }) => {
+  await page.goto("/tools/api-contract-checker/");
+  await page.getByLabel("Expected contract", { exact: true }).fill('{"amount":"number"}');
+  const response = page.getByLabel("JSON response", { exact: true });
+  await response.fill('{"amount":1e400}');
+  await page.getByRole("button", { name: "Check response", exact: true }).click();
+  await expect(page.locator("#results")).toContainText("$.amount — expected number, received non-finite number");
+  const pending = page.waitForEvent("download");
+  await page.getByRole("button", { name: "Download report", exact: true }).click();
+  const report = JSON.parse(await readFile(await (await pending).path(), "utf8"));
+  expect(report.findings).toEqual([{kind: "type", path: "$.amount", expected: "number", actual: "non-finite number"}]);
+  await response.fill('{"amount":1e308}');
+  await expect(page.getByRole("button", { name: "Download report", exact: true })).toBeDisabled();
+  await page.getByRole("button", { name: "Check response", exact: true }).click();
+  await expect(page.locator("#results")).toContainText("Response matches the contract.");
+});
+
 test("Stockroom bounds input issues and keeps every page available", async ({ page }) => {
   await page.goto("/tools/stockroom-reconciliation/");
   const input = page.getByLabel("Stock count CSV", { exact: true });

@@ -34,6 +34,19 @@ test("reports missing fields and nested type changes with JSON paths", () => {
   assert.deepEqual(checkContract({ author: "string" }, {}), [{ kind: "missing", path: "$.author" }]);
 });
 
+test("number contracts reject overflowed JSON numbers without exposing values", () => {
+  for (const value of ["1e400", "-1e400"]) {
+    assert.deepEqual(checkContract({amount: "number"}, JSON.parse('{"amount":' + value + '}')), [
+      {kind: "type", path: "$.amount", expected: "number", actual: "non-finite number"},
+    ]);
+  }
+  assert.deepEqual(checkContract({amount: "number"}, {amount: NaN}), [
+    {kind: "type", path: "$.amount", expected: "number", actual: "non-finite number"},
+  ]);
+  assert.deepEqual(checkContract({amount: "number"}, JSON.parse('{"amount":1e308}')), []);
+  assert.deepEqual(checkContract({amount: "any"}, JSON.parse('{"amount":1e400}')), []);
+});
+
 test("rejects unsupported and ambiguous contract definitions", () => {
   assert.throws(() => checkContract({ count: "integer" }, { count: 2 }), /Unsupported type/);
   assert.throws(() => checkContract({ rows: ["string", "number"] }, { rows: [] }), /one array item/);

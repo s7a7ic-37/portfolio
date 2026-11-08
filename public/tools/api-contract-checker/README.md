@@ -15,6 +15,7 @@ Contracts allow up to 64 nesting levels. Reports allow up to 50,000 findings and
 ## Contract format
 
 - Primitive types: `string`, `number`, `boolean`, `object`, `array`, `null` or `any`.
+- `number` requires a finite JavaScript number; overflowed values such as `1e400` produce a finding. Integer ranges and decimal precision are not checked. `any` leaves the value unconstrained.
 - Nested objects list required child fields.
 - Arrays accept one template, such as `[{ "id": "number" }]`.
 - Extra payload fields are allowed.
