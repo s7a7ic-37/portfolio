@@ -35,7 +35,7 @@ const evidenceLinks = {
   "contract-check": [
     ["Contract parser and limit tests ↗", "https://github.com/s7a7ic-37/portfolio/blob/3b7d47c/public/tools/api-contract-checker/checker.test.js"],
     ["Browser workflow tests ↗", "https://github.com/s7a7ic-37/portfolio/blob/3b7d47c/tests/browser/tool-flows.spec.js"],
-    ["CI workflow ↗", "https://github.com/s7a7ic-37/portfolio/blob/3b7d47c/.github/workflows/checks.yml"],
+    ["Green CI run ↗", "https://github.com/s7a7ic-37/portfolio/actions/runs/42473574995"],
   ],
 };
 

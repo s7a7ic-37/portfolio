@@ -166,7 +166,7 @@ const studies = {
     checks: [
       {label: "Contract parser and limit tests", path: "public/tools/api-contract-checker/checker.test.js"},
       {label: "Browser workflow tests", path: "tests/browser/tool-flows.spec.js"},
-      {label: "CI workflow", path: ".github/workflows/checks.yml"},
+      {label: "Green CI run", path: "https://github.com/s7a7ic-37/portfolio/actions/runs/42473574995"},
     ],
     demo: "Load the example, check the response, then change a type or try the literal key `customer.name`. Inspect its path, page through findings and download the full JSON report. All input stays in the browser.",
     limits: "This checks a small required-field and type contract; it is not a full JSON Schema validator and does not make network requests. Extra response fields are allowed, and a shape match cannot prove endpoint behavior or meaning.",
