@@ -73,8 +73,8 @@ const studies = {
       {label: "Chart interaction tests", path: "tests/test_plotting.py"},
       {label: "Green CI run", path: "https://github.com/s7a7ic-37/grid-demand-lab/actions/runs/42434684384"},
     ],
-    demo: "The public page shows the live daily chart. The current source also includes a touch readout, a CSV snapshot of the displayed values and quarterly backtests; those controls are not in the presently deployed Render interface yet.",
-    limits: "NESO’s 2025 history is openly licensed but can be revised; this one held-out period does not establish current accuracy or operational suitability. The live feed may lag settlement. Extra repeated-hour periods currently reuse a prior settlement period. The Render-hosted demo is on an earlier interface than the current tested source, so the source links and CI describe controls that are not yet live.",
+    demo: "The public page shows the daily chart, touch readout and quarterly backtests. The daily forecast CSV export is implemented and tested in the current source, but its control is still awaiting Render publication.",
+    limits: "NESO’s 2025 history is openly licensed but can be revised; this one held-out period does not establish current accuracy or operational suitability. The live feed may lag settlement. Extra repeated-hour periods currently reuse a prior settlement period. The displayed-day CSV is not yet available in the live demo.",
     contribution: "A personal forecasting prototype using public NESO data. It does not support grid operations or claim energy savings. Recent code was developed with AI assistance and checked against time-ordered tests.",
   },
   "travel-planner": {
