@@ -20,6 +20,7 @@ const studies = {
     checks: [
       {label: "Database retry tests", path: "tests/test_creation_retries.py"},
       {label: "CI run with Docker build", path: "https://github.com/s7a7ic-37/runbook-desk/actions/runs/42433452124"},
+      {label: "Live OpenAPI schema", path: "https://runbook.artemislab.co.uk/api/openapi.json"},
     ],
     demo: "Open a labelled worked example, inspect a cited procedure, edit the reply, record a review and download the handoff. The export separates the original draft from the recorded decision.",
     limits: "The hosted demo uses fictional authored examples. The OpenAI Responses API client is implemented and mock-tested; real provider calls remain disabled and unverified. Browser workspaces use anonymous cookies, not user accounts. Free hosting can delay startup.",

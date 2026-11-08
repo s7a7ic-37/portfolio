@@ -4,6 +4,7 @@ const evidenceLinks = {
   "runbook-desk": [
     ["Database retry tests ↗", "https://github.com/s7a7ic-37/runbook-desk/blob/c984692/tests/test_creation_retries.py"],
     ["CI run with Docker build ↗", "https://github.com/s7a7ic-37/runbook-desk/actions/runs/42433452124"],
+    ["Live OpenAPI schema ↗", "https://runbook.artemislab.co.uk/api/openapi.json"],
   ],
   "pure-news": [
     ["Browser search and browsing tests ↗", "https://github.com/s7a7ic-37/pure-news/blob/236b0f1/tests/browser/browsing.spec.js"],
