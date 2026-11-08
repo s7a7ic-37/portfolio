@@ -12,6 +12,11 @@ const evidenceLinks = {
     ["Frontend CI run ↗", "https://github.com/s7a7ic-37/pure-news/actions/runs/42469313012"],
     ["API CI run ↗", "https://github.com/s7a7ic-37/pure-news-api/actions/runs/42469060995"],
   ],
+  "grid-demand-lab": [
+    ["Forecast and time-split tests ↗", "https://github.com/s7a7ic-37/grid-demand-lab/blob/12d1126/tests/test_forecast.py"],
+    ["Chart interaction tests ↗", "https://github.com/s7a7ic-37/grid-demand-lab/blob/12d1126/tests/test_plotting.py"],
+    ["Green CI run ↗", "https://github.com/s7a7ic-37/grid-demand-lab/actions/runs/42434684384"],
+  ],
   opslens: [
     ["Forecast validation tests ↗", "https://github.com/s7a7ic-37/ops-lens/blob/04feeda/tests/test_pipeline.py"],
     ["Dashboard helper tests ↗", "https://github.com/s7a7ic-37/ops-lens/blob/04feeda/web/helpers.test.mjs"],
@@ -24,7 +29,7 @@ const evidenceLinks = {
   ],
 };
 
-for (const [slug, title] of [["runbook-desk", "Runbook Desk"], ["pure-news", "Pure News"], ["opslens", "OpsLens"], ["stockroom-reconcile", "Stockroom Reconcile"]]) {
+for (const [slug, title] of [["runbook-desk", "Runbook Desk"], ["pure-news", "Pure News"], ["grid-demand-lab", "Grid Demand Lab"], ["opslens", "OpsLens"], ["stockroom-reconcile", "Stockroom Reconcile"]]) {
   test(`${title} case study opens directly and returns to the project list`, async ({page}) => {
     const response = await page.goto(`/case-studies/${slug}/`);
     expect(response.status()).toBe(200);
@@ -35,7 +40,10 @@ for (const [slug, title] of [["runbook-desk", "Runbook Desk"], ["pure-news", "Pu
     await expect(implementations).toHaveCount(slug === "pure-news" ? 4 : 3);
     for (const link of await implementations.all()) expect(await link.getAttribute("href")).toMatch(/^https:\/\/github\.com\/s7a7ic-37\//);
     for (const [name, href] of evidenceLinks[slug]) await expect(page.getByRole("link", {name, exact: true})).toHaveAttribute("href", href);
-    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    for (const width of [320, 390, 768, 1280]) {
+      await page.setViewportSize({width, height: 900});
+      expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    }
     await page.getByRole("link", {name: "All projects", exact: false}).first().click();
     await expect(page.locator("#projects .project-card")).toHaveCount(7);
     await expect(page.locator(`a[href="/case-studies/${slug}/"]`)).toBeVisible();
