@@ -2,7 +2,8 @@ import {test, expect} from "@playwright/test";
 
 for (const [slug, title] of [["runbook-desk", "Runbook Desk"], ["pure-news", "Pure News"]]) {
   test(`${title} case study opens directly and returns to the project list`, async ({page}) => {
-    await page.goto(`/case-studies/${slug}/`);
+    const response = await page.goto(`/case-studies/${slug}/`);
+    expect(response.status()).toBe(200);
     await expect(page.getByRole("heading", {name: title, exact: true})).toBeVisible();
     await expect(page).toHaveTitle(`${title} — project case study`);
     await expect(page.getByRole("heading", {name: "Boundaries and contribution", exact: true})).toBeVisible();

@@ -11,7 +11,7 @@ export default defineConfig({
     { name: "webkit-mobile", use: { browserName: "webkit", viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true } },
   ],
   webServer: {
-    command: "npm run build && npm run preview -- --host 127.0.0.1 --port 4194 --strictPort",
+    command: "npm run build && npx --yes wrangler@4.158.0 dev --port 4194",
     url: "http://127.0.0.1:4194",
   },
 });
