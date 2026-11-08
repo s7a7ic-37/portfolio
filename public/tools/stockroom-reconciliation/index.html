@@ -40,7 +40,12 @@
       </div>
       <p id="status" class="tool-status" role="status" aria-live="polite"></p>
       <div id="summary" class="summary" aria-live="polite"></div>
-      <ul id="issues" class="tool-results" aria-label="Import issues"></ul>
+      <ul id="issues" class="tool-results" aria-label="Import issues" tabindex="-1"></ul>
+      <nav id="issue-pages" class="exception-pages" aria-label="Input issue pages" hidden>
+        <button class="tool-button tool-button--light" id="previous-issue-page" type="button">Previous</button>
+        <span id="issue-page-label" role="status" aria-live="polite"></span>
+        <button class="tool-button tool-button--light" id="next-issue-page" type="button">Next</button>
+      </nav>
       <div id="exception-filter" class="exception-filter" hidden>
         <label for="finding-filter">Filter exceptions</label>
         <select id="finding-filter">

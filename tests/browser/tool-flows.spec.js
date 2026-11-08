@@ -1,6 +1,33 @@
 import { test, expect } from "@playwright/test";
 import { readFile } from "node:fs/promises";
 
+test("Stockroom bounds input issues and keeps every page available", async ({ page }) => {
+  await page.goto("/tools/stockroom-reconciliation/");
+  const input = page.getByLabel("Stock count CSV", { exact: true });
+  const run = page.getByRole("button", { name: "Reconcile rows", exact: true });
+  const source = count => "sku,expected,counted\n" + Array.from({ length: count }, (_, index) => `SKU-${index},invalid,1`).join("\n");
+  await page.getByLabel("Choose a CSV file", { exact: true }).setInputFiles({ name: "invalid-stock.csv", mimeType: "text/csv", buffer: Buffer.from(source(5000)) });
+  await expect(page.locator("#issues li")).toHaveCount(25);
+  await expect(page.locator("#summary")).toContainText("5000 Held for input fixes");
+  await input.fill(source(26));
+  await run.click();
+  const pages = page.getByRole("navigation", { name: "Input issue pages", exact: true });
+  await expect(pages).toContainText("1–25 of 26 input issues");
+  await pages.getByRole("button", { name: "Next", exact: true }).click();
+  await expect(page.locator("#issues li")).toHaveCount(1);
+  await expect(page.locator("#issues")).toBeFocused();
+  await expect(page.locator("#issues li")).toContainText("Line 27");
+  await expect(pages.getByRole("button", { name: "Next", exact: true })).toBeDisabled();
+  await pages.getByRole("button", { name: "Previous", exact: true }).click();
+  await expect(page.locator("#issues li")).toHaveCount(25);
+  await input.fill("sku,expected,counted\nOK,1,1");
+  await expect(pages).toBeHidden();
+  await expect(page.locator("#issues li")).toHaveCount(0);
+  await run.click();
+  await expect(pages).toBeHidden();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+});
+
 test("Contract Check preserves edits during file reads and quotes literal keys", async ({ page }) => {
   await page.goto("/tools/api-contract-checker/");
   const response = page.getByLabel("JSON response", { exact: true });

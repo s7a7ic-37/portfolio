@@ -5,6 +5,10 @@ const fileInput = document.querySelector("#csv-file");
 const status = document.querySelector("#status");
 const summary = document.querySelector("#summary");
 const issues = document.querySelector("#issues");
+const issuePages = document.querySelector("#issue-pages");
+const previousIssuePage = document.querySelector("#previous-issue-page");
+const nextIssuePage = document.querySelector("#next-issue-page");
+const issuePageLabel = document.querySelector("#issue-page-label");
 const tableBody = document.querySelector("#exceptions-table tbody");
 const tableRegion = document.querySelector(".table-wrap");
 const downloadButton = document.querySelector("#download-exceptions");
@@ -27,10 +31,15 @@ const sampleCsv = [
 let lastExceptions = [];
 let inputRevision = 0;
 let page = 0;
+let lastIssues = [];
+let issuePage = 0;
 
 function clearResult() {
   summary.replaceChildren();
   issues.replaceChildren();
+  lastIssues = [];
+  issuePage = 0;
+  issuePages.hidden = true;
   tableBody.replaceChildren();
   lastExceptions = [];
   page = 0;
@@ -65,12 +74,9 @@ function showResult(result) {
     item.append(count, document.createTextNode(" " + label));
     summary.append(item);
   }
-  for (const issue of result.issues) {
-    const item = document.createElement("li");
-    item.dataset.kind = "missing";
-    item.textContent = "Line " + issue.line + " — " + issue.message;
-    issues.append(item);
-  }
+  lastIssues = result.issues;
+  issuePage = 0;
+  showIssuePage();
   lastExceptions = result.exceptions;
   findingFilter.value = "all";
   page = 0;
@@ -81,6 +87,35 @@ function showResult(result) {
     ? "Review the input issues before relying on the totals."
     : "Reconciliation complete. Exceptions are ready for follow-up.";
 }
+
+function showIssuePage() {
+  issues.replaceChildren();
+  const start = issuePage * PAGE_SIZE;
+  for (const issue of lastIssues.slice(start, start + PAGE_SIZE)) {
+    const item = document.createElement("li");
+    item.dataset.kind = "missing";
+    item.textContent = "Line " + issue.line + " — " + issue.message;
+    issues.append(item);
+  }
+  issuePages.hidden = !lastIssues.length;
+  previousIssuePage.disabled = issuePage === 0;
+  nextIssuePage.disabled = start + PAGE_SIZE >= lastIssues.length;
+  issuePageLabel.textContent = lastIssues.length
+    ? `${start + 1}–${Math.min(start + PAGE_SIZE, lastIssues.length)} of ${lastIssues.length.toLocaleString("en-GB")} input issues`
+    : "";
+}
+
+function changeIssuePage(delta) {
+  const next = issuePage + delta;
+  if (next < 0 || next * PAGE_SIZE >= lastIssues.length) return;
+  issuePage = next;
+  showIssuePage();
+  issues.focus();
+  issues.scrollIntoView({ block: "start" });
+}
+
+previousIssuePage.addEventListener("click", () => changeIssuePage(-1));
+nextIssuePage.addEventListener("click", () => changeIssuePage(1));
 
 function filteredExceptions() {
   const choice = findingFilter.value;
