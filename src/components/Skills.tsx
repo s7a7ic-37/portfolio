@@ -16,7 +16,7 @@ const capabilities = [
     description: "Time-based holdouts and baseline comparisons in OpsLens; live NESO inputs and a separate historical evaluation in Grid Demand.",
     tools: ["Python", "pandas", "NumPy", "DuckDB", "scikit-learn", "LightGBM", "Altair", "NESO API"],
     evidence: [
-      { label: "OpsLens · holdout evaluation", href: "https://opslens.artemislab.co.uk/#cohort" },
+      { label: "OpsLens · rank forecast errors", href: "https://opslens.artemislab.co.uk/#product-detail" },
       { label: "Grid Demand · live forecast", href: "https://grid.artemislab.co.uk/" },
     ],
   },
