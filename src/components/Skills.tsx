@@ -7,7 +7,7 @@ const capabilities = [
   },
   {
     number: "02", title: "APIs & relational data",
-    description: "REST endpoints, validated requests, source-backed draft review and transactional SQL.",
+    description: "Validated REST endpoints, workspace-scoped SQL writes and human review of source-backed drafts.",
     tools: ["Node.js", "Express", "FastAPI", "Pydantic", "PostgreSQL", "SQL", "OpenAI Responses API", "Supabase"],
     evidence: [{ label: "Runbook Desk", href: "https://runbook.artemislab.co.uk/" }, { label: "Pure News API", href: "https://github.com/s7a7ic-37/pure-news-api" }],
   },
