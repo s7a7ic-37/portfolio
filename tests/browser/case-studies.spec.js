@@ -2,16 +2,18 @@ import {test, expect} from "@playwright/test";
 
 const evidenceLinks = {
   "runbook-desk": [
-    ["Database retry tests ↗", "https://github.com/s7a7ic-37/runbook-desk/blob/c984692/tests/test_creation_retries.py"],
-    ["CI run with Docker build ↗", "https://github.com/s7a7ic-37/runbook-desk/actions/runs/42433452124"],
+    ["Database retry tests ↗", "https://github.com/s7a7ic-37/runbook-desk/blob/5cdb522/tests/test_creation_retries.py"],
+    ["Handoff snapshot tests ↗", "https://github.com/s7a7ic-37/runbook-desk/blob/5cdb522/frontend/tests/report.test.ts"],
+    ["CI run with Docker build ↗", "https://github.com/s7a7ic-37/runbook-desk/actions/runs/42481268119"],
     ["Live OpenAPI schema ↗", "https://runbook.artemislab.co.uk/api/openapi.json"],
   ],
   "pure-news": [
-    ["Browser search and browsing tests ↗", "https://github.com/s7a7ic-37/pure-news/blob/236b0f1/tests/browser/browsing.spec.js"],
-    ["API search and validation tests ↗", "https://github.com/s7a7ic-37/pure-news-api/blob/2e3e12b/__tests__/app.test.js"],
+    ["Browser search and browsing tests ↗", "https://github.com/s7a7ic-37/pure-news/blob/8d63d1a/tests/browser/browsing.spec.js"],
+    ["Saved-story recovery tests ↗", "https://github.com/s7a7ic-37/pure-news/blob/8d63d1a/tests/browser/reading-list.spec.js"],
+    ["API search and validation tests ↗", "https://github.com/s7a7ic-37/pure-news-api/blob/e6c5273/__tests__/app.test.js"],
     ["API race regression test ↗", "https://github.com/s7a7ic-37/pure-news-api/blob/e3dc588/__tests__/comments.models.test.js"],
-    ["Frontend CI run ↗", "https://github.com/s7a7ic-37/pure-news/actions/runs/42469313012"],
-    ["API CI run ↗", "https://github.com/s7a7ic-37/pure-news-api/actions/runs/42469060995"],
+    ["Frontend CI run ↗", "https://github.com/s7a7ic-37/pure-news/actions/runs/42479759008"],
+    ["API CI run ↗", "https://github.com/s7a7ic-37/pure-news-api/actions/runs/42480464240"],
   ],
   "grid-demand-lab": [
     ["Forecast and time-split tests ↗", "https://github.com/s7a7ic-37/grid-demand-lab/blob/12d1126/tests/test_forecast.py"],
@@ -19,24 +21,24 @@ const evidenceLinks = {
     ["Green CI run ↗", "https://github.com/s7a7ic-37/grid-demand-lab/actions/runs/42434684384"],
   ],
   "travel-planner": [
-    ["Plan and transfer tests ↗", "https://github.com/s7a7ic-37/travel-planner/blob/22454bf/travel-planner-fe/tests/demo.test.mjs"],
-    ["Shared itinerary link tests ↗", "https://github.com/s7a7ic-37/travel-planner/blob/22454bf/travel-planner-fe/tests/itinerary.test.mjs"],
-    ["Green CI run ↗", "https://github.com/s7a7ic-37/travel-planner/actions/runs/42416623963"],
+    ["Plan and transfer tests ↗", "https://github.com/s7a7ic-37/travel-planner/blob/6c3b2a3/travel-planner-fe/tests/demo.test.mjs"],
+    ["Shared itinerary link tests ↗", "https://github.com/s7a7ic-37/travel-planner/blob/6c3b2a3/travel-planner-fe/tests/itinerary.test.mjs"],
+    ["Green CI run ↗", "https://github.com/s7a7ic-37/travel-planner/actions/runs/42479419976"],
   ],
   opslens: [
-    ["Forecast validation tests ↗", "https://github.com/s7a7ic-37/ops-lens/blob/04feeda/tests/test_pipeline.py"],
-    ["Dashboard helper tests ↗", "https://github.com/s7a7ic-37/ops-lens/blob/04feeda/web/helpers.test.mjs"],
-    ["Green CI run ↗", "https://github.com/s7a7ic-37/ops-lens/actions/runs/42465716125"],
+    ["Forecast validation tests ↗", "https://github.com/s7a7ic-37/ops-lens/blob/b796ce5/tests/test_pipeline.py"],
+    ["Dashboard helper tests ↗", "https://github.com/s7a7ic-37/ops-lens/blob/b796ce5/web/helpers.test.mjs"],
+    ["Green CI run ↗", "https://github.com/s7a7ic-37/ops-lens/actions/runs/42478971803"],
   ],
   "stockroom-reconcile": [
-    ["Parser and export tests ↗", "https://github.com/s7a7ic-37/portfolio/blob/bf35c92/public/tools/stockroom-reconciliation/reconcile.test.js"],
-    ["Browser workflow tests ↗", "https://github.com/s7a7ic-37/portfolio/blob/bf35c92/tests/browser/tool-flows.spec.js"],
-    ["Green CI run ↗", "https://github.com/s7a7ic-37/portfolio/actions/runs/42466718145"],
+    ["Parser and export tests ↗", "https://github.com/s7a7ic-37/portfolio/blob/4cd5951/public/tools/stockroom-reconciliation/reconcile.test.js"],
+    ["Browser workflow tests ↗", "https://github.com/s7a7ic-37/portfolio/blob/4cd5951/tests/browser/tool-flows.spec.js"],
+    ["Green CI run ↗", "https://github.com/s7a7ic-37/portfolio/actions/runs/42478429342"],
   ],
   "contract-check": [
-    ["Contract parser and limit tests ↗", "https://github.com/s7a7ic-37/portfolio/blob/3b7d47c/public/tools/api-contract-checker/checker.test.js"],
-    ["Browser workflow tests ↗", "https://github.com/s7a7ic-37/portfolio/blob/3b7d47c/tests/browser/tool-flows.spec.js"],
-    ["Green CI run ↗", "https://github.com/s7a7ic-37/portfolio/actions/runs/42473574995"],
+    ["Contract parser and limit tests ↗", "https://github.com/s7a7ic-37/portfolio/blob/3c41c7c/public/tools/api-contract-checker/checker.test.js"],
+    ["Browser workflow tests ↗", "https://github.com/s7a7ic-37/portfolio/blob/3c41c7c/tests/browser/tool-flows.spec.js"],
+    ["Green CI run ↗", "https://github.com/s7a7ic-37/portfolio/actions/runs/42480045967"],
   ],
 };
 
@@ -48,7 +50,7 @@ for (const [slug, title] of [["runbook-desk", "Runbook Desk"], ["pure-news", "Pu
     await expect(page).toHaveTitle(`${title} — project case study`);
     await expect(page.getByRole("heading", {name: "Boundaries and contribution", exact: true})).toBeVisible();
     const implementations = page.getByRole("link", {name: "Inspect the implementation", exact: false});
-    await expect(implementations).toHaveCount(slug === "pure-news" ? 4 : 3);
+    await expect(implementations).toHaveCount(["pure-news", "runbook-desk"].includes(slug) ? 4 : 3);
     for (const link of await implementations.all()) expect(await link.getAttribute("href")).toMatch(/^https:\/\/github\.com\/s7a7ic-37\//);
     for (const [name, href] of evidenceLinks[slug]) await expect(page.getByRole("link", {name, exact: true})).toHaveAttribute("href", href);
     for (const width of [320, 390, 768, 1280]) {
