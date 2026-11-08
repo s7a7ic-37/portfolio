@@ -97,8 +97,8 @@ const studies = {
       {label: "Green CI run", path: "https://github.com/s7a7ic-37/travel-planner/actions/runs/42416623963"},
     ],
     demo: "Choose a city and a couple of interests, generate a short plan, then try another city. Open Recent itineraries in the menu, reopen a plan, export it and print or save it as a PDF.",
-    limits: "The guest demo uses curated places; it does not provide live availability, prices, opening times, bookings or route optimization. Firebase and Mapbox settings are not active in this public flow. The live integrations and original team backend are not claimed as hosted features.",
-    contribution: "Originally built as a four-person project; original source history and contributor credit remain in the repository. This page describes the verified guest-planner workflow and its current limits. Recent code uses AI coding assistance with automated checks.",
+    limits: "The guest planner uses curated city lists. It has no live prices, opening times, bookings or route optimization, and Firebase or Mapbox features are not configured for this public demo.",
+    contribution: "The original project was built by a four-person team; the repository retains its history and authorship. This case study describes the guest-planner workflow available in the portfolio demo. Recent updates use AI coding assistance and regression tests.",
   },
   opslens: {
     title: "OpsLens",
