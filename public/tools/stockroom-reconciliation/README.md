@@ -12,6 +12,8 @@ Editing, loading the sample or reconciling while a file is being read keeps the 
 
 The worklist and input issues each show 25 rows per page. Export includes every exception, regardless of the open page; held input issues remain separate from checked stock.
 
+Filter exceptions by finding and search SKU or item text. Search is literal, ignores case and outer spaces, and stays in the browser. Filters change only the visible worklist; totals and the full exception export remain unchanged.
+
 ## CSV format
 
 Required columns: `sku`, `expected`, `counted`. Optional: `name`, `condition`.

@@ -18,6 +18,8 @@ const nextButton = document.querySelector("#next-page");
 const pageLabel = document.querySelector("#page-label");
 const filterControls = document.querySelector("#exception-filter");
 const findingFilter = document.querySelector("#finding-filter");
+const searchInput = document.querySelector("#exception-search");
+const clearSearch = document.querySelector("#clear-search");
 const emptyFilter = document.querySelector("#filter-empty");
 const PAGE_SIZE = 25;
 
@@ -45,6 +47,7 @@ function clearResult() {
   page = 0;
   pagination.hidden = true;
   findingFilter.value = "all";
+  searchInput.value = "";
   filterControls.hidden = true;
   emptyFilter.hidden = true;
   downloadButton.disabled = true;
@@ -79,6 +82,7 @@ function showResult(result) {
   showIssuePage();
   lastExceptions = result.exceptions;
   findingFilter.value = "all";
+  searchInput.value = "";
   page = 0;
   showPage();
   downloadButton.disabled = !lastExceptions.length;
@@ -119,9 +123,11 @@ nextIssuePage.addEventListener("click", () => changeIssuePage(1));
 
 function filteredExceptions() {
   const choice = findingFilter.value;
-  return lastExceptions.filter(row => choice === "all" ||
+  const query = searchInput.value.trim().toLowerCase();
+  return lastExceptions.filter(row => (choice === "all" ||
     (choice === "shortage" && row.difference < 0) ||
-    (choice === "overage" && row.difference > 0) || row.condition === choice);
+    (choice === "overage" && row.difference > 0) || row.condition === choice) &&
+    (row.sku.toLowerCase().includes(query) || (row.name || "").toLowerCase().includes(query)));
 }
 
 function showPage() {
@@ -138,6 +144,7 @@ function showPage() {
     tableBody.append(tr);
   }
   filterControls.hidden = !lastExceptions.length;
+  clearSearch.disabled = !searchInput.value;
   emptyFilter.hidden = !lastExceptions.length || shown.length > 0;
   emptyFilter.textContent = `No exceptions match this filter. ${lastExceptions.length.toLocaleString("en-GB")} total exceptions remain in the report.`;
   pagination.hidden = !shown.length;
@@ -145,7 +152,7 @@ function showPage() {
   nextButton.disabled = start + PAGE_SIZE >= shown.length;
   pageLabel.textContent = shown.length
     ? `${start + 1}–${Math.min(start + PAGE_SIZE, shown.length)} of ${shown.length.toLocaleString("en-GB")} exceptions` +
-      (findingFilter.value === "all" ? "" : ` · ${lastExceptions.length.toLocaleString("en-GB")} total`)
+      (findingFilter.value === "all" && !searchInput.value.trim() ? "" : ` · ${lastExceptions.length.toLocaleString("en-GB")} total`)
     : "";
 }
 
@@ -163,6 +170,16 @@ nextButton.addEventListener("click", () => changePage(1));
 findingFilter.addEventListener("change", () => {
   page = 0;
   showPage();
+});
+searchInput.addEventListener("input", () => {
+  page = 0;
+  showPage();
+});
+clearSearch.addEventListener("click", () => {
+  searchInput.value = "";
+  page = 0;
+  showPage();
+  searchInput.focus();
 });
 
 function run() {

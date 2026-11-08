@@ -47,6 +47,7 @@
         <button class="tool-button tool-button--light" id="next-issue-page" type="button">Next</button>
       </nav>
       <div id="exception-filter" class="exception-filter" hidden>
+        <div class="exception-control">
         <label for="finding-filter">Filter exceptions</label>
         <select id="finding-filter">
           <option value="all">All exceptions</option>
@@ -55,6 +56,12 @@
           <option value="damaged">Damaged stock</option>
           <option value="held">Held stock</option>
         </select>
+        </div>
+        <div class="exception-control">
+          <label for="exception-search">Find SKU or item</label>
+          <input id="exception-search" type="search" autocomplete="off" spellcheck="false">
+        </div>
+        <button class="tool-button tool-button--light" id="clear-search" type="button" disabled>Clear search</button>
       </div>
       <p id="filter-empty" class="field-help" role="status" hidden></p>
       <p class="field-help">On a narrow screen, swipe the table sideways to see every column.</p>

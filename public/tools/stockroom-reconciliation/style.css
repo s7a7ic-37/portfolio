@@ -2,10 +2,11 @@
 
 body { background: #f4f4f0; color: #30332f; font-family: Arial,Helvetica,sans-serif; }
 .exception-pages:not([hidden]) { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; margin-top: 16px; font-size: 13px; }
-.exception-filter:not([hidden]) { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; margin: 20px 0 12px; }
+.exception-filter:not([hidden]) { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: end; margin: 20px 0 12px; }
+.exception-control { display: grid; gap: 6px; max-width: 100%; }
 .exception-filter label { font-size: 13px; font-weight: 700; }
-.exception-filter select { min-height: 44px; min-width: 200px; max-width: 100%; padding: 8px 12px; border: 1px solid #d3c6a4; border-radius: 3px; background: #fffef8; color: #30332f; font: inherit; font-size: 16px; }
-.exception-filter select:focus-visible { outline: 3px solid #b8842c; outline-offset: 3px; }
+.exception-filter select, .exception-filter input { min-height: 44px; width: 220px; max-width: 100%; padding: 8px 12px; border: 1px solid #d3c6a4; border-radius: 3px; background: #fffef8; color: #30332f; font: inherit; font-size: 16px; }
+.exception-filter select:focus-visible, .exception-filter input:focus-visible { outline: 3px solid #b8842c; outline-offset: 3px; }
 @media(max-width:600px) { .exception-pages span { flex-basis: 100%; order: -1; text-align: center; } }
 .tool-shell { width: min(1200px,calc(100% - 40px)); }
 .tool-nav a { color: #61490e; }
@@ -31,7 +32,7 @@ html[data-theme="dark"] .tool-panel { background: #282c24; }
 html[data-theme="dark"] .tool-panel > p, html[data-theme="dark"] .field-help, html[data-theme="dark"] .tool-footnote, html[data-theme="dark"] .file-input { color: #c4c7b5; }
 html[data-theme="dark"] .tool-field label, html[data-theme="dark"] caption { color: #ecebdd; }
 html[data-theme="dark"] .tool-field textarea { background: #1d211b; color: #ecebdd; border-color: #77765a; }
-html[data-theme="dark"] .exception-filter select { background: #1d211b; color: #ecebdd; border-color: #77765a; }
+html[data-theme="dark"] .exception-filter select, html[data-theme="dark"] .exception-filter input { background: #1d211b; color: #ecebdd; border-color: #77765a; }
 html[data-theme="dark"] .tool-button { background: #e4c179; color: #29210f; border-color: #e4c179; }
 html[data-theme="dark"] .tool-button--light { background: transparent; color: #e4c179; }
 html[data-theme="dark"] .file-input::file-selector-button { background: #282c24; color: #ecebdd; border-color: #77765a; }

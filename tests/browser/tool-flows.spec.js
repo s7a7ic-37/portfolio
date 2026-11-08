@@ -1,6 +1,57 @@
 import { test, expect } from "@playwright/test";
 import { readFile } from "node:fs/promises";
 
+test("Stockroom searches SKU and item text without changing totals or full export", async ({ page }) => {
+  await page.goto("/tools/stockroom-reconciliation/");
+  const source = "sku,name,expected,counted,condition\n" + Array.from({length: 28}, (_, i) =>
+    `SKU-${i},${i === 27 ? "Łódź [rack]" : "Item " + i},2,1,${i === 27 ? "damaged" : "sellable"}`).join("\n");
+  await page.getByLabel("Stock count CSV", {exact: true}).fill(source);
+  await page.getByRole("button", {name: "Reconcile rows", exact: true}).click();
+  const rows = page.locator("#exceptions-table tbody tr");
+  const pages = page.getByRole("navigation", {name: "Exception pages", exact: true});
+  await pages.getByRole("button", {name: "Next", exact: true}).click();
+  await expect(rows).toHaveCount(3);
+  const search = page.getByLabel("Find SKU or item", {exact: true});
+  await search.fill(" sku-27 ");
+  await expect(rows).toHaveCount(1);
+  await expect(rows.first()).toContainText("Łódź [rack]");
+  await expect(pages).toContainText("1–1 of 1 exceptions · 28 total");
+  await search.fill("ŁÓDŹ [rack]");
+  await expect(rows).toHaveCount(1);
+  await page.getByLabel("Filter exceptions", {exact: true}).selectOption("overage");
+  await expect(rows).toHaveCount(0);
+  await expect(page.locator("#filter-empty")).toContainText("28 total exceptions remain");
+  await page.getByLabel("Filter exceptions", {exact: true}).selectOption("damaged");
+  await expect(rows).toHaveCount(1);
+  await search.fill(".+");
+  await expect(rows).toHaveCount(0);
+  await expect(page.locator("#summary")).toContainText("28 Exceptions");
+  const pending = page.waitForEvent("download");
+  await page.getByRole("button", {name: "Export all exceptions", exact: true}).click();
+  const csv = await readFile(await (await pending).path(), "utf8");
+  expect(csv.split("\r\n")).toHaveLength(29);
+  expect(csv).toContain("SKU-0,");
+  expect(csv).toContain("SKU-27,");
+  await page.getByRole("button", {name: "Clear search", exact: true}).click();
+  await expect(search).toHaveValue("");
+  await expect(search).toBeFocused();
+  await expect(page.getByRole("button", {name: "Clear search", exact: true})).toBeDisabled();
+  await expect(rows).toHaveCount(1);
+  await page.getByLabel("Filter exceptions", {exact: true}).selectOption("all");
+  await expect(rows).toHaveCount(25);
+  await search.fill("sku-27");
+  await page.getByRole("button", {name: "Load sample", exact: true}).click();
+  await expect(search).toHaveValue("");
+  await expect(rows).toHaveCount(3);
+  for (const width of [320, 390, 768, 1280]) {
+    await page.setViewportSize({width, height: 900});
+    expect(await page.evaluate(() => innerWidth)).toBe(width);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    expect((await search.boundingBox()).height).toBeGreaterThanOrEqual(44);
+    expect(await search.evaluate(input => getComputedStyle(input).fontSize)).toBe("16px");
+  }
+});
+
 test("Contract Check validates root arrays and primitive responses", async ({ page }) => {
   await page.goto("/tools/api-contract-checker/");
   const contract = page.getByLabel("Expected contract", {exact: true});
