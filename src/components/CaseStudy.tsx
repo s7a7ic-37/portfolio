@@ -13,10 +13,10 @@ const studies = {
     decisions: [
       {title: "Reject a stale review", text: "A review includes the version of the case it opened. The database transaction rejects an outdated version with HTTP 409, preserving the earlier decision. The interface retains local edits and offers an explicit reload.", path: "server/main.py"},
       {title: "Validate the evidence boundary", text: "Structured drafts must reference the incident or selected runbook IDs. Pydantic validates the shape and allowed citations. That checks references, not whether a proposed explanation is true; human review remains necessary.", path: "server/models.py"},
-      {title: "Treat an interrupted write as uncertain", text: "Requests have a bounded wait and writes are never repeated automatically. The interface explains that a save may have completed and offers history recovery. Public procedures remain readable while the case server connects.", path: "frontend/src/api.ts"},
+      {title: "Recover a save after a lost response", text: "A new case carries a workspace-scoped retry key. If its response is lost, an explicit retry with unchanged details returns the saved case. PostgreSQL rejects reuse for different input. The pending key lasts while the page stays open; writes are never repeated automatically.", path: "frontend/src/App.tsx"},
     ],
-    proof: "An isolated hosted two-tab check recorded one review and one version change; the stale second review returned 409. Backend tests cover workspace isolation, budget reservations, malformed drafts and conflicts. Browser regressions cover unsaved edits, source dialogs and recovery.",
-    testPath: "tests/test_workflow.py",
+    proof: "Four hosted browser checks discarded a successful response after the database committed, then recovered exactly one case through an explicit retry. Database tests cover concurrent retries, case limits and schema upgrades. Separate hosted checks confirmed conflicting-input rejection and workspace isolation; a two-tab review check recorded one decision and rejected the stale second review.",
+    testPath: "tests/test_creation_retries.py",
     demo: "Open a labelled worked example, inspect a cited procedure, edit the reply, record a review and download the handoff. The export separates the original draft from the recorded decision.",
     limits: "The hosted demo uses fictional authored examples. The OpenAI Responses API client is implemented and mock-tested; real provider calls remain disabled and unverified. Browser workspaces use anonymous cookies, not user accounts. Free hosting can delay startup.",
     contribution: "A personal portfolio project developed with AI coding assistance and checked through automated tests and published browser flows.",
@@ -47,7 +47,7 @@ export type CaseStudyKey = keyof typeof studies;
 export default function CaseStudy({ project }: { project: CaseStudyKey }) {
   const study = studies[project];
   useEffect(() => { document.title = `${study.title} — project case study`; }, [study.title]);
-  const sourceLink = (path: string) => path.startsWith("https:") ? path : `${study.source}/blob/${project === "runbook-desk" ? "0a2e8c0" : "15e81e8"}/${path}`;
+  const sourceLink = (path: string) => path.startsWith("https:") ? path : `${study.source}/blob/${project === "runbook-desk" ? "c984692" : "15e81e8"}/${path}`;
   return (
     <div className={styles.page}>
       <a className={styles.skip} href="#case-content">Skip to case study</a>
