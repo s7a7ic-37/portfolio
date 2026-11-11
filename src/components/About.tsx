@@ -3,19 +3,12 @@ export default function About() {
     <section id="about" className="about-section">
       <div className="section-wrap">
         <p className="eyebrow">About</p>
-        <h2 className="section-title">Good software starts with the problem in front of you.</h2>
+        <h2 className="section-title">From operations to software.</h2>
         <div className="about-copy">
-          <div className="about-aside">
-            <span className="about-monogram" aria-hidden="true">MP</span>
-            <span>Based in Warrington, UK<br />Learning by building</span>
-          </div>
           <p>
-            I’m Maksymilian. I bring an <strong>operations background</strong> to
-            my work in software: understand the task, make the information clear,
-            and build a tool that helps someone take the next step. My current
-            projects span React interfaces, Node and Python APIs, and practical data handling.
-            I trained in full-stack JavaScript with Northcoders and keep extending
-            that foundation through the projects below.
+            I’m Maksymilian, based in Warrington. I worked in operations before
+            completing Northcoders’ full-stack JavaScript course. I now build
+            projects with React, Node, Python and SQL.
           </p>
         </div>
       </div>

@@ -50,8 +50,8 @@ for (const [slug, title] of [["runbook-desk", "Runbook Desk"], ["pure-news", "Pu
     expect(response.status()).toBe(200);
     await expect(page.getByRole("heading", {name: title, exact: true})).toBeVisible();
     await expect(page).toHaveTitle(`${title} — project case study`);
-    await expect(page.getByRole("heading", {name: "Boundaries and contribution", exact: true})).toBeVisible();
-    const implementations = page.getByRole("link", {name: "Inspect the implementation", exact: false});
+    await expect(page.getByRole("heading", {name: "Limits and my contribution", exact: true})).toBeVisible();
+    const implementations = page.getByRole("link", {name: "View code", exact: false});
     await expect(implementations).toHaveCount(["pure-news", "runbook-desk"].includes(slug) ? 4 : 3);
     for (const link of await implementations.all()) expect(await link.getAttribute("href")).toMatch(/^https:\/\/github\.com\/s7a7ic-37\//);
     for (const [name, href] of evidenceLinks[slug]) await expect(page.getByRole("link", {name, exact: true})).toHaveAttribute("href", href);

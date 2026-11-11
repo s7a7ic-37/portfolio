@@ -1,30 +1,23 @@
 const capabilities = [
   {
-    number: "01", title: "Interfaces & interaction",
-    description: "Responsive interfaces, keyboard-friendly controls, shareable browsing state and clear loading, empty and recovery states.",
+    title: "Interfaces",
+    description: "Responsive pages, forms and navigation.",
     tools: ["JavaScript", "TypeScript", "React", "Next.js", "HTML & CSS", "React Router"],
-    evidence: [{ label: "Pure News · live interface", href: "https://news.artemislab.co.uk/" }, { label: "Travel · Next.js planner", href: "https://travel.artemislab.co.uk/demo/" }],
   },
   {
-    number: "02", title: "APIs & relational data",
-    description: "Validated REST endpoints, workspace-scoped SQL writes and human review of source-backed drafts.",
+    title: "APIs & databases",
+    description: "REST endpoints, input validation and SQL data.",
     tools: ["Node.js", "Express", "FastAPI", "Pydantic", "PostgreSQL", "SQL", "OpenAI Responses API", "Supabase"],
-    evidence: [{ label: "Runbook Desk", href: "https://runbook.artemislab.co.uk/" }, { label: "Pure News API", href: "https://github.com/s7a7ic-37/pure-news-api" }],
   },
   {
-    number: "03", title: "Data & model evaluation",
-    description: "Time-based holdouts and baseline comparisons in OpsLens; live NESO inputs and a separate historical evaluation in Grid Demand.",
+    title: "Data & machine learning",
+    description: "Forecasting and evaluation on demand and retail data.",
     tools: ["Python", "pandas", "NumPy", "DuckDB", "scikit-learn", "LightGBM", "Altair", "NESO API"],
-    evidence: [
-      { label: "OpsLens · rank forecast errors", href: "https://opslens.artemislab.co.uk/#product-detail" },
-      { label: "Grid Demand · live forecast", href: "https://grid.artemislab.co.uk/" },
-    ],
   },
   {
-    number: "04", title: "Testing & delivery",
-    description: "Database-backed regression tests, mobile browser checks, container builds and repeatable deployments.",
+    title: "Testing & delivery",
+    description: "Unit and browser tests, CI and deployment.",
     tools: ["Git", "GitHub Actions", "Jest", "Supertest", "Playwright", "pytest", "Docker", "Cloudflare Workers", "Render"],
-    evidence: [{ label: "Runbook Desk tests", href: "https://github.com/s7a7ic-37/runbook-desk/actions" }, { label: "Pure News browser checks", href: "https://github.com/s7a7ic-37/pure-news/actions/workflows/checks.yml" }],
   },
 ];
 
@@ -33,17 +26,14 @@ export default function Skills() {
     <section id="skills" className="skills-section">
       <div className="section-wrap">
         <div className="skills-heading">
-          <div><p className="eyebrow">Tools, with a purpose</p><h2 className="section-title">Built across<br />the stack.</h2></div>
-          <p className="section-intro">JavaScript and TypeScript for interfaces and APIs; Python and SQL for data processing, model evaluation and support workflows.</p>
+          <div><p className="eyebrow">Skills</p><h2 className="section-title">What I’ve used.</h2></div>
         </div>
         <div className="capability-grid">
           {capabilities.map((capability) => (
-            <article className="capability-card" key={capability.number}>
-              <div className="capability-top"><span>{capability.number}</span></div>
+            <article className="capability-card" key={capability.title}>
               <h3>{capability.title}</h3>
               <p>{capability.description}</p>
               <ul className="capability-tools" aria-label={capability.title + " technologies"}>{capability.tools.map((tool) => <li key={tool}>{tool}</li>)}</ul>
-              <div className="capability-evidence">{capability.evidence.map((item) => <a key={item.href} href={item.href}>{item.label} <span aria-hidden="true">↗</span></a>)}</div>
             </article>
           ))}
         </div>

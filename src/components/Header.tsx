@@ -31,7 +31,12 @@ export default function Header() {
     }}>
       <div className={styles.inner + " section-wrap"}>
         <a className={styles.brand} href="#hero" onClick={() => setIsMenuOpen(false)} aria-label="Maksymilian Pasiecki, home">
-          <span className={styles.brandMark}>MP</span>
+          <svg className={styles.brandMark} viewBox="0 0 40 40" aria-hidden="true">
+            <rect width="40" height="40" rx="11" fill="var(--ink)" />
+            <path d="M10 29h8V21h8V11" fill="none" stroke="var(--paper)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" />
+            <circle cx="10" cy="29" r="3" fill="var(--orange)" />
+            <circle cx="26" cy="11" r="3" fill="var(--paper)" />
+          </svg>
           <span>Maksymilian Pasiecki</span>
         </a>
         <button
