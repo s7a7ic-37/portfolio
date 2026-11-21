@@ -14,13 +14,13 @@ const evidenceLinks = {
     ["Mobile booking tests ↗", "https://github.com/s7a7ic-37/depot-booking/blob/29b475a/web/tests/booking.spec.js"],
   ],
   "river-data-monitor": [
-    ["Import tests ↗", "https://github.com/s7a7ic-37/river-data-monitor/blob/d594ea9/tests/test_monitor.py"],
-    ["Report route tests ↗", "https://github.com/s7a7ic-37/river-data-monitor/blob/d594ea9/tests/worker.test.mjs"],
-    ["Manual refresh run ↗", "https://github.com/s7a7ic-37/river-data-monitor/actions/runs/44913007482"],
+    ["Import tests ↗", "https://github.com/s7a7ic-37/river-data-monitor/blob/c8eeb09/tests/test_monitor.py"],
+    ["Report route tests ↗", "https://github.com/s7a7ic-37/river-data-monitor/blob/c8eeb09/tests/worker.test.mjs"],
+    ["Manual refresh run ↗", "https://github.com/s7a7ic-37/river-data-monitor/actions/runs/44928142093"],
   ],
   "webhook-delivery-lab": [
-    ["Queue tests ↗", "https://github.com/s7a7ic-37/webhook-delivery-lab/blob/99216d7/tests/queue.test.mjs"],
-    ["Storage tests ↗", "https://github.com/s7a7ic-37/webhook-delivery-lab/blob/99216d7/tests/session.test.mjs"],
+    ["Queue tests ↗", "https://github.com/s7a7ic-37/webhook-delivery-lab/blob/a59d666/tests/queue.test.mjs"],
+    ["Storage tests ↗", "https://github.com/s7a7ic-37/webhook-delivery-lab/blob/a59d666/tests/session.test.mjs"],
   ],
   "document-search-lab": [
     ["Python evaluation tests ↗", "https://github.com/s7a7ic-37/document-search-lab/blob/59852d5/tests/test_evaluation.py"],
@@ -46,10 +46,10 @@ const evidenceLinks = {
     ["API CI run ↗", "https://github.com/s7a7ic-37/pure-news-api/actions/runs/42480464240"],
   ],
   "grid-demand-lab": [
-    ["Forecast and time-split tests ↗", "https://github.com/s7a7ic-37/grid-demand-lab/blob/d123576/tests/test_forecast.py"],
-    ["Chart interaction tests ↗", "https://github.com/s7a7ic-37/grid-demand-lab/blob/d123576/tests/test_plotting.py"],
-    ["Refresh recovery tests ↗", "https://github.com/s7a7ic-37/grid-demand-lab/blob/d123576/tests/test_refresh.py"],
-    ["Green CI run ↗", "https://github.com/s7a7ic-37/grid-demand-lab/actions/runs/44927052877"],
+    ["Forecast and time-split tests ↗", "https://github.com/s7a7ic-37/grid-demand-lab/blob/9dae547/tests/test_forecast.py"],
+    ["Chart interaction tests ↗", "https://github.com/s7a7ic-37/grid-demand-lab/blob/9dae547/tests/test_plotting.py"],
+    ["Refresh recovery tests ↗", "https://github.com/s7a7ic-37/grid-demand-lab/blob/9dae547/tests/test_refresh.py"],
+    ["Green CI run ↗", "https://github.com/s7a7ic-37/grid-demand-lab/actions/runs/44928444802"],
   ],
   "travel-planner": [
     ["Plan and transfer tests ↗", "https://github.com/s7a7ic-37/travel-planner/blob/d982b6c/travel-planner-fe/tests/demo.test.mjs"],

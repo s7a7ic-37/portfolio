@@ -60,7 +60,7 @@ export const studies = {
   "grid-demand-lab": {
     title: "Grid Demand Lab",
     subtitle: "Estimating tomorrow’s electricity demand.",
-    revision: "d123576",
+    revision: "9dae547",
     stack: "Python · LightGBM · pandas · Streamlit · NESO API",
     live: "https://grid.artemislab.co.uk/",
     source: "https://github.com/s7a7ic-37/grid-demand-lab",
@@ -76,11 +76,11 @@ export const studies = {
       {label: "Forecast and time-split tests", path: "tests/test_forecast.py"},
       {label: "Chart interaction tests", path: "tests/test_plotting.py"},
       {label: "Refresh recovery tests", path: "tests/test_refresh.py"},
-      {label: "Green CI run", path: "https://github.com/s7a7ic-37/grid-demand-lab/actions/runs/44927052877"},
+      {label: "Green CI run", path: "https://github.com/s7a7ic-37/grid-demand-lab/actions/runs/44928444802"},
       {label: "Official day-ahead forecast", path: "https://bmrs.elexon.co.uk/api-documentation/endpoint/datasets/NDF"},
     ],
     demo: "Choose a half-hour on the chart and download the forecast CSV. If the comparison came from Elexon, the CSV includes its issue time and attribution. Open the backtests to compare historical errors.",
-    limits: "This is an exploratory forecast. The live feed can lag, and missing prior-day readings use the matching half-hour from last week. Extra repeated-hour predictions reuse period 48. Free hosting may take time to start.",
+    limits: "This is an exploratory forecast. If a prior-day reading is missing, the model looks up the settlement period number from last week. The same number can refer to a different UK clock time around clock changes. Free hosting may take time to start.",
     contribution: "Personal project using public demand data from NESO and Elexon.",
   },
   "travel-planner": {

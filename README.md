@@ -15,4 +15,4 @@ npm run dev
 
 `npm test` checks parsing, validation and themes. `npm run build` writes the site to `dist/`. For browser tests, run `npx playwright install --only-shell chromium webkit`, then `npm run test:browser`.
 
-Cloudflare Workers serves the Vite build. The Stockroom and Contract tools process files in the browser. Cascadia Code is included under its [font licence](public/cascadia-code-LICENSE.txt).
+Cloudflare Workers serves the Vite build. The Stockroom and Contract tools process files in the browser.
