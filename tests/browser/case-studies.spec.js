@@ -1,6 +1,10 @@
 import {test, expect} from "@playwright/test";
 
 const evidenceLinks = {
+  "trace-timeline": [
+    ["Parser and SDK export tests ↗", "https://github.com/s7a7ic-37/trace-timeline/blob/fa563dd/tests/trace.test.mjs"],
+    ["SDK-generated sample ↗", "https://github.com/s7a7ic-37/trace-timeline/blob/fa563dd/tests/fixtures/sdk-export.json"],
+  ],
   "depot-booking": [
     ["PostgreSQL API tests ↗", "https://github.com/s7a7ic-37/depot-booking/blob/95c4004/tests/booking.test.mjs"],
     ["Mobile booking tests ↗", "https://github.com/s7a7ic-37/depot-booking/blob/95c4004/web/tests/booking.spec.js"],
@@ -23,18 +27,18 @@ const evidenceLinks = {
     ["CI gate verification ↗", "https://github.com/s7a7ic-37/release-check/blob/dcd9f0a/.github/workflows/checks.yml"],
   ],
   "runbook-desk": [
-    ["Database retry tests ↗", "https://github.com/s7a7ic-37/runbook-desk/blob/10041c5/tests/test_creation_retries.py"],
-    ["Review and deletion tests ↗", "https://github.com/s7a7ic-37/runbook-desk/blob/10041c5/tests/test_workflow.py"],
-    ["Handoff snapshot tests ↗", "https://github.com/s7a7ic-37/runbook-desk/blob/10041c5/frontend/tests/report.test.ts"],
-    ["CI run with Docker build ↗", "https://github.com/s7a7ic-37/runbook-desk/actions/runs/42485780784"],
-    ["Live OpenAPI schema ↗", "https://runbook.artemislab.co.uk/api/openapi.json"],
+    ["Database retry tests ↗", "https://github.com/s7a7ic-37/runbook-desk/blob/ff2f6d8/tests/test_creation_retries.py"],
+    ["Review and deletion tests ↗", "https://github.com/s7a7ic-37/runbook-desk/blob/ff2f6d8/tests/test_workflow.py"],
+    ["Handoff snapshot tests ↗", "https://github.com/s7a7ic-37/runbook-desk/blob/ff2f6d8/frontend/tests/report.test.ts"],
+    ["CI run with Docker build ↗", "https://github.com/s7a7ic-37/runbook-desk/actions/runs/44918667924"],
+    ["API routes ↗", "https://github.com/s7a7ic-37/runbook-desk/blob/ff2f6d8/server/main.py"],
   ],
   "pure-news": [
-    ["Browser search and browsing tests ↗", "https://github.com/s7a7ic-37/pure-news/blob/0169cc1/tests/browser/browsing.spec.js"],
-    ["Saved-story recovery tests ↗", "https://github.com/s7a7ic-37/pure-news/blob/0169cc1/tests/browser/reading-list.spec.js"],
+    ["Browser search and browsing tests ↗", "https://github.com/s7a7ic-37/pure-news/blob/f1bfac2/tests/browser/browsing.spec.js"],
+    ["Saved-story recovery tests ↗", "https://github.com/s7a7ic-37/pure-news/blob/f1bfac2/tests/browser/reading-list.spec.js"],
     ["API search and validation tests ↗", "https://github.com/s7a7ic-37/pure-news-api/blob/e6c5273/__tests__/app.test.js"],
     ["API race regression test ↗", "https://github.com/s7a7ic-37/pure-news-api/blob/e3dc588/__tests__/comments.models.test.js"],
-    ["Frontend CI run ↗", "https://github.com/s7a7ic-37/pure-news/actions/runs/42486961132"],
+    ["Frontend CI run ↗", "https://github.com/s7a7ic-37/pure-news/actions/runs/44920778529"],
     ["API CI run ↗", "https://github.com/s7a7ic-37/pure-news-api/actions/runs/42480464240"],
   ],
   "grid-demand-lab": [
@@ -44,10 +48,10 @@ const evidenceLinks = {
     ["Green CI run ↗", "https://github.com/s7a7ic-37/grid-demand-lab/actions/runs/44915967482"],
   ],
   "travel-planner": [
-    ["Plan and transfer tests ↗", "https://github.com/s7a7ic-37/travel-planner/blob/3878358/travel-planner-fe/tests/demo.test.mjs"],
-    ["Shared itinerary link tests ↗", "https://github.com/s7a7ic-37/travel-planner/blob/3878358/travel-planner-fe/tests/itinerary.test.mjs"],
-    ["Planner browser regressions ↗", "https://github.com/s7a7ic-37/travel-planner/blob/3878358/travel-planner-fe/tests/browser/planner.spec.mjs"],
-    ["Green CI run ↗", "https://github.com/s7a7ic-37/travel-planner/actions/runs/42485443867"],
+    ["Plan and transfer tests ↗", "https://github.com/s7a7ic-37/travel-planner/blob/fd5bd74/travel-planner-fe/tests/demo.test.mjs"],
+    ["Shared itinerary link tests ↗", "https://github.com/s7a7ic-37/travel-planner/blob/fd5bd74/travel-planner-fe/tests/itinerary.test.mjs"],
+    ["Planner browser regressions ↗", "https://github.com/s7a7ic-37/travel-planner/blob/fd5bd74/travel-planner-fe/tests/browser/planner.spec.mjs"],
+    ["Green CI run ↗", "https://github.com/s7a7ic-37/travel-planner/actions/runs/44920003116"],
   ],
   opslens: [
     ["Forecast validation tests ↗", "https://github.com/s7a7ic-37/ops-lens/blob/32a3610/tests/test_pipeline.py"],
@@ -72,6 +76,7 @@ for (const [slug, title] of [
   ["depot-booking", "Depot Booking"],
   ["river-data-monitor", "River Data Monitor"],
   ["webhook-delivery-lab", "Webhook Delivery Lab"],
+  ["trace-timeline", "Trace Timeline"],
   ["document-search-lab", "Document Search Lab"],
   ["release-check", "Release Check"],
   ["grid-demand-lab", "Grid Demand Lab"],
@@ -95,7 +100,7 @@ for (const [slug, title] of [
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     }
     await page.getByRole("link", {name: "All projects", exact: false}).first().click();
-    await expect(page.locator("#projects .project-card")).toHaveCount(12);
+    await expect(page.locator("#projects .project-card")).toHaveCount(13);
     await expect(page.locator(`a[href="/case-studies/${slug}/"]`)).toBeVisible();
   });
   test(`${title} skip link reaches the main content with a keyboard`, async ({page, browserName}) => {
@@ -115,6 +120,7 @@ test("published project cards link to their demos and source", async ({page}) =>
     ["River Data Monitor", "river", "river-data-monitor", "Open project"],
     ["Depot Booking", "depot", "depot-booking", "Browser demo"],
     ["Webhook Delivery Lab", "webhooks", "webhook-delivery-lab", "Open project"],
+    ["Trace Timeline", "traces", "trace-timeline", "Open project"],
     ["Document Search Lab", "search-lab", "document-search-lab", "Open project"],
     ["Release Check", "release", "release-check", "Open project"],
   ]) {
@@ -130,12 +136,12 @@ test("project filters keep short lists accessible on a phone", async ({page}) =>
   await page.goto("/#projects");
   const filters = page.getByRole("group", {name: "Filter projects"});
   const cards = page.locator(".project-card");
-  await expect(cards).toHaveCount(12);
+  await expect(cards).toHaveCount(13);
   for (const [filter, count, example] of [
     ["Data", 4, "River Data Monitor"],
     ["Applications", 5, "Depot Booking"],
-    ["Developer tools", 3, "Release Check"],
-    ["All", 12, "Pure News"],
+    ["Developer tools", 4, "Trace Timeline"],
+    ["All", 13, "Pure News"],
   ]) {
     const button = filters.getByRole("button", {name: filter, exact: true});
     await button.click();

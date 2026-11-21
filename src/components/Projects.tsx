@@ -11,6 +11,7 @@ import depotPreview from "../assets/photos/project-depot.png";
 import webhookPreview from "../assets/photos/project-webhooks.png";
 import searchPreview from "../assets/photos/project-search.png";
 import releasePreview from "../assets/photos/project-release.png";
+import tracePreview from "../assets/photos/project-traces.png";
 
 const caseStudies: Record<string, string> = {
   "Depot Booking": "/case-studies/depot-booking/",
@@ -18,6 +19,7 @@ const caseStudies: Record<string, string> = {
   "Webhook Delivery Lab": "/case-studies/webhook-delivery-lab/",
   "Document Search Lab": "/case-studies/document-search-lab/",
   "Release Check": "/case-studies/release-check/",
+  "Trace Timeline": "/case-studies/trace-timeline/",
   "Runbook Desk": "/case-studies/runbook-desk/",
   "Pure News": "/case-studies/pure-news/",
   "Grid Demand Lab": "/case-studies/grid-demand-lab/",
@@ -33,6 +35,7 @@ const projects = [
   { name: "Depot Booking", group: "Applications", stack: ["React", "ASP.NET Core", "PostgreSQL"], preview: depotPreview, live: "https://depot.artemislab.co.uk/", source: "https://github.com/s7a7ic-37/depot-booking", demo: true },
   { name: "River Data Monitor", group: "Data", stack: ["Python", "SQL", "DuckDB"], preview: riverPreview, live: "https://river.artemislab.co.uk/", source: "https://github.com/s7a7ic-37/river-data-monitor" },
   { name: "Webhook Delivery Lab", group: "Developer tools", stack: ["TypeScript", "Queues", "Unit tests"], preview: webhookPreview, live: "https://webhooks.artemislab.co.uk/", source: "https://github.com/s7a7ic-37/webhook-delivery-lab" },
+  { name: "Trace Timeline", group: "Developer tools", stack: ["TypeScript", "OpenTelemetry", "File API"], preview: tracePreview, live: "https://traces.artemislab.co.uk/", source: "https://github.com/s7a7ic-37/trace-timeline" },
   { name: "Document Search Lab", group: "Data", stack: ["Python", "scikit-learn", "Search evaluation"], preview: searchPreview, live: "https://search-lab.artemislab.co.uk/", source: "https://github.com/s7a7ic-37/document-search-lab" },
   { name: "Release Check", group: "Developer tools", stack: ["Playwright", "JavaScript", "GitHub Actions"], preview: releasePreview, live: "https://release.artemislab.co.uk/", source: "https://github.com/s7a7ic-37/release-check" },
   { name: "Grid Demand Lab", group: "Data", stack: ["Python", "LightGBM", "NESO data"], preview: gridPreview, live: "https://grid.artemislab.co.uk/", source: "https://github.com/s7a7ic-37/grid-demand-lab" },

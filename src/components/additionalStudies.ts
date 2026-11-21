@@ -1,4 +1,24 @@
 export const additionalStudies = {
+  "trace-timeline": {
+    title: "Trace Timeline",
+    subtitle: "Read service timings from an OpenTelemetry trace.",
+    revision: "fa563dd",
+    stack: "TypeScript · OpenTelemetry JSON · Browser File API",
+    live: "https://traces.artemislab.co.uk/",
+    source: "https://github.com/s7a7ic-37/trace-timeline",
+    problem: "The viewer shows where a request spent time and which operations failed, using an OpenTelemetry JSON file.",
+    flow: ["Open a trace file", "Choose a trace", "Find error spans", "Inspect timings and parent spans"],
+    decisions: [
+      {title: "Keep nanoseconds exact", text: "The parser stores timestamps as integers and subtracts the trace start before calculating chart positions.", path: "src/trace.ts"},
+      {title: "Read the file in the browser", text: "The viewer keeps data in this tab. A failed import leaves the last valid trace on screen.", path: "src/app.ts"},
+      {title: "Support incomplete traces", text: "The viewer uses trace IDs to group spans. It still displays a span if its parent was missing from the file.", path: "tests/trace.test.mjs"},
+    ],
+    proof: "The parser reads actual JSON emitted by the OpenTelemetry JavaScript exporter, including the parent link and error status. Phone checks verify the import makes zero network requests.",
+    checks: [{label: "Parser and SDK export tests", path: "tests/trace.test.mjs"}, {label: "SDK-generated sample", path: "tests/fixtures/sdk-export.json"}],
+    demo: "In the booking example, select Errors only. Open Send email to see its parent, Queue confirmation, and its 58 ms duration.",
+    limits: "The viewer reads OTLP JSON files up to 512 KiB with up to 500 spans. The built-in booking trace is fictional.",
+    contribution: "Personal project using the OpenTelemetry trace format and local file processing.",
+  },
   "depot-booking": {
     title: "Depot Booking",
     subtitle: "Reserve an hour at a loading bay.",

@@ -17,7 +17,7 @@ const capabilities = [
   {
     title: "Testing & delivery",
     description: "Unit and browser tests, CI and deployment.",
-    tools: ["Git", "GitHub Actions", "Jest", "Supertest", "Playwright", "pytest", "Docker", "Cloudflare Workers", "Render"],
+    tools: ["Git", "GitHub Actions", "Jest", "Supertest", "Playwright", "pytest", "OpenTelemetry", "Docker", "Cloudflare Workers", "Render"],
   },
 ];
 
