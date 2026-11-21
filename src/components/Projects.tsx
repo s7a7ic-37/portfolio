@@ -35,8 +35,19 @@ const projects = [
 const filters = ["All", "Applications", "Data", "Developer tools"] as const;
 
 export default function Projects() {
-  const [filter, setFilter] = useState<(typeof filters)[number]>("All");
+  const [filter, setFilter] = useState(() => {
+    const selected = new URLSearchParams(window.location.search).get("projects");
+    return filters.find(label => label === selected) ?? "All";
+  });
   const visibleProjects = filter === "All" ? projects : projects.filter(project => project.group === filter);
+
+  function changeFilter(next: (typeof filters)[number]) {
+    const url = new URL(window.location.href);
+    if (next === "All") url.searchParams.delete("projects");
+    else url.searchParams.set("projects", next);
+    window.history.replaceState(window.history.state, "", url);
+    setFilter(next);
+  }
 
   return (
     <section id="projects" className="projects-section">
@@ -44,7 +55,7 @@ export default function Projects() {
         <div className="projects-heading"><h2 className="section-title">Selected projects.</h2></div>
         <div className="project-filters" role="group" aria-label="Filter projects">
           {filters.map(label => <button key={label} type="button" aria-pressed={label === filter} aria-controls="project-grid"
-            onClick={() => setFilter(label)}>{label}</button>)}
+            onClick={() => changeFilter(label)}>{label}</button>)}
         </div>
         <div className="project-grid" id="project-grid">
           {visibleProjects.map(project => (

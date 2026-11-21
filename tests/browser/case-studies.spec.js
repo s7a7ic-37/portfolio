@@ -162,3 +162,29 @@ test("project filters keep short lists accessible on a phone", async ({page}) =>
     expect((await button.boundingBox()).height).toBeGreaterThanOrEqual(44);
   }
 });
+
+test("a chosen project filter survives refresh and opening a case study", async ({page}) => {
+  await page.goto("/#projects");
+  const filters = page.getByRole("group", {name: "Filter projects"});
+  const tools = filters.getByRole("button", {name: "Developer tools", exact: true});
+  const cards = page.locator(".project-card");
+  await tools.click();
+  await expect(cards).toHaveCount(5);
+  expect(new URL(page.url()).searchParams.get("projects")).toBe("Developer tools");
+  await page.reload();
+  await expect(tools).toHaveAttribute("aria-pressed", "true");
+  await expect(cards).toHaveCount(5);
+
+  await cards.filter({has: page.getByRole("heading", {name: "Trace Timeline", exact: true})})
+    .getByRole("link", {name: "Case study ↗", exact: true}).click();
+  await expect(page.getByRole("heading", {name: "Trace Timeline", exact: true})).toBeVisible();
+  await page.goBack();
+  await expect(tools).toHaveAttribute("aria-pressed", "true");
+  await expect(cards).toHaveCount(5);
+
+  await filters.getByRole("button", {name: "All", exact: true}).click();
+  expect(new URL(page.url()).searchParams.has("projects")).toBe(false);
+  await expect(cards).toHaveCount(14);
+  await page.goto("/?projects=unknown#projects");
+  await expect(cards).toHaveCount(14);
+});
