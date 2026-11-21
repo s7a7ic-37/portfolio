@@ -1,18 +1,8 @@
 # Maksymilian Pasiecki — portfolio
 
-A React and TypeScript portfolio for web applications, API tools and operations data projects.
+A React and TypeScript portfolio with working demos, source repositories and case studies for web, data and developer projects.
 
-**[Portfolio](https://portfolio.artemislab.co.uk)**
-
-## Projects
-
-- **[Runbook Desk](https://runbook.artemislab.co.uk/)** — cited support-case drafts, saved history and human review with FastAPI, React/TypeScript and PostgreSQL. The public demo uses labelled examples; real LLM calls are paused.
-- **[Pure News](https://news.artemislab.co.uk/)** — article browsing, filters, votes and comments, backed by an Express/PostgreSQL API.
-- **[Grid Demand Lab](https://grid.artemislab.co.uk/)** — half-hourly GB electricity forecasts using live NESO inputs, LightGBM and a separate historical holdout.
-- **[OpsLens](https://opslens.artemislab.co.uk/)** — retail invoice investigation and time-based forecast comparisons using Python, DuckDB and scikit-learn.
-- **[Travel Planner](https://travel.artemislab.co.uk/demo/)** — five-city itineraries with reordering, local saving and JSON import/export. A personal fork of a four-person Northcoders project.
-- **[Stockroom Reconcile](https://portfolio.artemislab.co.uk/tools/stockroom-reconciliation/)** — compare CSV stock counts, filter the worklist and export all exceptions.
-- **[Contract Check](https://portfolio.artemislab.co.uk/tools/api-contract-checker/)** — check JSON payloads against a small field-and-type contract, review 25 findings at a time and download the complete report.
+[Browse the projects](https://portfolio.artemislab.co.uk/#projects).
 
 ## Run locally
 
@@ -23,14 +13,6 @@ npm ci
 npm run dev
 ```
 
-`npm test` checks tool parsing, validation and themes. `npm run build` checks TypeScript and builds the site into `dist/`.
+`npm test` checks parsing, validation and themes. `npm run build` writes the site to `dist/`. For browser tests, run `npx playwright install --only-shell chromium webkit`, then `npm run test:browser`.
 
-Run `npx playwright install --only-shell chromium webkit` once, then `npm run test:browser` for Chromium desktop/mobile and mobile WebKit checks against a fresh build served by Wrangler's local asset router. These cover direct case-study links, keyboard access, local file loading, newer-input preservation, worklist paging and complete CSV exports. CI runs them too. Browser emulation does not replace physical-device testing.
-
-## Stack and hosting
-
-React, TypeScript, Vite and CSS. Hosted as static assets on Cloudflare Workers, configured in `wrangler.jsonc`.
-
-Cascadia Code is included under its [font licence](public/cascadia-code-LICENSE.txt).
-
-The two browser tools process inputs locally without uploads or persistence. Each project's README covers its setup and demo limitations.
+Cloudflare Workers serves the Vite build. The Stockroom and Contract tools process files in the browser. Cascadia Code is included under its [font licence](public/cascadia-code-LICENSE.txt).
