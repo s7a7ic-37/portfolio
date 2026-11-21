@@ -27,7 +27,8 @@ th,td { padding: 14px 12px; }
 
 html[data-theme="dark"] body { background: #1c1f1b; color: #ecebdd; }
 html[data-theme="dark"] .tool-nav { border-color: #535443; }
-html[data-theme="dark"] .tool-nav a { color: #e4c179; }
+html[data-theme="dark"] .tool-nav a,
+html[data-theme="dark"] .tool-source a { color: #e4c179; }
 html[data-theme="dark"] .tool-panel { background: #282c24; }
 html[data-theme="dark"] .tool-panel > p, html[data-theme="dark"] .field-help, html[data-theme="dark"] .tool-footnote, html[data-theme="dark"] .file-input { color: #c4c7b5; }
 html[data-theme="dark"] .tool-field label, html[data-theme="dark"] caption { color: #ecebdd; }
