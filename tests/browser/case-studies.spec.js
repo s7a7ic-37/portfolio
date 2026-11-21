@@ -2,25 +2,25 @@ import {test, expect} from "@playwright/test";
 
 const evidenceLinks = {
   "depot-booking": [
-    ["PostgreSQL API tests ↗", "https://github.com/s7a7ic-37/depot-booking/blob/3185bfc/tests/booking.test.mjs"],
-    ["Mobile booking tests ↗", "https://github.com/s7a7ic-37/depot-booking/blob/3185bfc/web/tests/booking.spec.js"],
+    ["PostgreSQL API tests ↗", "https://github.com/s7a7ic-37/depot-booking/blob/95c4004/tests/booking.test.mjs"],
+    ["Mobile booking tests ↗", "https://github.com/s7a7ic-37/depot-booking/blob/95c4004/web/tests/booking.spec.js"],
   ],
   "river-data-monitor": [
-    ["Import tests ↗", "https://github.com/s7a7ic-37/river-data-monitor/blob/4c753cc/tests/test_monitor.py"],
-    ["Report route tests ↗", "https://github.com/s7a7ic-37/river-data-monitor/blob/4c753cc/tests/worker.test.mjs"],
+    ["Import tests ↗", "https://github.com/s7a7ic-37/river-data-monitor/blob/d594ea9/tests/test_monitor.py"],
+    ["Report route tests ↗", "https://github.com/s7a7ic-37/river-data-monitor/blob/d594ea9/tests/worker.test.mjs"],
     ["Manual refresh run ↗", "https://github.com/s7a7ic-37/river-data-monitor/actions/runs/44913007482"],
   ],
   "webhook-delivery-lab": [
-    ["Queue tests ↗", "https://github.com/s7a7ic-37/webhook-delivery-lab/blob/37f6926/tests/queue.test.mjs"],
-    ["Storage tests ↗", "https://github.com/s7a7ic-37/webhook-delivery-lab/blob/37f6926/tests/session.test.mjs"],
+    ["Queue tests ↗", "https://github.com/s7a7ic-37/webhook-delivery-lab/blob/99216d7/tests/queue.test.mjs"],
+    ["Storage tests ↗", "https://github.com/s7a7ic-37/webhook-delivery-lab/blob/99216d7/tests/session.test.mjs"],
   ],
   "document-search-lab": [
     ["Python evaluation tests ↗", "https://github.com/s7a7ic-37/document-search-lab/blob/59852d5/tests/test_evaluation.py"],
     ["Browser and Python parity tests ↗", "https://github.com/s7a7ic-37/document-search-lab/blob/59852d5/tests/search.test.mjs"],
   ],
   "release-check": [
-    ["Release verdict tests ↗", "https://github.com/s7a7ic-37/release-check/blob/a284ff1/tests/report.test.mjs"],
-    ["CI gate verification ↗", "https://github.com/s7a7ic-37/release-check/blob/a284ff1/.github/workflows/checks.yml"],
+    ["Release verdict tests ↗", "https://github.com/s7a7ic-37/release-check/blob/dcd9f0a/tests/report.test.mjs"],
+    ["CI gate verification ↗", "https://github.com/s7a7ic-37/release-check/blob/dcd9f0a/.github/workflows/checks.yml"],
   ],
   "runbook-desk": [
     ["Database retry tests ↗", "https://github.com/s7a7ic-37/runbook-desk/blob/10041c5/tests/test_creation_retries.py"],
@@ -38,9 +38,10 @@ const evidenceLinks = {
     ["API CI run ↗", "https://github.com/s7a7ic-37/pure-news-api/actions/runs/42480464240"],
   ],
   "grid-demand-lab": [
-    ["Forecast and time-split tests ↗", "https://github.com/s7a7ic-37/grid-demand-lab/blob/681b10d/tests/test_forecast.py"],
-    ["Chart interaction tests ↗", "https://github.com/s7a7ic-37/grid-demand-lab/blob/681b10d/tests/test_plotting.py"],
-    ["Green CI run ↗", "https://github.com/s7a7ic-37/grid-demand-lab/actions/runs/42482666073"],
+    ["Forecast and time-split tests ↗", "https://github.com/s7a7ic-37/grid-demand-lab/blob/7b9f328/tests/test_forecast.py"],
+    ["Chart interaction tests ↗", "https://github.com/s7a7ic-37/grid-demand-lab/blob/7b9f328/tests/test_plotting.py"],
+    ["Refresh recovery tests ↗", "https://github.com/s7a7ic-37/grid-demand-lab/blob/7b9f328/tests/test_refresh.py"],
+    ["Green CI run ↗", "https://github.com/s7a7ic-37/grid-demand-lab/actions/runs/44915967482"],
   ],
   "travel-planner": [
     ["Plan and transfer tests ↗", "https://github.com/s7a7ic-37/travel-planner/blob/3878358/travel-planner-fe/tests/demo.test.mjs"],

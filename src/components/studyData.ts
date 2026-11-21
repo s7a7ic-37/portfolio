@@ -60,7 +60,7 @@ export const studies = {
   "grid-demand-lab": {
     title: "Grid Demand Lab",
     subtitle: "Estimating tomorrow’s electricity demand.",
-    revision: "681b10d",
+    revision: "7b9f328",
     stack: "Python · LightGBM · pandas · Streamlit · NESO API",
     live: "https://grid.artemislab.co.uk/",
     source: "https://github.com/s7a7ic-37/grid-demand-lab",
@@ -69,13 +69,14 @@ export const studies = {
     decisions: [
       {title: "Match periods by date", text: "Previous-day and previous-week values use the calendar date and settlement period. This handles 46- and 50-period days without shifting every later row.", path: "forecast.py"},
       {title: "Compare with simple baselines", text: "A 28-day holdout and four quarter-end tests compare the model with previous-day and previous-week forecasts. The test periods do not choose the model.", path: "tests/test_forecast.py"},
-      {title: "Refresh without retraining", text: "Refresh fetches readings and recalculates the forecast; it does not fit a new model. CSV download captures the values already shown.", path: "app.py"},
+      {title: "Keep the last forecast after errors", text: "Refresh recalculates with the existing model. If the feed fails, the open session keeps its last chart and CSV with the original timestamp.", path: "app.py"},
     ],
     proof: "On a 28-day 2025 holdout, model MAE was 1,604 MW; previous-day and previous-week baselines were 1,960 MW and 2,278 MW. Tests cover feed parsing, 46/48/50-period days and CSV export.",
     checks: [
       {label: "Forecast and time-split tests", path: "tests/test_forecast.py"},
       {label: "Chart interaction tests", path: "tests/test_plotting.py"},
-      {label: "Green CI run", path: "https://github.com/s7a7ic-37/grid-demand-lab/actions/runs/42482666073"},
+      {label: "Refresh recovery tests", path: "tests/test_refresh.py"},
+      {label: "Green CI run", path: "https://github.com/s7a7ic-37/grid-demand-lab/actions/runs/44915967482"},
     ],
     demo: "Choose a time on the chart, download the displayed forecast, then open the backtests to compare historical errors.",
     limits: "The tests use historical data and do not show that the model is suitable for grid operations. The live feed can lag; incomplete days use a weekly fallback. Extra repeated-hour predictions reuse period 48. Free hosting may take time to start.",
