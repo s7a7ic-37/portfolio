@@ -5,6 +5,7 @@ import contractPreview from "../assets/photos/project-contract.jpg";
 import stockPreview from "../assets/photos/project-stockroom.jpg";
 import gridPreview from "../assets/photos/project-grid.png";
 import runbookPreview from "../assets/photos/project-runbook.png";
+import riverPreview from "../assets/photos/project-river.png";
 
 const caseStudies: Record<string, string> = {
   "Runbook Desk": "/case-studies/runbook-desk/",
@@ -19,6 +20,7 @@ const caseStudies: Record<string, string> = {
 const projects = [
   { name: "Runbook Desk", stack: ["FastAPI", "TypeScript", "PostgreSQL"], preview: runbookPreview, live: "https://runbook.artemislab.co.uk/", source: "https://github.com/s7a7ic-37/runbook-desk" },
   { name: "Pure News", stack: ["React", "Express", "PostgreSQL"], preview: newsPreview, live: "https://news.artemislab.co.uk/", source: "https://github.com/s7a7ic-37/pure-news", api: "https://github.com/s7a7ic-37/pure-news-api" },
+  { name: "River Data Monitor", stack: ["Python", "SQL", "DuckDB"], preview: riverPreview, live: "https://river.artemislab.co.uk/", source: "https://github.com/s7a7ic-37/river-data-monitor" },
   { name: "Grid Demand Lab", stack: ["Python", "LightGBM", "NESO data"], preview: gridPreview, live: "https://grid.artemislab.co.uk/", source: "https://github.com/s7a7ic-37/grid-demand-lab" },
   { name: "OpsLens", stack: ["Python", "DuckDB", "scikit-learn"], preview: opsPreview, live: "https://opslens.artemislab.co.uk/", source: "https://github.com/s7a7ic-37/ops-lens" },
   { name: "Ready, Jet Set, Go!", stack: ["Next.js", "TypeScript", "Firebase"], preview: travelPreview, live: "https://travel.artemislab.co.uk/demo/", source: "https://github.com/s7a7ic-37/travel-planner" },

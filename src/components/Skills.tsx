@@ -11,7 +11,7 @@ const capabilities = [
   },
   {
     title: "Data & machine learning",
-    description: "Forecasting and evaluation on demand and retail data.",
+    description: "Data imports, quality checks and forecast evaluation.",
     tools: ["Python", "pandas", "NumPy", "DuckDB", "scikit-learn", "LightGBM", "Altair", "NESO API"],
   },
   {
