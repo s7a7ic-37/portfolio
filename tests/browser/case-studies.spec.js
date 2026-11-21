@@ -10,12 +10,12 @@ const evidenceLinks = {
     ["SDK-generated sample ↗", "https://github.com/s7a7ic-37/trace-timeline/blob/950a31b/tests/fixtures/sdk-export.json"],
   ],
   "depot-booking": [
-    ["PostgreSQL API tests ↗", "https://github.com/s7a7ic-37/depot-booking/blob/29b475a/tests/booking.test.mjs"],
-    ["Mobile booking tests ↗", "https://github.com/s7a7ic-37/depot-booking/blob/29b475a/web/tests/booking.spec.js"],
+    ["PostgreSQL API tests ↗", "https://github.com/s7a7ic-37/depot-booking/blob/978ec50/tests/booking.test.mjs"],
+    ["Mobile booking tests ↗", "https://github.com/s7a7ic-37/depot-booking/blob/978ec50/web/tests/booking.spec.js"],
   ],
   "river-data-monitor": [
-    ["Import tests ↗", "https://github.com/s7a7ic-37/river-data-monitor/blob/c8eeb09/tests/test_monitor.py"],
-    ["Report route tests ↗", "https://github.com/s7a7ic-37/river-data-monitor/blob/c8eeb09/tests/worker.test.mjs"],
+    ["Import tests ↗", "https://github.com/s7a7ic-37/river-data-monitor/blob/2e5006d/tests/test_monitor.py"],
+    ["Report route tests ↗", "https://github.com/s7a7ic-37/river-data-monitor/blob/2e5006d/tests/worker.test.mjs"],
     ["Manual refresh run ↗", "https://github.com/s7a7ic-37/river-data-monitor/actions/runs/44928142093"],
   ],
   "webhook-delivery-lab": [
@@ -31,18 +31,18 @@ const evidenceLinks = {
     ["CI gate verification ↗", "https://github.com/s7a7ic-37/release-check/blob/dcd9f0a/.github/workflows/checks.yml"],
   ],
   "runbook-desk": [
-    ["Database retry tests ↗", "https://github.com/s7a7ic-37/runbook-desk/blob/74dacae/tests/test_creation_retries.py"],
-    ["Review and deletion tests ↗", "https://github.com/s7a7ic-37/runbook-desk/blob/74dacae/tests/test_workflow.py"],
-    ["Handoff snapshot tests ↗", "https://github.com/s7a7ic-37/runbook-desk/blob/74dacae/frontend/tests/report.test.ts"],
-    ["CI run with Docker build ↗", "https://github.com/s7a7ic-37/runbook-desk/actions/runs/44925210844"],
-    ["API routes ↗", "https://github.com/s7a7ic-37/runbook-desk/blob/74dacae/server/main.py"],
+    ["Database retry tests ↗", "https://github.com/s7a7ic-37/runbook-desk/blob/ac3f6e8/tests/test_creation_retries.py"],
+    ["Review and deletion tests ↗", "https://github.com/s7a7ic-37/runbook-desk/blob/ac3f6e8/tests/test_workflow.py"],
+    ["Handoff snapshot tests ↗", "https://github.com/s7a7ic-37/runbook-desk/blob/ac3f6e8/frontend/tests/report.test.ts"],
+    ["CI run with Docker build ↗", "https://github.com/s7a7ic-37/runbook-desk/actions/runs/44929722511"],
+    ["API routes ↗", "https://github.com/s7a7ic-37/runbook-desk/blob/ac3f6e8/server/main.py"],
   ],
   "pure-news": [
-    ["Browser search and browsing tests ↗", "https://github.com/s7a7ic-37/pure-news/blob/9d94fbb/tests/browser/browsing.spec.js"],
-    ["Saved-story recovery tests ↗", "https://github.com/s7a7ic-37/pure-news/blob/9d94fbb/tests/browser/reading-list.spec.js"],
+    ["Browser search and browsing tests ↗", "https://github.com/s7a7ic-37/pure-news/blob/d6538ca/tests/browser/browsing.spec.js"],
+    ["Saved-story recovery tests ↗", "https://github.com/s7a7ic-37/pure-news/blob/d6538ca/tests/browser/reading-list.spec.js"],
     ["API search and validation tests ↗", "https://github.com/s7a7ic-37/pure-news-api/blob/e6c5273/__tests__/app.test.js"],
     ["API race regression test ↗", "https://github.com/s7a7ic-37/pure-news-api/blob/e3dc588/__tests__/comments.models.test.js"],
-    ["Frontend CI run ↗", "https://github.com/s7a7ic-37/pure-news/actions/runs/44927106859"],
+    ["Frontend CI run ↗", "https://github.com/s7a7ic-37/pure-news/actions/runs/44930298551"],
     ["API CI run ↗", "https://github.com/s7a7ic-37/pure-news-api/actions/runs/42480464240"],
   ],
   "grid-demand-lab": [
