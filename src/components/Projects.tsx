@@ -13,6 +13,11 @@ import searchPreview from "../assets/photos/project-search.png";
 import releasePreview from "../assets/photos/project-release.png";
 
 const caseStudies: Record<string, string> = {
+  "Depot Booking": "/case-studies/depot-booking/",
+  "River Data Monitor": "/case-studies/river-data-monitor/",
+  "Webhook Delivery Lab": "/case-studies/webhook-delivery-lab/",
+  "Document Search Lab": "/case-studies/document-search-lab/",
+  "Release Check": "/case-studies/release-check/",
   "Runbook Desk": "/case-studies/runbook-desk/",
   "Pure News": "/case-studies/pure-news/",
   "Grid Demand Lab": "/case-studies/grid-demand-lab/",

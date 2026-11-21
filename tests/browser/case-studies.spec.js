@@ -1,6 +1,27 @@
 import {test, expect} from "@playwright/test";
 
 const evidenceLinks = {
+  "depot-booking": [
+    ["PostgreSQL API tests ↗", "https://github.com/s7a7ic-37/depot-booking/blob/3185bfc/tests/booking.test.mjs"],
+    ["Mobile booking tests ↗", "https://github.com/s7a7ic-37/depot-booking/blob/3185bfc/web/tests/booking.spec.js"],
+  ],
+  "river-data-monitor": [
+    ["Import tests ↗", "https://github.com/s7a7ic-37/river-data-monitor/blob/4c753cc/tests/test_monitor.py"],
+    ["Report route tests ↗", "https://github.com/s7a7ic-37/river-data-monitor/blob/4c753cc/tests/worker.test.mjs"],
+    ["Manual refresh run ↗", "https://github.com/s7a7ic-37/river-data-monitor/actions/runs/44913007482"],
+  ],
+  "webhook-delivery-lab": [
+    ["Queue tests ↗", "https://github.com/s7a7ic-37/webhook-delivery-lab/blob/37f6926/tests/queue.test.mjs"],
+    ["Storage tests ↗", "https://github.com/s7a7ic-37/webhook-delivery-lab/blob/37f6926/tests/session.test.mjs"],
+  ],
+  "document-search-lab": [
+    ["Python evaluation tests ↗", "https://github.com/s7a7ic-37/document-search-lab/blob/59852d5/tests/test_evaluation.py"],
+    ["Browser and Python parity tests ↗", "https://github.com/s7a7ic-37/document-search-lab/blob/59852d5/tests/search.test.mjs"],
+  ],
+  "release-check": [
+    ["Release verdict tests ↗", "https://github.com/s7a7ic-37/release-check/blob/a284ff1/tests/report.test.mjs"],
+    ["CI gate verification ↗", "https://github.com/s7a7ic-37/release-check/blob/a284ff1/.github/workflows/checks.yml"],
+  ],
   "runbook-desk": [
     ["Database retry tests ↗", "https://github.com/s7a7ic-37/runbook-desk/blob/10041c5/tests/test_creation_retries.py"],
     ["Review and deletion tests ↗", "https://github.com/s7a7ic-37/runbook-desk/blob/10041c5/tests/test_workflow.py"],
@@ -44,7 +65,20 @@ const evidenceLinks = {
   ],
 };
 
-for (const [slug, title] of [["runbook-desk", "Runbook Desk"], ["pure-news", "Pure News"], ["grid-demand-lab", "Grid Demand Lab"], ["travel-planner", "Ready, Jet Set, Go!"], ["opslens", "OpsLens"], ["stockroom-reconcile", "Stockroom Reconcile"], ["contract-check", "Contract Check"]]) {
+for (const [slug, title] of [
+  ["runbook-desk", "Runbook Desk"],
+  ["pure-news", "Pure News"],
+  ["depot-booking", "Depot Booking"],
+  ["river-data-monitor", "River Data Monitor"],
+  ["webhook-delivery-lab", "Webhook Delivery Lab"],
+  ["document-search-lab", "Document Search Lab"],
+  ["release-check", "Release Check"],
+  ["grid-demand-lab", "Grid Demand Lab"],
+  ["travel-planner", "Ready, Jet Set, Go!"],
+  ["opslens", "OpsLens"],
+  ["stockroom-reconcile", "Stockroom Reconcile"],
+  ["contract-check", "Contract Check"],
+]) {
   test(`${title} case study opens directly and returns to the project list`, async ({page}) => {
     const response = await page.goto(`/case-studies/${slug}/`);
     expect(response.status()).toBe(200);
