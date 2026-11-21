@@ -42,7 +42,7 @@ export const additionalStudies = {
   "depot-booking": {
     title: "Depot Booking",
     subtitle: "Reserve an hour at a loading bay.",
-    revision: "11c6360",
+    revision: "29b475a",
     stack: "React · ASP.NET Core · PostgreSQL · IndexedDB",
     live: "https://depot.artemislab.co.uk/",
     source: "https://github.com/s7a7ic-37/depot-booking",
@@ -53,7 +53,7 @@ export const additionalStudies = {
       {title: "Keep the original during a move", text: "If the new slot is taken, PostgreSQL rolls back the move. A successful move gets a new ID so an older tab cannot cancel it.", path: "api/Program.cs"},
       {title: "Make the demo work in two tabs", text: "The hosted demo uses IndexedDB's unique slot key and write transaction to show the same race in one browser.", path: "web/src/demo.ts"},
     ],
-    proof: "PostgreSQL tests cover concurrent moves, workspace isolation and stale cancellation. Phone checks cover retaining keyboard focus after cancellation and downloading the daily CSV.",
+    proof: "PostgreSQL tests cover concurrent moves, workspace isolation and stale cancellation. Phone checks cover keyboard focus after a reservation or cancellation and downloading the daily CSV.",
     checks: [{label: "PostgreSQL API tests", path: "tests/booking.test.mjs"}, {label: "Mobile booking tests", path: "web/tests/booking.spec.js"}],
     demo: "Reserve two slots for tomorrow using sample references. In two tabs of the same browser, try moving them to the same bay and hour. Open the day’s CSV to check both bookings.",
     limits: "The hosted demo stores sample bookings in the browser. The ASP.NET Core and PostgreSQL version is available in the source.",
