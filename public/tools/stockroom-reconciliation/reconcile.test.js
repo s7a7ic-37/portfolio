@@ -57,7 +57,7 @@ test("Excel-oriented exports quote and prefix formula-like text while keeping ne
 test("large files are rejected before reading and row limits retain the original input", async () => {
   await assert.rejects(readCsvFile({ size: 1_000_001, arrayBuffer: () => { throw new Error("Must not read"); } }), /1 MB/);
   assert.equal(await readCsvFile({ size: 4, arrayBuffer: async () => new TextEncoder().encode("test").buffer }), "test");
-  await assert.rejects(readCsvFile({ size: 1, arrayBuffer: async () => new Uint8Array([255]).buffer }), TypeError);
+  await assert.rejects(readCsvFile({ size: 1, arrayBuffer: async () => new Uint8Array([255]).buffer }), /Choose a UTF-8 CSV file/);
   assert.throws(() => reconcileCsv("x".repeat(1_000_001)), /characters/);
   const header = "sku,expected,counted\n";
   const rows = Array.from({ length: 5000 }, (_, index) => `SKU-${index},1,1`).join("\n");

@@ -156,7 +156,11 @@ export function reconcileCsv(source) {
 
 export async function readCsvFile(file) {
   if (file.size > 1_000_000) throw new Error("Choose a CSV file no larger than 1 MB.");
-  return new TextDecoder("utf-8", { fatal: true }).decode(await file.arrayBuffer());
+  try {
+    return new TextDecoder("utf-8", { fatal: true }).decode(await file.arrayBuffer());
+  } catch {
+    throw new Error("This file could not be read. Choose a UTF-8 CSV file.");
+  }
 }
 
 export function exceptionsToCsv(exceptions) {

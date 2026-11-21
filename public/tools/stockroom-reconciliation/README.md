@@ -8,7 +8,7 @@ Load the synthetic sample, paste CSV or choose a local file. Files are processed
 
 Use UTF-8 CSV with up to 5,000 stock rows. Files are capped at 1 MB; pasted text at 1,000,000 characters. Input changes clear previous results and disable export until the next reconciliation.
 
-Editing, loading the sample or reconciling while a file is being read keeps the newer input.
+A rejected file leaves the current stock count and results intact. Editing, loading the sample or reconciling while a file is being read keeps the newer input.
 
 The worklist and input issues each show 25 rows per page. Export includes every exception, regardless of the open page; held input issues remain separate from checked stock.
 

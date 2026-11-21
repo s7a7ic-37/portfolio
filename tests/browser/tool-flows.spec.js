@@ -193,6 +193,50 @@ test("Stockroom pages exceptions, exports all rows and keeps newer CSV edits", a
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });
 
+test("Stockroom preserves the current count and report when a file is rejected", async ({ page }) => {
+  await page.goto("/tools/stockroom-reconciliation/");
+  const input = page.getByLabel("Stock count CSV", { exact: true });
+  const file = page.getByLabel("Choose a CSV file", { exact: true });
+  const download = page.getByRole("button", { name: "Export all exceptions", exact: true });
+  const rows = page.locator("#exceptions-table tbody tr");
+  const status = page.locator("#status");
+  const previous = "sku,expected,counted\nKEEP,3,2\nOTHER,1,4";
+  await file.setInputFiles({ name: "stock.csv", mimeType: "text/csv", buffer: Buffer.from(previous) });
+  await expect(rows).toHaveCount(2);
+  const filter = page.getByLabel("Filter exceptions", { exact: true });
+  await filter.selectOption("shortage");
+
+  const rejected = [
+    { bytes: Buffer.from('sku,expected,counted\nBROKEN,1,"2'), error: "Unclosed quote near line 2." },
+    { bytes: Buffer.from([255]), error: "Choose a UTF-8 CSV file." },
+  ];
+  for (const { bytes, error } of rejected) {
+    await file.setInputFiles({ name: "invalid.csv", mimeType: "text/csv", buffer: bytes });
+    await expect(status).toContainText(error);
+    await expect(status).toContainText("Your current stock count is unchanged.");
+    await expect(input).toHaveValue(previous);
+    await expect(filter).toHaveValue("shortage");
+    await expect(rows).toHaveCount(1);
+    await expect(rows.first()).toContainText("KEEP");
+    await expect(download).toBeEnabled();
+  }
+
+  const pending = page.waitForEvent("download");
+  await download.click();
+  const csv = await readFile(await (await pending).path(), "utf8");
+  expect(csv.split("\r\n").slice(1)).toEqual([
+    "KEEP,,3,2,-1,sellable,Short by 1",
+    "OTHER,,1,4,3,sellable,Over by 3",
+  ]);
+
+  const next = "sku,expected,counted\nNEW,1,0\nHOLD,bad,1";
+  await file.setInputFiles({ name: "updated.csv", mimeType: "text/csv", buffer: Buffer.from(next) });
+  await expect(input).toHaveValue(next);
+  await expect(filter).toHaveValue("all");
+  await expect(rows.first()).toContainText("NEW");
+  await expect(page.locator("#issues")).toContainText("Line 3 — expected must be a whole, non-negative quantity.");
+});
+
 test("Contract Check pages findings without truncating the downloadable report", async ({ page }) => {
   await page.goto("/tools/api-contract-checker/");
   await page.getByLabel("Expected contract", { exact: true }).fill('{"rows":[{"id":"number","title":"string"}]}');

@@ -201,20 +201,22 @@ document.querySelector("#load-sample").addEventListener("click", () => {
 fileInput.addEventListener("change", async () => {
   const file = fileInput.files?.[0];
   if (!file) return;
-  clearResult();
   const revision = ++inputRevision;
   fileInput.disabled = true;
+  downloadButton.disabled = true;
   status.dataset.tone = "";
   status.textContent = "Reading CSV file…";
   try {
     const text = await readCsvFile(file);
     if (revision !== inputRevision) return;
+    const result = reconcileCsv(text);
     csvInput.value = text;
-    run();
+    showResult(result);
   } catch (error) {
     if (revision !== inputRevision) return;
+    downloadButton.disabled = !lastExceptions.length;
     status.dataset.tone = "error";
-    status.textContent = file.size > 1_000_000 ? error.message : "This file could not be read. Choose a UTF-8 CSV file.";
+    status.textContent = error.message + " Your current stock count is unchanged.";
   } finally {
     fileInput.disabled = false;
     fileInput.value = "";
