@@ -7,6 +7,7 @@ export const caseStudies: Record<string, `/case-studies/${CaseStudyKey}/`> = {
   "Document Search Lab": "/case-studies/document-search-lab/",
   "Release Check": "/case-studies/release-check/",
   "Trace Timeline": "/case-studies/trace-timeline/",
+  "Query Plan Lab": "/case-studies/query-plan-lab/",
   "Runbook Desk": "/case-studies/runbook-desk/",
   "Pure News": "/case-studies/pure-news/",
   "Grid Demand Lab": "/case-studies/grid-demand-lab/",

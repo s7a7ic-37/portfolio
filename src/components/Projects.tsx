@@ -13,6 +13,7 @@ import webhookPreview from "../assets/photos/project-webhooks.webp";
 import searchPreview from "../assets/photos/project-search.webp";
 import releasePreview from "../assets/photos/project-release.webp";
 import tracePreview from "../assets/photos/project-traces.webp";
+import queryPreview from "../assets/photos/project-query-plan.webp";
 
 const projects = [
   { name: "Runbook Desk", group: "Applications", stack: ["FastAPI", "TypeScript", "PostgreSQL"], preview: runbookPreview, live: "https://runbook.artemislab.co.uk/", source: "https://github.com/s7a7ic-37/runbook-desk" },
@@ -21,6 +22,7 @@ const projects = [
   { name: "River Data Monitor", group: "Data", stack: ["Python", "SQL", "DuckDB"], preview: riverPreview, live: "https://river.artemislab.co.uk/", source: "https://github.com/s7a7ic-37/river-data-monitor" },
   { name: "Webhook Delivery Lab", group: "Developer tools", stack: ["TypeScript", "Queues", "Unit tests"], preview: webhookPreview, live: "https://webhooks.artemislab.co.uk/", source: "https://github.com/s7a7ic-37/webhook-delivery-lab" },
   { name: "Trace Timeline", group: "Developer tools", stack: ["TypeScript", "OpenTelemetry", "File API"], preview: tracePreview, live: "https://traces.artemislab.co.uk/", source: "https://github.com/s7a7ic-37/trace-timeline" },
+  { name: "Query Plan Lab", group: "Developer tools", stack: ["PostgreSQL", "SQL", "EXPLAIN"], preview: queryPreview, live: "https://plans.artemislab.co.uk/", source: "https://github.com/s7a7ic-37/query-plan-lab" },
   { name: "Document Search Lab", group: "Data", stack: ["Python", "scikit-learn", "Search evaluation"], preview: searchPreview, live: "https://search-lab.artemislab.co.uk/", source: "https://github.com/s7a7ic-37/document-search-lab" },
   { name: "Release Check", group: "Developer tools", stack: ["Playwright", "JavaScript", "GitHub Actions"], preview: releasePreview, live: "https://release.artemislab.co.uk/", source: "https://github.com/s7a7ic-37/release-check" },
   { name: "Grid Demand Lab", group: "Data", stack: ["Python", "LightGBM", "NESO data"], preview: gridPreview, live: "https://grid.artemislab.co.uk/", source: "https://github.com/s7a7ic-37/grid-demand-lab" },

@@ -17,7 +17,7 @@ export const studies = {
       {title: "Recover an interrupted save", text: "Each new case gets a retry key scoped to its browser workspace. Retrying unchanged details finds the saved case; reuse with different input is rejected.", path: "frontend/src/App.tsx"},
       {title: "Keep the review history", text: "The handoff includes each decision and the reply as it looked at that time.", path: "frontend/src/report.ts"},
     ],
-    proof: "Hosted checks cover lost save responses, stale reviews, workspace isolation and deletion rules. CI runs database and Docker checks; browser tests cover recovery from an unreadable response.",
+    proof: "PostgreSQL tests cover repeat saves, stale reviews, workspace isolation and deletion. Two-tab browser checks verify that a stale review preserves the local edit and the already recorded decision.",
     checks: [
       {label: "Database retry tests", path: "tests/test_creation_retries.py"},
       {label: "Review and deletion tests", path: "tests/test_workflow.py"},

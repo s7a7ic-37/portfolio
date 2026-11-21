@@ -1,13 +1,17 @@
 import {test, expect} from "@playwright/test";
 
 const evidenceLinks = {
+  "query-plan-lab": [
+    ["Plan and result tests ↗", "https://github.com/s7a7ic-37/query-plan-lab/blob/4545b9b/plan.test.mjs"],
+    ["PostgreSQL CI run ↗", "https://github.com/s7a7ic-37/query-plan-lab/actions/runs/44924280589"],
+  ],
   "trace-timeline": [
-    ["Parser and SDK export tests ↗", "https://github.com/s7a7ic-37/trace-timeline/blob/fa563dd/tests/trace.test.mjs"],
-    ["SDK-generated sample ↗", "https://github.com/s7a7ic-37/trace-timeline/blob/fa563dd/tests/fixtures/sdk-export.json"],
+    ["Parser and SDK export tests ↗", "https://github.com/s7a7ic-37/trace-timeline/blob/950a31b/tests/trace.test.mjs"],
+    ["SDK-generated sample ↗", "https://github.com/s7a7ic-37/trace-timeline/blob/950a31b/tests/fixtures/sdk-export.json"],
   ],
   "depot-booking": [
-    ["PostgreSQL API tests ↗", "https://github.com/s7a7ic-37/depot-booking/blob/95c4004/tests/booking.test.mjs"],
-    ["Mobile booking tests ↗", "https://github.com/s7a7ic-37/depot-booking/blob/95c4004/web/tests/booking.spec.js"],
+    ["PostgreSQL API tests ↗", "https://github.com/s7a7ic-37/depot-booking/blob/11c6360/tests/booking.test.mjs"],
+    ["Mobile booking tests ↗", "https://github.com/s7a7ic-37/depot-booking/blob/11c6360/web/tests/booking.spec.js"],
   ],
   "river-data-monitor": [
     ["Import tests ↗", "https://github.com/s7a7ic-37/river-data-monitor/blob/d594ea9/tests/test_monitor.py"],
@@ -77,6 +81,7 @@ for (const [slug, title] of [
   ["river-data-monitor", "River Data Monitor"],
   ["webhook-delivery-lab", "Webhook Delivery Lab"],
   ["trace-timeline", "Trace Timeline"],
+  ["query-plan-lab", "Query Plan Lab"],
   ["document-search-lab", "Document Search Lab"],
   ["release-check", "Release Check"],
   ["grid-demand-lab", "Grid Demand Lab"],
@@ -100,7 +105,7 @@ for (const [slug, title] of [
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     }
     await page.getByRole("link", {name: "All projects", exact: false}).first().click();
-    await expect(page.locator("#projects .project-card")).toHaveCount(13);
+    await expect(page.locator("#projects .project-card")).toHaveCount(14);
     await expect(page.locator(`a[href="/case-studies/${slug}/"]`)).toBeVisible();
   });
   test(`${title} skip link reaches the main content with a keyboard`, async ({page, browserName}) => {
@@ -121,11 +126,15 @@ test("published project cards link to their demos and source", async ({page}) =>
     ["Depot Booking", "depot", "depot-booking", "Browser demo"],
     ["Webhook Delivery Lab", "webhooks", "webhook-delivery-lab", "Open project"],
     ["Trace Timeline", "traces", "trace-timeline", "Open project"],
+    ["Query Plan Lab", "plans", "query-plan-lab", "Open project"],
     ["Document Search Lab", "search-lab", "document-search-lab", "Open project"],
     ["Release Check", "release", "release-check", "Open project"],
   ]) {
     const card = page.locator(".project-card").filter({has: page.getByRole("heading", {name, exact: true})});
-    await expect(card.getByRole("img", {name: name + " interface"})).toBeVisible();
+    const image = card.getByRole("img", {name: name + " interface"});
+    await expect(image).toBeVisible();
+    await image.scrollIntoViewIfNeeded();
+    expect(await image.evaluate(async (preview) => { await preview.decode(); return preview.naturalWidth; })).toBeGreaterThan(0);
     await expect(card.getByRole("link", {name: label + " ↗", exact: true})).toHaveAttribute("href", "https://" + host + ".artemislab.co.uk/");
     await expect(card.getByRole("link", {name: "Source ↗", exact: true})).toHaveAttribute("href", "https://github.com/s7a7ic-37/" + repo);
   }
@@ -136,12 +145,12 @@ test("project filters keep short lists accessible on a phone", async ({page}) =>
   await page.goto("/#projects");
   const filters = page.getByRole("group", {name: "Filter projects"});
   const cards = page.locator(".project-card");
-  await expect(cards).toHaveCount(13);
+  await expect(cards).toHaveCount(14);
   for (const [filter, count, example] of [
     ["Data", 4, "River Data Monitor"],
     ["Applications", 5, "Depot Booking"],
-    ["Developer tools", 4, "Trace Timeline"],
-    ["All", 13, "Pure News"],
+    ["Developer tools", 5, "Query Plan Lab"],
+    ["All", 14, "Pure News"],
   ]) {
     const button = filters.getByRole("button", {name: filter, exact: true});
     await button.click();
