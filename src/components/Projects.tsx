@@ -1,18 +1,18 @@
 import { useState } from "react";
 import { caseStudies } from "./caseRoutes";
 import newsPreview from "../assets/photos/project-news.png";
-import travelPreview from "../assets/photos/project-travel.png";
+import travelPreview from "../assets/photos/project-travel.webp";
 import opsPreview from "../assets/photos/project-opslens.webp";
 import contractPreview from "../assets/photos/project-contract.jpg";
 import stockPreview from "../assets/photos/project-stockroom.jpg";
 import gridPreview from "../assets/photos/project-grid.png";
 import runbookPreview from "../assets/photos/project-runbook.png";
-import riverPreview from "../assets/photos/project-river.png";
-import depotPreview from "../assets/photos/project-depot.png";
-import webhookPreview from "../assets/photos/project-webhooks.png";
-import searchPreview from "../assets/photos/project-search.png";
-import releasePreview from "../assets/photos/project-release.png";
-import tracePreview from "../assets/photos/project-traces.png";
+import riverPreview from "../assets/photos/project-river.webp";
+import depotPreview from "../assets/photos/project-depot.webp";
+import webhookPreview from "../assets/photos/project-webhooks.webp";
+import searchPreview from "../assets/photos/project-search.webp";
+import releasePreview from "../assets/photos/project-release.webp";
+import tracePreview from "../assets/photos/project-traces.webp";
 
 const projects = [
   { name: "Runbook Desk", group: "Applications", stack: ["FastAPI", "TypeScript", "PostgreSQL"], preview: runbookPreview, live: "https://runbook.artemislab.co.uk/", source: "https://github.com/s7a7ic-37/runbook-desk" },
