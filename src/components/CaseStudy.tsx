@@ -5,7 +5,10 @@ import styles from "./CaseStudy.module.css";
 
 export default function CaseStudy({ project }: { project: CaseStudyKey }) {
   const study = studies[project];
-  useEffect(() => { document.title = `${study.title} — project case study`; }, [study.title]);
+  useEffect(() => {
+    document.title = `${study.title} — project case study`;
+    document.getElementById(window.location.hash.slice(1))?.scrollIntoView({ behavior: "instant" });
+  }, [study.title]);
   const sourceLink = (path: string) => path.startsWith("https:") ? path : `${study.source}/blob/${study.revision}/${path}`;
   return (
     <div className={styles.page}>

@@ -183,7 +183,3 @@ export const studies = {
 };
 
 export type CaseStudyKey = keyof typeof studies;
-
-export function isCaseStudyKey(key: string): key is CaseStudyKey {
-  return Object.prototype.hasOwnProperty.call(studies, key);
-}
