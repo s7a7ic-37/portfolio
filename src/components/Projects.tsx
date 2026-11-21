@@ -1,3 +1,4 @@
+import { useState } from "react";
 import newsPreview from "../assets/photos/project-news.png";
 import travelPreview from "../assets/photos/project-travel.png";
 import opsPreview from "../assets/photos/project-opslens.webp";
@@ -22,27 +23,36 @@ const caseStudies: Record<string, string> = {
 };
 
 const projects = [
-  { name: "Runbook Desk", stack: ["FastAPI", "TypeScript", "PostgreSQL"], preview: runbookPreview, live: "https://runbook.artemislab.co.uk/", source: "https://github.com/s7a7ic-37/runbook-desk" },
-  { name: "Pure News", stack: ["React", "Express", "PostgreSQL"], preview: newsPreview, live: "https://news.artemislab.co.uk/", source: "https://github.com/s7a7ic-37/pure-news", api: "https://github.com/s7a7ic-37/pure-news-api" },
-  { name: "Depot Booking", stack: ["React", "ASP.NET Core", "PostgreSQL"], preview: depotPreview, live: "https://depot.artemislab.co.uk/", source: "https://github.com/s7a7ic-37/depot-booking", demo: true },
-  { name: "River Data Monitor", stack: ["Python", "SQL", "DuckDB"], preview: riverPreview, live: "https://river.artemislab.co.uk/", source: "https://github.com/s7a7ic-37/river-data-monitor" },
-  { name: "Webhook Delivery Lab", stack: ["TypeScript", "Queues", "Unit tests"], preview: webhookPreview, live: "https://webhooks.artemislab.co.uk/", source: "https://github.com/s7a7ic-37/webhook-delivery-lab" },
-  { name: "Document Search Lab", stack: ["Python", "scikit-learn", "Search evaluation"], preview: searchPreview, live: "https://search-lab.artemislab.co.uk/", source: "https://github.com/s7a7ic-37/document-search-lab" },
-  { name: "Release Check", stack: ["Playwright", "JavaScript", "GitHub Actions"], preview: releasePreview, live: "https://release.artemislab.co.uk/", source: "https://github.com/s7a7ic-37/release-check" },
-  { name: "Grid Demand Lab", stack: ["Python", "LightGBM", "NESO data"], preview: gridPreview, live: "https://grid.artemislab.co.uk/", source: "https://github.com/s7a7ic-37/grid-demand-lab" },
-  { name: "OpsLens", stack: ["Python", "DuckDB", "scikit-learn"], preview: opsPreview, live: "https://opslens.artemislab.co.uk/", source: "https://github.com/s7a7ic-37/ops-lens" },
-  { name: "Ready, Jet Set, Go!", stack: ["Next.js", "TypeScript", "Firebase"], preview: travelPreview, live: "https://travel.artemislab.co.uk/demo/", source: "https://github.com/s7a7ic-37/travel-planner" },
-  { name: "Stockroom Reconcile", stack: ["JavaScript", "CSV"], preview: stockPreview, live: "/tools/stockroom-reconciliation/", source: "https://github.com/s7a7ic-37/portfolio/tree/main/public/tools/stockroom-reconciliation" },
-  { name: "Contract Check", stack: ["JavaScript", "JSON"], preview: contractPreview, live: "/tools/api-contract-checker/", source: "https://github.com/s7a7ic-37/portfolio/tree/main/public/tools/api-contract-checker" },
+  { name: "Runbook Desk", group: "Applications", stack: ["FastAPI", "TypeScript", "PostgreSQL"], preview: runbookPreview, live: "https://runbook.artemislab.co.uk/", source: "https://github.com/s7a7ic-37/runbook-desk" },
+  { name: "Pure News", group: "Applications", stack: ["React", "Express", "PostgreSQL"], preview: newsPreview, live: "https://news.artemislab.co.uk/", source: "https://github.com/s7a7ic-37/pure-news", api: "https://github.com/s7a7ic-37/pure-news-api" },
+  { name: "Depot Booking", group: "Applications", stack: ["React", "ASP.NET Core", "PostgreSQL"], preview: depotPreview, live: "https://depot.artemislab.co.uk/", source: "https://github.com/s7a7ic-37/depot-booking", demo: true },
+  { name: "River Data Monitor", group: "Data", stack: ["Python", "SQL", "DuckDB"], preview: riverPreview, live: "https://river.artemislab.co.uk/", source: "https://github.com/s7a7ic-37/river-data-monitor" },
+  { name: "Webhook Delivery Lab", group: "Developer tools", stack: ["TypeScript", "Queues", "Unit tests"], preview: webhookPreview, live: "https://webhooks.artemislab.co.uk/", source: "https://github.com/s7a7ic-37/webhook-delivery-lab" },
+  { name: "Document Search Lab", group: "Data", stack: ["Python", "scikit-learn", "Search evaluation"], preview: searchPreview, live: "https://search-lab.artemislab.co.uk/", source: "https://github.com/s7a7ic-37/document-search-lab" },
+  { name: "Release Check", group: "Developer tools", stack: ["Playwright", "JavaScript", "GitHub Actions"], preview: releasePreview, live: "https://release.artemislab.co.uk/", source: "https://github.com/s7a7ic-37/release-check" },
+  { name: "Grid Demand Lab", group: "Data", stack: ["Python", "LightGBM", "NESO data"], preview: gridPreview, live: "https://grid.artemislab.co.uk/", source: "https://github.com/s7a7ic-37/grid-demand-lab" },
+  { name: "OpsLens", group: "Data", stack: ["Python", "DuckDB", "scikit-learn"], preview: opsPreview, live: "https://opslens.artemislab.co.uk/", source: "https://github.com/s7a7ic-37/ops-lens" },
+  { name: "Ready, Jet Set, Go!", group: "Applications", stack: ["Next.js", "TypeScript", "Firebase"], preview: travelPreview, live: "https://travel.artemislab.co.uk/demo/", source: "https://github.com/s7a7ic-37/travel-planner" },
+  { name: "Stockroom Reconcile", group: "Applications", stack: ["JavaScript", "CSV"], preview: stockPreview, live: "/tools/stockroom-reconciliation/", source: "https://github.com/s7a7ic-37/portfolio/tree/main/public/tools/stockroom-reconciliation" },
+  { name: "Contract Check", group: "Developer tools", stack: ["JavaScript", "JSON"], preview: contractPreview, live: "/tools/api-contract-checker/", source: "https://github.com/s7a7ic-37/portfolio/tree/main/public/tools/api-contract-checker" },
 ];
 
+const filters = ["All", "Applications", "Data", "Developer tools"] as const;
+
 export default function Projects() {
+  const [filter, setFilter] = useState<(typeof filters)[number]>("All");
+  const visibleProjects = filter === "All" ? projects : projects.filter(project => project.group === filter);
+
   return (
     <section id="projects" className="projects-section">
       <div className="section-wrap">
         <div className="projects-heading"><h2 className="section-title">Selected projects.</h2></div>
-        <div className="project-grid">
-          {projects.map(project => (
+        <div className="project-filters" role="group" aria-label="Filter projects">
+          {filters.map(label => <button key={label} type="button" aria-pressed={label === filter} aria-controls="project-grid"
+            onClick={() => setFilter(label)}>{label}</button>)}
+        </div>
+        <div className="project-grid" id="project-grid">
+          {visibleProjects.map(project => (
             <article className="project-card" key={project.name}>
               <a className="project-art" href={project.live} aria-label={`Open ${project.name}`}><img src={project.preview} width="900" height="633" loading="lazy" alt={`${project.name} interface`} /></a>
               <h3>{project.name}</h3>

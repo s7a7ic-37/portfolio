@@ -89,3 +89,26 @@ test("published project cards link to their demos and source", async ({page}) =>
     await expect(card.getByRole("link", {name: "Source ↗", exact: true})).toHaveAttribute("href", "https://github.com/s7a7ic-37/" + repo);
   }
 });
+
+test("project filters keep short lists accessible on a phone", async ({page}) => {
+  await page.setViewportSize({width: 320, height: 850});
+  await page.goto("/#projects");
+  const filters = page.getByRole("group", {name: "Filter projects"});
+  const cards = page.locator(".project-card");
+  await expect(cards).toHaveCount(12);
+  for (const [filter, count, example] of [
+    ["Data", 4, "River Data Monitor"],
+    ["Applications", 5, "Depot Booking"],
+    ["Developer tools", 3, "Release Check"],
+    ["All", 12, "Pure News"],
+  ]) {
+    const button = filters.getByRole("button", {name: filter, exact: true});
+    await button.click();
+    await expect(button).toHaveAttribute("aria-pressed", "true");
+    await expect(filters.locator('[aria-pressed="true"]')).toHaveCount(1);
+    await expect(cards).toHaveCount(count);
+    await expect(cards.getByRole("heading", {name: example, exact: true})).toBeVisible();
+    expect(await page.evaluate(() => innerWidth === document.documentElement.scrollWidth)).toBe(true);
+    expect((await button.boundingBox()).height).toBeGreaterThanOrEqual(44);
+  }
+});
