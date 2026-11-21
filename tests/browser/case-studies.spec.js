@@ -60,7 +60,7 @@ for (const [slug, title] of [["runbook-desk", "Runbook Desk"], ["pure-news", "Pu
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     }
     await page.getByRole("link", {name: "All projects", exact: false}).first().click();
-    await expect(page.locator("#projects .project-card")).toHaveCount(8);
+    await expect(page.locator("#projects .project-card")).toHaveCount(12);
     await expect(page.locator(`a[href="/case-studies/${slug}/"]`)).toBeVisible();
   });
   test(`${title} skip link reaches the main content with a keyboard`, async ({page, browserName}) => {
@@ -74,10 +74,18 @@ for (const [slug, title] of [["runbook-desk", "Runbook Desk"], ["pure-news", "Pu
   });
 }
 
-test("the River Data Monitor card links to its dashboard and source", async ({page}) => {
+test("published project cards link to their demos and source", async ({page}) => {
   await page.goto("/#projects");
-  const card = page.locator(".project-card").filter({has: page.getByRole("heading", {name: "River Data Monitor", exact: true})});
-  await expect(card.getByRole("img", {name: "River Data Monitor interface"})).toBeVisible();
-  await expect(card.getByRole("link", {name: "Open project ↗", exact: true})).toHaveAttribute("href", "https://river.artemislab.co.uk/");
-  await expect(card.getByRole("link", {name: "Source ↗", exact: true})).toHaveAttribute("href", "https://github.com/s7a7ic-37/river-data-monitor");
+  for (const [name, host, repo, label] of [
+    ["River Data Monitor", "river", "river-data-monitor", "Open project"],
+    ["Depot Booking", "depot", "depot-booking", "Browser demo"],
+    ["Webhook Delivery Lab", "webhooks", "webhook-delivery-lab", "Open project"],
+    ["Document Search Lab", "search-lab", "document-search-lab", "Open project"],
+    ["Release Check", "release", "release-check", "Open project"],
+  ]) {
+    const card = page.locator(".project-card").filter({has: page.getByRole("heading", {name, exact: true})});
+    await expect(card.getByRole("img", {name: name + " interface"})).toBeVisible();
+    await expect(card.getByRole("link", {name: label + " ↗", exact: true})).toHaveAttribute("href", "https://" + host + ".artemislab.co.uk/");
+    await expect(card.getByRole("link", {name: "Source ↗", exact: true})).toHaveAttribute("href", "https://github.com/s7a7ic-37/" + repo);
+  }
 });

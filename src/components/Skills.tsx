@@ -7,7 +7,7 @@ const capabilities = [
   {
     title: "APIs & databases",
     description: "REST endpoints, input validation and SQL data.",
-    tools: ["Node.js", "Express", "FastAPI", "Pydantic", "PostgreSQL", "SQL", "OpenAI Responses API", "Supabase"],
+    tools: ["Node.js", "Express", "C#", "ASP.NET Core", "FastAPI", "Pydantic", "PostgreSQL", "SQL", "IndexedDB", "OpenAI Responses API", "Supabase"],
   },
   {
     title: "Data & machine learning",
