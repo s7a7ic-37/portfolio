@@ -1,6 +1,10 @@
 import {test, expect} from "@playwright/test";
 
 const evidenceLinks = {
+  "schema-rollout-lab": [
+    ["Rollout tests ↗", "https://github.com/s7a7ic-37/schema-rollout-lab/blob/986f60c/tests/rollout.test.mjs"],
+    ["PostgreSQL CI run ↗", "https://github.com/s7a7ic-37/schema-rollout-lab/actions/runs/46097680505"],
+  ],
   "access-review-lab": [
     ["Policy tests ↗", "https://github.com/s7a7ic-37/access-review-lab/blob/e5c30ae/tests/policy.test.js"],
     ["Browser tests ↗", "https://github.com/s7a7ic-37/access-review-lab/blob/e5c30ae/tests/review.spec.js"],
@@ -35,8 +39,9 @@ const evidenceLinks = {
     ["Browser and Python parity tests ↗", "https://github.com/s7a7ic-37/document-search-lab/blob/59852d5/tests/search.test.mjs"],
   ],
   "release-check": [
-    ["Release verdict tests ↗", "https://github.com/s7a7ic-37/release-check/blob/dcd9f0a/tests/report.test.mjs"],
-    ["CI gate verification ↗", "https://github.com/s7a7ic-37/release-check/blob/dcd9f0a/.github/workflows/checks.yml"],
+    ["Release verdict tests ↗", "https://github.com/s7a7ic-37/release-check/blob/b4d34c3/tests/report.test.mjs"],
+    ["Evidence file checks ↗", "https://github.com/s7a7ic-37/release-check/blob/b4d34c3/tests/evidence.mjs"],
+    ["CI gate verification ↗", "https://github.com/s7a7ic-37/release-check/actions/runs/46098816571"],
   ],
   "runbook-desk": [
     ["Database retry tests ↗", "https://github.com/s7a7ic-37/runbook-desk/blob/ac3f6e8/tests/test_creation_retries.py"],
@@ -90,6 +95,7 @@ for (const [slug, title] of [
   ["webhook-delivery-lab", "Webhook Delivery Lab"],
   ["trace-timeline", "Trace Timeline"],
   ["query-plan-lab", "Query Plan Lab"],
+  ["schema-rollout-lab", "Schema Rollout Lab"],
   ["document-search-lab", "Document Search Lab"],
   ["release-check", "Release Check"],
   ["grid-demand-lab", "Grid Demand Lab"],
@@ -113,7 +119,7 @@ for (const [slug, title] of [
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     }
     await page.getByRole("link", {name: "All projects", exact: false}).first().click();
-    await expect(page.locator("#projects .project-card")).toHaveCount(15);
+    await expect(page.locator("#projects .project-card")).toHaveCount(16);
     await expect(page.locator(`a[href="/case-studies/${slug}/"]`)).toBeVisible();
   });
   test(`${title} skip link reaches the main content with a keyboard`, async ({page, browserName}) => {
@@ -136,6 +142,7 @@ test("published project cards link to their demos and source", async ({page}) =>
     ["Webhook Delivery Lab", "webhooks", "webhook-delivery-lab", "Open project"],
     ["Trace Timeline", "traces", "trace-timeline", "Open project"],
     ["Query Plan Lab", "plans", "query-plan-lab", "Open project"],
+    ["Schema Rollout Lab", "migrations", "schema-rollout-lab", "Open project"],
     ["Grid Demand Lab", "grid", "grid-demand-lab", "Open project"],
     ["Document Search Lab", "search-lab", "document-search-lab", "Open project"],
     ["Release Check", "release", "release-check", "Open project"],
@@ -155,12 +162,12 @@ test("project filters keep short lists accessible on a phone", async ({page}) =>
   await page.goto("/#projects");
   const filters = page.getByRole("group", {name: "Filter projects"});
   const cards = page.locator(".project-card");
-  await expect(cards).toHaveCount(15);
+  await expect(cards).toHaveCount(16);
   for (const [filter, count, example] of [
     ["Data", 4, "River Data Monitor"],
     ["Applications", 5, "Depot Booking"],
-    ["Developer tools", 6, "Access Review Lab"],
-    ["All", 15, "Pure News"],
+    ["Developer tools", 7, "Schema Rollout Lab"],
+    ["All", 16, "Pure News"],
   ]) {
     const button = filters.getByRole("button", {name: filter, exact: true});
     await button.click();
@@ -179,22 +186,22 @@ test("a chosen project filter survives refresh and opening a case study", async 
   const tools = filters.getByRole("button", {name: "Developer tools", exact: true});
   const cards = page.locator(".project-card");
   await tools.click();
-  await expect(cards).toHaveCount(6);
+  await expect(cards).toHaveCount(7);
   expect(new URL(page.url()).searchParams.get("projects")).toBe("Developer tools");
   await page.reload();
   await expect(tools).toHaveAttribute("aria-pressed", "true");
-  await expect(cards).toHaveCount(6);
+  await expect(cards).toHaveCount(7);
 
   await cards.filter({has: page.getByRole("heading", {name: "Trace Timeline", exact: true})})
     .getByRole("link", {name: "Case study ↗", exact: true}).click();
   await expect(page.getByRole("heading", {name: "Trace Timeline", exact: true})).toBeVisible();
   await page.goBack();
   await expect(tools).toHaveAttribute("aria-pressed", "true");
-  await expect(cards).toHaveCount(6);
+  await expect(cards).toHaveCount(7);
 
   await filters.getByRole("button", {name: "All", exact: true}).click();
   expect(new URL(page.url()).searchParams.has("projects")).toBe(false);
-  await expect(cards).toHaveCount(15);
+  await expect(cards).toHaveCount(16);
   await page.goto("/?projects=unknown#projects");
-  await expect(cards).toHaveCount(15);
+  await expect(cards).toHaveCount(16);
 });
