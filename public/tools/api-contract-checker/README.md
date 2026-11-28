@@ -10,7 +10,7 @@ Response files can be loaded as UTF-8 JSON up to 1 MB. An invalid file leaves th
 
 Editing either input clears the previous findings and disables export until the next check.
 
-Use **Compare contracts** to check a candidate response contract against a baseline. The candidate can add fields and make an existing guarantee stricter. Removing a required field or allowing an incompatible type produces a finding. The comparison reads the contracts in your browser and does not inspect a live API.
+Use **Compare contracts** to check a candidate response contract against a baseline. The candidate can add fields and make an existing guarantee stricter. Removing a required field or allowing an incompatible type produces a finding. The comparison uses only the two contracts you provide and runs in your browser.
 
 Contracts allow up to 64 nesting levels. Reports allow up to 50,000 findings and 1,000,000 characters across their paths; larger reports show an error without offering a partial export.
 

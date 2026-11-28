@@ -7,8 +7,8 @@ const evidenceLinks = {
     ["CI run ↗", "https://github.com/s7a7ic-37/access-review-lab/actions/runs/46094804379"],
   ],
   "query-plan-lab": [
-    ["Plan and result tests ↗", "https://github.com/s7a7ic-37/query-plan-lab/blob/4545b9b/plan.test.mjs"],
-    ["PostgreSQL CI run ↗", "https://github.com/s7a7ic-37/query-plan-lab/actions/runs/44924280589"],
+    ["Plan and result tests ↗", "https://github.com/s7a7ic-37/query-plan-lab/blob/0461e6d/plan.test.mjs"],
+    ["PostgreSQL CI run ↗", "https://github.com/s7a7ic-37/query-plan-lab/actions/runs/46096719510"],
   ],
   "trace-timeline": [
     ["Parser and SDK export tests ↗", "https://github.com/s7a7ic-37/trace-timeline/blob/3469a86/tests/trace.test.mjs"],
@@ -76,9 +76,8 @@ const evidenceLinks = {
     ["Green CI run ↗", "https://github.com/s7a7ic-37/portfolio/actions/runs/42486555076"],
   ],
   "contract-check": [
-    ["Contract parser and limit tests ↗", "https://github.com/s7a7ic-37/portfolio/blob/fdd14ed/public/tools/api-contract-checker/checker.test.js"],
-    ["Browser workflow tests ↗", "https://github.com/s7a7ic-37/portfolio/blob/fdd14ed/tests/browser/tool-flows.spec.js"],
-    ["Green CI run ↗", "https://github.com/s7a7ic-37/portfolio/actions/runs/42486162846"],
+    ["Contract parser and limit tests ↗", "https://github.com/s7a7ic-37/portfolio/blob/847f216/public/tools/api-contract-checker/checker.test.js"],
+    ["Browser workflow tests ↗", "https://github.com/s7a7ic-37/portfolio/blob/847f216/tests/browser/tool-flows.spec.js"],
   ],
 };
 
