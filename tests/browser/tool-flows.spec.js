@@ -1,6 +1,49 @@
 import { test, expect } from "@playwright/test";
 import { readFile } from "node:fs/promises";
 
+test("Contract Check compares candidate guarantees and preserves each mode’s draft", async ({ page }) => {
+  await page.goto("/tools/api-contract-checker/");
+  const mode = page.getByLabel("Mode", { exact: true });
+  const response = page.getByLabel("JSON response", { exact: true });
+  const downloadButton = page.getByRole("button", { name: "Download report", exact: true });
+  await response.fill('{"draft":true}');
+  await mode.selectOption("compare");
+  await expect(page.getByRole("status").filter({ hasText: "breaking change" })).toHaveText("2 breaking changes.");
+  const baseline = page.getByLabel("Baseline contract", { exact: true });
+  const candidate = page.getByLabel("Candidate contract", { exact: true });
+  await baseline.fill('[{"id":"number","label":"string"}]');
+  await candidate.fill('[{"id":"any"}]');
+  await expect(downloadButton).toBeDisabled();
+  await page.getByRole("button", { name: "Compare contracts", exact: true }).click();
+  await expect(page.locator("#results li")).toHaveText([
+    "$[*].id — baseline requires number, candidate allows any",
+    "$[*].label — required field removed",
+  ]);
+  const pending = page.waitForEvent("download");
+  await downloadButton.click();
+  const file = await pending;
+  expect(file.suggestedFilename()).toBe("contract-compatibility-report.json");
+  const report = JSON.parse(await readFile(await file.path(), "utf8"));
+  expect(report.mode).toBe("compatibility");
+  expect(report.findings).toEqual([
+    {kind: "type", path: "$[*].id", expected: "number", actual: "any"},
+    {kind: "missing", path: "$[*].label"},
+  ]);
+  expect(report).not.toHaveProperty("responses");
+  await mode.selectOption("response");
+  await expect(response).toHaveValue('{"draft":true}');
+  await expect(downloadButton).toBeDisabled();
+  await mode.selectOption("compare");
+  await expect(candidate).toHaveValue('[{"id":"any"}]');
+  await expect(downloadButton).toBeDisabled();
+  await candidate.fill('[{"id":"number","label":"string","newField":"boolean"}]');
+  await page.getByRole("button", { name: "Compare contracts", exact: true }).click();
+  await expect(page.locator("#results")).toContainText("The candidate preserves the baseline contract.");
+  await page.setViewportSize({ width: 320, height: 844 });
+  expect(await page.evaluate(() => [innerWidth, document.documentElement.scrollWidth])).toEqual([320, 320]);
+  expect((await mode.boundingBox()).height).toBeGreaterThanOrEqual(44);
+});
+
 test("Stockroom searches SKU and item text without changing totals or full export", async ({ page }) => {
   await page.goto("/tools/stockroom-reconciliation/");
   const source = "sku,name,expected,counted,condition\n" + Array.from({length: 28}, (_, i) =>

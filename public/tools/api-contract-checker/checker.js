@@ -64,8 +64,27 @@ function collectFindings(schema, value, path, addFinding) {
   }
 }
 
-export function checkContract(contract, response) {
-  validateSchema(contract);
+function collectCompatibility(baseline, candidate, path, addFinding) {
+  const expected = typeof baseline === "string" ? baseline : typeOf(baseline);
+  const actual = typeof candidate === "string" ? candidate : typeOf(candidate);
+  if (expected === "any") return;
+  if (expected !== actual) {
+    addFinding({ kind: "type", path, expected, actual });
+    return;
+  }
+  if (Array.isArray(baseline) && baseline.length) {
+    collectCompatibility(baseline[0], Array.isArray(candidate) ? candidate[0] ?? "any" : "any", path + "[*]", addFinding);
+  }
+  if (isRecord(baseline)) {
+    for (const [key, child] of Object.entries(baseline)) {
+      const field = propertyPath(path, key);
+      if (!isRecord(candidate) || !Object.hasOwn(candidate, key)) addFinding({ kind: "missing", path: field });
+      else collectCompatibility(child, candidate[key], field, addFinding);
+    }
+  }
+}
+
+function buildFindings(collect) {
   const findings = [];
   let pathCharacters = 0;
   const addFinding = (finding) => {
@@ -74,6 +93,17 @@ export function checkContract(contract, response) {
       throw new Error("Report is too large. Check a smaller response or contract.");
     findings.push(finding);
   };
-  collectFindings(contract, response, "$", addFinding);
+  collect(addFinding);
   return findings;
+}
+
+export function checkContract(contract, response) {
+  validateSchema(contract);
+  return buildFindings(add => collectFindings(contract, response, "$", add));
+}
+
+export function compareContracts(baseline, candidate) {
+  validateSchema(baseline);
+  validateSchema(candidate);
+  return buildFindings(add => collectCompatibility(baseline, candidate, "$", add));
 }

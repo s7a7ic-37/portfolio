@@ -26,23 +26,31 @@
     <section class="tool-panel" aria-labelledby="check-heading">
       <h2 id="check-heading">Check a response</h2>
       <p>Use type names such as <code>"string"</code> and <code>"number"</code>, nested objects, or a one-item array template. Extra response fields are allowed.</p>
+      <div class="tool-field check-mode">
+        <label for="check-mode">Mode</label>
+        <select id="check-mode">
+          <option value="response">Check a response</option>
+          <option value="compare">Compare contracts</option>
+        </select>
+        <p class="field-help" id="compare-help" hidden>Check whether the candidate still guarantees the baseline’s fields and types.</p>
+      </div>
       <form id="check-form">
         <div class="tool-grid">
           <div class="tool-field">
-            <label for="contract">Expected contract</label>
+            <label id="contract-label" for="contract">Expected contract</label>
             <textarea id="contract" spellcheck="false" aria-describedby="contract-help"></textarea>
             <p class="field-help" id="contract-help">All listed fields are required. An empty object means “must be an object”. Numbers must be finite; integer ranges and decimal precision are not checked.</p>
           </div>
           <div class="tool-field">
-            <label for="response">JSON response</label>
+            <label id="response-label" for="response">JSON response</label>
             <textarea id="response" spellcheck="false"></textarea>
-            <label for="response-file" class="file-label">Or choose a response file</label>
+            <label id="response-file-label" for="response-file" class="file-label">Or choose a response file</label>
             <input id="response-file" type="file" accept=".json,application/json" aria-describedby="file-help">
             <p class="field-help" id="file-help">UTF-8 JSON, up to 1 MB. Read in your browser without uploads. Loading a file replaces the response text.</p>
           </div>
         </div>
         <div class="tool-actions">
-          <button class="tool-button" type="submit">Check response</button>
+          <button class="tool-button" id="run-check" type="submit">Check response</button>
           <button class="tool-button tool-button--light" id="load-example" type="button">Load example</button>
           <button class="tool-button tool-button--light" id="download-report" type="button" disabled>Download report</button>
         </div>

@@ -1,6 +1,46 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { checkContract, readJsonFile } from "./checker.js";
+import { checkContract, compareContracts, readJsonFile } from "./checker.js";
+
+test("a candidate may add guarantees without breaking the baseline", () => {
+  assert.deepEqual(compareContracts({
+    orders: [{ id: "number", note: "any" }],
+    metadata: "object",
+    events: [],
+  }, {
+    orders: [{ id: "number", note: "string", total: "number" }],
+    metadata: { updated: "string" },
+    events: ["number"],
+    next: "null",
+  }), []);
+  assert.deepEqual(compareContracts({ row: {}, tags: ["any"] }, { row: "object", tags: "array" }), []);
+});
+
+test("removed requirements and weakened nested types produce exact paths", () => {
+  const baseline = { orders: [{ id: "number", "site.name": "string" }], visible: "boolean" };
+  const candidate = { orders: [{ id: "any" }] };
+  assert.deepEqual(compareContracts(baseline, candidate), [
+    { kind: "type", path: "$.orders[*].id", expected: "number", actual: "any" },
+    { kind: "missing", path: '$.orders[*]["site.name"]' },
+    { kind: "missing", path: "$.visible" },
+  ]);
+  assert.deepEqual(compareContracts(["number"], []), [
+    { kind: "type", path: "$[*]", expected: "number", actual: "any" },
+  ]);
+  assert.deepEqual(compareContracts({ order: { id: "number" } }, { order: "object" }), [
+    { kind: "missing", path: "$.order.id" },
+  ]);
+});
+
+test("compatibility validates both contracts and does not treat inherited properties as required", () => {
+  assert.throws(() => compareContracts("any", "decimal"), /Unsupported type/);
+  assert.throws(() => compareContracts(false, "any"), /Use type names/);
+  const baseline = JSON.parse('{"__proto__":"string","constructor":"number"}');
+  assert.deepEqual(compareContracts(baseline, {}), [
+    { kind: "missing", path: "$.__proto__" },
+    { kind: "missing", path: "$.constructor" },
+  ]);
+});
 
 test("local JSON files preserve UTF-8 text and validate before replacing input", async () => {
   const text = '{"title":"Łódź","rows":[1,2]}';

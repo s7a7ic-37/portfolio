@@ -22,6 +22,9 @@ a, .tool-nav a { color: #c4b5fd; }
 .tool-footnote { margin-top: 24px; font-size: 13px; }
 .tool-footnote summary { min-height: 44px; cursor: pointer; padding: 12px 0; }
 .field-help { margin: 8px 0; font-size: 12px; line-height: 1.5; }
+.check-mode { margin: 14px 0 18px; }
+.check-mode select { max-width: 100%; min-height: 44px; padding: 7px 10px; border: 1px solid currentColor; background: transparent; color: inherit; font: inherit; font-size: 16px; }
+html[data-theme="dark"] .check-mode select { color-scheme: dark; }
 .tool-field .file-label { margin-top: 16px; }
 #response-file { width: 100%; min-height: 44px; font: inherit; font-size: 13px; }
 #response-file::file-selector-button { min-height: 44px; margin-right: 8px; padding: 8px 12px; border: 1px solid currentColor; border-radius: 0; background: transparent; color: inherit; font: inherit; cursor: pointer; }
