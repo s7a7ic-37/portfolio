@@ -3,6 +3,7 @@ import type { CaseStudyKey } from "./studyData";
 export const caseStudies: Record<string, `/case-studies/${CaseStudyKey}/`> = {
   "Depot Booking": "/case-studies/depot-booking/",
   "River Data Monitor": "/case-studies/river-data-monitor/",
+  "Access Review Lab": "/case-studies/access-review-lab/",
   "Webhook Delivery Lab": "/case-studies/webhook-delivery-lab/",
   "Document Search Lab": "/case-studies/document-search-lab/",
   "Release Check": "/case-studies/release-check/",

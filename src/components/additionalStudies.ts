@@ -1,4 +1,24 @@
 export const additionalStudies = {
+  "access-review-lab": {
+    title: "Access Review Lab",
+    subtitle: "Check what a proposed policy grants or removes.",
+    revision: "e5c30ae",
+    stack: "JavaScript · Node tests · Playwright",
+    live: "https://access-review.artemislab.co.uk/",
+    source: "https://github.com/s7a7ic-37/access-review-lab",
+    problem: "A contractor trial should allow work-order edits at the North depot. Reviewers need to see that the South depot restriction still holds.",
+    flow: ["Inspect a request", "Compare both decisions", "Review all changed requests", "Download the review"],
+    decisions: [
+      {title: "Explain which rule wins", text: "An explicit deny wins over a matching allow. Requests without a matching allow are denied by default.", path: "web/policy.js"},
+      {title: "Compare the whole example", text: "The review checks every role, action, resource and site combination so changes outside the selected request are visible.", path: "web/policy.js"},
+      {title: "Keep the rules with the export", text: "The downloaded review contains both policies and the computed changes, so someone can reproduce the comparison.", path: "web/app.js"},
+    ],
+    proof: "The example checks 36 requests and finds exactly one new grant. Desktop Chromium and phone-width WebKit verified the grant, policy editing and JSON export on the live site.",
+    checks: [{label: "Policy tests", path: "tests/policy.test.js"}, {label: "Browser tests", path: "tests/review.spec.js"}, {label: "CI run", path: "https://github.com/s7a7ic-37/access-review-lab/actions/runs/46094804379"}],
+    demo: "Inspect the changed contractor request. Switch its site to South depot to see which rule blocks the edit.",
+    limits: "The lab evaluates fictional rules in the browser. It has a fixed set of roles, actions, resources and sites.",
+    contribution: "Personal project covering rule evaluation, policy comparisons and reproducible exports.",
+  },
   "query-plan-lab": {
     title: "Query Plan Lab",
     subtitle: "Compare two PostgreSQL plans for the same query.",

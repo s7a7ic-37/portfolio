@@ -1,6 +1,11 @@
 import {test, expect} from "@playwright/test";
 
 const evidenceLinks = {
+  "access-review-lab": [
+    ["Policy tests ↗", "https://github.com/s7a7ic-37/access-review-lab/blob/e5c30ae/tests/policy.test.js"],
+    ["Browser tests ↗", "https://github.com/s7a7ic-37/access-review-lab/blob/e5c30ae/tests/review.spec.js"],
+    ["CI run ↗", "https://github.com/s7a7ic-37/access-review-lab/actions/runs/46094804379"],
+  ],
   "query-plan-lab": [
     ["Plan and result tests ↗", "https://github.com/s7a7ic-37/query-plan-lab/blob/4545b9b/plan.test.mjs"],
     ["PostgreSQL CI run ↗", "https://github.com/s7a7ic-37/query-plan-lab/actions/runs/44924280589"],
@@ -79,6 +84,7 @@ for (const [slug, title] of [
   ["pure-news", "Pure News"],
   ["depot-booking", "Depot Booking"],
   ["river-data-monitor", "River Data Monitor"],
+  ["access-review-lab", "Access Review Lab"],
   ["webhook-delivery-lab", "Webhook Delivery Lab"],
   ["trace-timeline", "Trace Timeline"],
   ["query-plan-lab", "Query Plan Lab"],
@@ -105,7 +111,7 @@ for (const [slug, title] of [
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     }
     await page.getByRole("link", {name: "All projects", exact: false}).first().click();
-    await expect(page.locator("#projects .project-card")).toHaveCount(14);
+    await expect(page.locator("#projects .project-card")).toHaveCount(15);
     await expect(page.locator(`a[href="/case-studies/${slug}/"]`)).toBeVisible();
   });
   test(`${title} skip link reaches the main content with a keyboard`, async ({page, browserName}) => {
@@ -123,6 +129,7 @@ test("published project cards link to their demos and source", async ({page}) =>
   await page.goto("/#projects");
   for (const [name, host, repo, label] of [
     ["River Data Monitor", "river", "river-data-monitor", "Open project"],
+    ["Access Review Lab", "access-review", "access-review-lab", "Open project"],
     ["Depot Booking", "depot", "depot-booking", "Browser demo"],
     ["Webhook Delivery Lab", "webhooks", "webhook-delivery-lab", "Open project"],
     ["Trace Timeline", "traces", "trace-timeline", "Open project"],
@@ -146,12 +153,12 @@ test("project filters keep short lists accessible on a phone", async ({page}) =>
   await page.goto("/#projects");
   const filters = page.getByRole("group", {name: "Filter projects"});
   const cards = page.locator(".project-card");
-  await expect(cards).toHaveCount(14);
+  await expect(cards).toHaveCount(15);
   for (const [filter, count, example] of [
     ["Data", 4, "River Data Monitor"],
     ["Applications", 5, "Depot Booking"],
-    ["Developer tools", 5, "Query Plan Lab"],
-    ["All", 14, "Pure News"],
+    ["Developer tools", 6, "Access Review Lab"],
+    ["All", 15, "Pure News"],
   ]) {
     const button = filters.getByRole("button", {name: filter, exact: true});
     await button.click();
@@ -170,22 +177,22 @@ test("a chosen project filter survives refresh and opening a case study", async 
   const tools = filters.getByRole("button", {name: "Developer tools", exact: true});
   const cards = page.locator(".project-card");
   await tools.click();
-  await expect(cards).toHaveCount(5);
+  await expect(cards).toHaveCount(6);
   expect(new URL(page.url()).searchParams.get("projects")).toBe("Developer tools");
   await page.reload();
   await expect(tools).toHaveAttribute("aria-pressed", "true");
-  await expect(cards).toHaveCount(5);
+  await expect(cards).toHaveCount(6);
 
   await cards.filter({has: page.getByRole("heading", {name: "Trace Timeline", exact: true})})
     .getByRole("link", {name: "Case study ↗", exact: true}).click();
   await expect(page.getByRole("heading", {name: "Trace Timeline", exact: true})).toBeVisible();
   await page.goBack();
   await expect(tools).toHaveAttribute("aria-pressed", "true");
-  await expect(cards).toHaveCount(5);
+  await expect(cards).toHaveCount(6);
 
   await filters.getByRole("button", {name: "All", exact: true}).click();
   expect(new URL(page.url()).searchParams.has("projects")).toBe(false);
-  await expect(cards).toHaveCount(14);
+  await expect(cards).toHaveCount(15);
   await page.goto("/?projects=unknown#projects");
-  await expect(cards).toHaveCount(14);
+  await expect(cards).toHaveCount(15);
 });
