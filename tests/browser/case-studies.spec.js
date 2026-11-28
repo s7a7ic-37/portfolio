@@ -11,12 +11,15 @@ const evidenceLinks = {
     ["PostgreSQL CI run ↗", "https://github.com/s7a7ic-37/query-plan-lab/actions/runs/44924280589"],
   ],
   "trace-timeline": [
-    ["Parser and SDK export tests ↗", "https://github.com/s7a7ic-37/trace-timeline/blob/950a31b/tests/trace.test.mjs"],
-    ["SDK-generated sample ↗", "https://github.com/s7a7ic-37/trace-timeline/blob/950a31b/tests/fixtures/sdk-export.json"],
+    ["Parser and SDK export tests ↗", "https://github.com/s7a7ic-37/trace-timeline/blob/3469a86/tests/trace.test.mjs"],
+    ["SDK-generated sample ↗", "https://github.com/s7a7ic-37/trace-timeline/blob/3469a86/tests/fixtures/sdk-export.json"],
+    ["CI run ↗", "https://github.com/s7a7ic-37/trace-timeline/actions/runs/46096045854"],
   ],
   "depot-booking": [
     ["PostgreSQL API tests ↗", "https://github.com/s7a7ic-37/depot-booking/blob/978ec50/tests/booking.test.mjs"],
     ["Mobile booking tests ↗", "https://github.com/s7a7ic-37/depot-booking/blob/978ec50/web/tests/booking.spec.js"],
+    ["PostgreSQL browser check ↗", "https://github.com/s7a7ic-37/depot-booking/blob/6ad72bf/web/tests/live-booking.mjs"],
+    ["Docker CI run ↗", "https://github.com/s7a7ic-37/depot-booking/actions/runs/46095713716"],
   ],
   "river-data-monitor": [
     ["Import tests ↗", "https://github.com/s7a7ic-37/river-data-monitor/blob/2e5006d/tests/test_monitor.py"],
