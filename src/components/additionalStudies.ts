@@ -93,10 +93,10 @@ export const additionalStudies = {
       {title: "Keep the last good readings", text: "A failed import records an error and retains the last good snapshot.", path: "tests/test_monitor.py"},
       {title: "Show gaps in the feed", text: "A gap over 15 minutes breaks the chart line. The gap list gives the two observed times and their elapsed duration.", path: "web/app.js"},
     ],
-    proof: "A manual refresh added 12 real readings. A separate repeat import added none. Tests cover provider failure, conflicting readings and backup data.",
-    checks: [{label: "Import tests", path: "tests/test_monitor.py"}, {label: "Report route tests", path: "tests/worker.test.mjs"}, {label: "Manual refresh run", path: "https://github.com/s7a7ic-37/river-data-monitor/actions/runs/44928142093"}],
+    proof: "A scheduled run on 27 November added 31 real readings. The published report matched the saved snapshot, with 283 unique reading times. Tests cover provider failure, conflicting readings and backup data.",
+    checks: [{label: "Import tests", path: "tests/test_monitor.py"}, {label: "Report route tests", path: "tests/worker.test.mjs"}, {label: "Scheduled refresh run", path: "https://github.com/s7a7ic-37/river-data-monitor/actions/runs/46078872348"}],
     demo: "Choose a range, inspect a reading or gap, and download the CSV. Refresh readings checks for new data and keeps your range selected.",
-    limits: "Each successful import updates a rolling 72-hour window for one gauge. Measurements can arrive in batches. The refresh workflow is configured to run every two hours.",
+    limits: "Each successful import updates a rolling 72-hour window for one gauge. Measurements can arrive in batches. The workflow is scheduled every two hours, but actual start times can vary.",
     contribution: "Personal project using public Environment Agency data.",
   },
   "webhook-delivery-lab": {

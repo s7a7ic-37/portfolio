@@ -21,7 +21,7 @@ const evidenceLinks = {
   "river-data-monitor": [
     ["Import tests ↗", "https://github.com/s7a7ic-37/river-data-monitor/blob/2e5006d/tests/test_monitor.py"],
     ["Report route tests ↗", "https://github.com/s7a7ic-37/river-data-monitor/blob/2e5006d/tests/worker.test.mjs"],
-    ["Manual refresh run ↗", "https://github.com/s7a7ic-37/river-data-monitor/actions/runs/44928142093"],
+    ["Scheduled refresh run ↗", "https://github.com/s7a7ic-37/river-data-monitor/actions/runs/46078872348"],
   ],
   "webhook-delivery-lab": [
     ["Queue tests ↗", "https://github.com/s7a7ic-37/webhook-delivery-lab/blob/a59d666/tests/queue.test.mjs"],
